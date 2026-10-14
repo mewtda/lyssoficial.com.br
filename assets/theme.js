@@ -311,6 +311,30 @@
       if (fresh && current) current.innerHTML = fresh.innerHTML;
       const count = $('[data-cart-count-source]', current)?.dataset.cartCountSource;
       if (count !== undefined) cart.updateCount(count);
+      cart.loadRecommendations();
+    },
+    recsCache: new Map(),
+    async loadRecommendations() {
+      const container = $('[data-cart-recs]');
+      if (!container) return;
+      const url = container.dataset.url;
+      const show = (html) => {
+        const track = $('[data-cart-recs-track]', container);
+        if (!track || !html.trim()) return;
+        track.innerHTML = html;
+        container.hidden = false;
+      };
+      if (cart.recsCache.has(url)) {
+        show(cart.recsCache.get(url));
+        return;
+      }
+      try {
+        const response = await fetch(url);
+        const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const html = $('[data-cart-recs-result]', doc)?.innerHTML || '';
+        cart.recsCache.set(url, html);
+        if (container.isConnected) show(html);
+      } catch (e) {}
     },
     updateCount(count) {
       $$('[data-cart-count]').forEach((el) => {
@@ -359,6 +383,7 @@
   const initCart = () => {
     const drawer = $('[data-cart-drawer]');
     if (drawer) {
+      cart.loadRecommendations();
       cart.panel = createPanel({
         element: drawer,
         overlay: $('[data-cart-overlay]'),
@@ -376,6 +401,19 @@
     document.addEventListener('click', (event) => {
       if (event.target.closest('[data-cart-close]')) {
         cart.panel?.close();
+        return;
+      }
+      const quickAdd = event.target.closest('[data-quick-add]');
+      if (quickAdd) {
+        event.preventDefault();
+        quickAdd.classList.add('is-loading');
+        const formData = new FormData();
+        formData.append('id', quickAdd.dataset.quickAdd);
+        formData.append('quantity', '1');
+        cart.add(formData).catch((error) => {
+          quickAdd.classList.remove('is-loading');
+          window.alert(error.description || error.message || 'Error');
+        });
         return;
       }
       const button = event.target.closest('[data-qty-change]');

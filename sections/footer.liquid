@@ -102,6 +102,11 @@
     {%- endif -%}
 
     <span class="footer__copyright">&copy;&nbsp;{{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+
+    <a href="https://www.mewtda.com.br" class="footer__credit" target="_blank" rel="noopener">
+      <span>Desenvolvido por</span>
+      <img src="{{ 'mewtda-logo.png' | asset_url }}" alt="Mewtda" width="400" height="184" loading="lazy" class="footer__credit-logo">
+    </a>
   </div>
 </div>
 

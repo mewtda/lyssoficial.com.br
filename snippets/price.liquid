@@ -4,6 +4,7 @@
   @param {product} [product] - Product to price
   @param {variant} [variant] - Variant to price; overrides product
   @param {string} [class] - Extra classes
+  @param {boolean} [installments] - Also render the interest-free installments line
 
   @example
   {% render 'price', product: product %}
@@ -38,3 +39,6 @@
     </span>
   {%- endif -%}
 </div>
+{%- if installments -%}
+  {% render 'installments', price: price %}
+{%- endif -%}

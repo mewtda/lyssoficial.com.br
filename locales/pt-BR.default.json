@@ -35,7 +35,9 @@
     "remove": "Remover",
     "subtotal": "Subtotal",
     "taxes_note": "Frete e descontos calculados no checkout.",
-    "view_cart": "Ver carrinho"
+    "view_cart": "Ver carrinho",
+    "recommendations_add": "Adicionar",
+    "recommendations_options": "Ver opções"
   },
   "collections": {
     "all_collections": "Coleções",
@@ -138,6 +140,7 @@
       "add_to_cart": "Adicionar ao carrinho",
       "on_sale": "Promo",
       "placeholder_title": "Nome do produto",
+      "installments": "ou em até {{ count }}x de {{ amount }} sem juros",
       "price_from": "A partir de {{ price }}",
       "regular_price": "Preço normal",
       "sale_price": "Preço promocional",

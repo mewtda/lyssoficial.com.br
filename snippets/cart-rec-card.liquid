@@ -1,0 +1,31 @@
+{% doc %}
+  Compact product card used for recommendations inside the cart drawer.
+
+  @param {product} product - Product to render
+
+  @example
+  {% render 'cart-rec-card', product: product %}
+{% enddoc %}
+
+{%- assign variant = product.selected_or_first_available_variant -%}
+<div class="cart-rec">
+  <a href="{{ product.url }}" class="cart-rec__media" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_media -%}
+      {{ product.featured_media.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', widths: '150, 300', sizes: '120px' }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </a>
+  <a href="{{ product.url }}" class="cart-rec__title">{{ product.title | escape }}</a>
+  {% render 'price', product: product %}
+  {%- if product.available -%}
+    {%- if product.has_only_default_variant -%}
+      <button type="button" class="cart-rec__add" data-quick-add="{{ variant.id }}">
+        {% render 'icon', icon: 'plus', class: 'icon--small' %}
+        {{ 'cart.recommendations_add' | t }}
+      </button>
+    {%- else -%}
+      <a href="{{ product.url }}" class="cart-rec__add">{{ 'cart.recommendations_options' | t }}</a>
+    {%- endif -%}
+  {%- endif -%}
+</div>

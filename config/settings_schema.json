@@ -87,6 +87,33 @@
     ]
   },
   {
+    "name": "Parcelamento",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_installments",
+        "label": "Mostrar parcelamento sem juros",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "installments_count",
+        "label": "Parcelas sem juros",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "unit": "x",
+        "default": 4
+      },
+      {
+        "type": "text",
+        "id": "installments_min",
+        "label": "Valor mínimo da parcela (R$)",
+        "info": "Opcional. Se a parcela ficar abaixo disso, o número de parcelas é reduzido. Ex.: 50"
+      }
+    ]
+  },
+  {
     "name": "Cores",
     "settings": [
       {

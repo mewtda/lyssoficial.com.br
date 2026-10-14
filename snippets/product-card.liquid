@@ -88,6 +88,7 @@
         </h3>
         {% render 'price', product: product %}
       </div>
+      {% render 'installments', price: product.price, class: 'card__installments' %}
     </div>
   {%- else -%}
     <div class="card__media">

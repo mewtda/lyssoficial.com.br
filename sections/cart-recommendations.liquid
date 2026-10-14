@@ -1,0 +1,22 @@
+{%- comment -%}
+  Rendered only through the Product Recommendations API for the cart drawer.
+{%- endcomment -%}
+<div data-cart-recs-result>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    {%- assign in_cart = cart.items | map: 'product_id' -%}
+    {%- assign shown = 0 -%}
+    {%- for product in recommendations.products -%}
+      {%- if in_cart contains product.id or product.available == false -%}{%- continue -%}{%- endif -%}
+      {%- if shown >= 6 -%}{%- break -%}{%- endif -%}
+      {%- assign shown = shown | plus: 1 -%}
+      {% render 'cart-rec-card', product: product %}
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Recomendações do carrinho",
+  "settings": []
+}
+{% endschema %}

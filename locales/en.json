@@ -35,7 +35,9 @@
     "remove": "Remove",
     "subtotal": "Subtotal",
     "taxes_note": "Shipping and discounts calculated at checkout.",
-    "view_cart": "View cart"
+    "view_cart": "View cart",
+    "recommendations_add": "Add",
+    "recommendations_options": "Choose options"
   },
   "collections": {
     "all_collections": "Collections",
@@ -138,6 +140,7 @@
       "add_to_cart": "Add to cart",
       "on_sale": "Sale",
       "placeholder_title": "Product name",
+      "installments": "or up to {{ count }} interest-free payments of {{ amount }}",
       "price_from": "From {{ price }}",
       "regular_price": "Regular price",
       "sale_price": "Sale price",

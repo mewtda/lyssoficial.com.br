@@ -21,6 +21,29 @@
         <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
       </div>
     {%- endif -%}
+
+    {%- if section.settings.show_recommendations -%}
+      {%- if cart.item_count > 0 -%}
+        <div
+          class="cart-recs"
+          data-cart-recs
+          data-url="{{ routes.product_recommendations_url }}?section_id=cart-recommendations&product_id={{ cart.items.first.product_id }}&limit=10&intent=related"
+          hidden
+        >
+          <p class="cart-recs__heading">{{ section.settings.recommendations_heading }}</p>
+          <div class="cart-recs__track" data-cart-recs-track></div>
+        </div>
+      {%- elsif section.settings.empty_collection != blank and section.settings.empty_collection.products_count > 0 -%}
+        <div class="cart-recs">
+          <p class="cart-recs__heading">{{ section.settings.empty_heading }}</p>
+          <div class="cart-recs__track">
+            {%- for product in section.settings.empty_collection.products limit: 6 -%}
+              {% render 'cart-rec-card', product: product %}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 
   {%- if cart.item_count > 0 -%}
@@ -47,6 +70,35 @@
 
 {% schema %}
 {
-  "name": "Carrinho lateral"
+  "name": "Carrinho lateral",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_recommendations",
+      "label": "Mostrar recomendações de produtos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "recommendations_heading",
+      "label": "Título das recomendações",
+      "default": "Combine com"
+    },
+    {
+      "type": "header",
+      "content": "Carrinho vazio"
+    },
+    {
+      "type": "collection",
+      "id": "empty_collection",
+      "label": "Coleção sugerida quando o carrinho está vazio"
+    },
+    {
+      "type": "text",
+      "id": "empty_heading",
+      "label": "Título",
+      "default": "Mais amados"
+    }
+  ]
 }
 {% endschema %}

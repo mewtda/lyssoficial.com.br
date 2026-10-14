@@ -1,0 +1,26 @@
+{% doc %}
+  Renders the interest-free installments line (e.g. "ou em até 4x de R$ 50,00 sem juros").
+
+  @param {number} price - Price in cents
+  @param {string} [class] - Extra classes
+
+  @example
+  {% render 'installments', price: product.price %}
+{% enddoc %}
+
+{%- if settings.show_installments and price > 0 -%}
+  {%- liquid
+    assign count = settings.installments_count | default: 4
+    assign min_cents = settings.installments_min | strip | replace: ',', '.' | times: 100 | round
+    if min_cents > 0
+      assign max_by_min = price | divided_by: min_cents
+      if max_by_min < count
+        assign count = max_by_min
+      endif
+    endif
+  -%}
+  {%- if count > 1 -%}
+    {%- assign amount = price | divided_by: count | money -%}
+    <p class="price__installments {{ class }}">{{ 'products.product.installments' | t: count: count, amount: amount }}</p>
+  {%- endif -%}
+{%- endif -%}
