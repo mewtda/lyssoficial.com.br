@@ -22,7 +22,7 @@
             "link": "shopify://collections/all",
             "alignment": "left",
             "text_color": "#ffffff",
-            "overlay": 45
+            "overlay": 30
           }
         },
         "s2": {
@@ -90,7 +90,7 @@
             "link_label": "Descobrir",
             "link": "",
             "text_color": "#ffffff",
-            "overlay": 55
+            "overlay": 80
           }
         },
         "b2": {
