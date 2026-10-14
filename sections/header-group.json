@@ -46,7 +46,16 @@
           "type": "mega_menu",
           "settings": {
             "menu_item": "",
-            "image_1": "shopify://shop_images/IMG_0640.png",
+            "content_type": "images",
+            "featured_heading": "Mais vendidos",
+            "products": [
+              "anel-baguete",
+              "anel-bee",
+              "bracelete-retro",
+              "brinco-argola-crystal",
+              "bracelete-retro-renda"
+            ],
+            "collections": [],
             "label_1": "",
             "link_1": "",
             "label_2": "",
