@@ -202,7 +202,7 @@
   assign video_key = section.settings.video_metafield | split: '.' | last | strip
   assign video_field = product.metafields[video_ns][video_key]
   if video_field == blank
-    assign video_field = product.metafields.custom.videos
+    assign video_field = product.metafields.custom.video
   endif
   assign video_count = 0
   if video_field != blank
@@ -260,8 +260,8 @@
       "type": "text",
       "id": "video_metafield",
       "label": "Metafield do vídeo flutuante",
-      "info": "namespace.chave do metafield de produto. Aceita um vídeo ou uma lista de vídeos (arquivo ou URL). Ex.: custom.video",
-      "default": "custom.video"
+      "info": "namespace.chave do metafield de produto. Aceita um vídeo ou uma lista de vídeos (arquivo ou URL). Ex.: custom.product",
+      "default": "custom.product"
     }
   ],
   "blocks": [
