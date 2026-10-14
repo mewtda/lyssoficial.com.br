@@ -1,5 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": "Default",
+  "current": {
+    "logo": "shopify://shop_images/semassinatura_preto.png",
+    "logo_width": 100,
+    "color_text": "#1d1d1c",
+    "color_background": "#ffffff",
+    "color_accent_background": "#f6f2ec",
+    "color_accent_text": "#3b3b3b",
+    "color_button": "#000000",
+    "color_button_text": "#ffffff",
+    "color_sale": "#1d1d1c",
+    "free_shipping_threshold": 300,
+    "card_show_second_image": true,
+    "card_badge_tag": "new",
+    "card_badge_label": "NEW",
+    "sections": {
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {
       "color_text": "#1d1d1c",
