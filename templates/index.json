@@ -84,7 +84,7 @@
           "type": "banner",
           "settings": {
             "image": "shopify://shop_images/123.png",
-            "image_mobile": "shopify://shop_images/Editorial_de_Moda_no_Campo_de_Tulipas.png",
+            "image_mobile": "shopify://shop_images/123.png",
             "ratio_mobile": "2 / 1",
             "heading": "Ao redor do pescoço",
             "link_label": "Descobrir",
