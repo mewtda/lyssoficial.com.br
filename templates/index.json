@@ -131,6 +131,7 @@
         "l1": {
           "type": "look",
           "settings": {
+            "image": "shopify://shop_images/222.jpg",
             "name": "@cliente",
             "product_1": "",
             "x_1": 40,
@@ -149,6 +150,7 @@
         "l2": {
           "type": "look",
           "settings": {
+            "image": "shopify://shop_images/aaaa.jpg",
             "name": "@cliente",
             "product_1": "",
             "x_1": 40,
@@ -167,6 +169,7 @@
         "l3": {
           "type": "look",
           "settings": {
+            "image": "shopify://shop_images/IMG_7330_JPG_6ebcdddb-b35f-4e1f-8140-ab934c83eefb.jpg",
             "name": "@cliente",
             "product_1": "",
             "x_1": 40,
@@ -185,6 +188,7 @@
         "l4": {
           "type": "look",
           "settings": {
+            "image": "shopify://shop_images/33333.jpg",
             "name": "@cliente",
             "product_1": "",
             "x_1": 40,
