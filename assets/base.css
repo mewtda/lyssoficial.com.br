@@ -652,7 +652,9 @@ details > summary::-webkit-details-marker {
 
   .header__logo-wrap {
     order: 1;
+    flex: 1 0 auto;
     justify-content: flex-start;
+    margin-right: 32px;
   }
 
   .header__logo img {
@@ -1274,18 +1276,11 @@ details > summary::-webkit-details-marker {
     z-index: 3;
     min-height: 0;
     padding: 16px;
-    opacity: 0;
-    transition: opacity 0.5s;
     pointer-events: none;
   }
 
   .card__info a {
     pointer-events: auto;
-  }
-
-  .card:hover .card__info,
-  .card:focus-within .card__info {
-    opacity: 1;
   }
 }
 
@@ -3019,4 +3014,72 @@ details > summary::-webkit-details-marker {
 .cart-page .cart-progress {
   padding-left: 0;
   padding-right: 0;
+}
+
+.story-video {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 90;
+  width: 96px;
+  aspect-ratio: 9 / 16;
+  transition: width 0.4s;
+}
+
+.story-video[hidden] {
+  display: none;
+}
+
+.story-video.is-expanded {
+  width: min(280px, calc(100vw - 32px));
+}
+
+.story-video__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.story-video__frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-video__close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.story-video__close svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (min-width: 768px) {
+  .story-video {
+    left: 24px;
+    bottom: 24px;
+    width: 120px;
+  }
+
+  .story-video.is-expanded {
+    width: 300px;
+  }
 }

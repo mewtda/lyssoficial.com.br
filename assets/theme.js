@@ -553,6 +553,22 @@
     );
   };
 
+  const initStoryVideo = (root = document) => {
+    $$('[data-story-video]', root).forEach((wrap) => {
+      const video = $('video', wrap);
+      if (!video) return;
+      $('[data-story-video-toggle]', wrap)?.addEventListener('click', () => {
+        const expanded = wrap.classList.toggle('is-expanded');
+        video.muted = !expanded;
+        video.play().catch(() => {});
+      });
+      $('[data-story-video-close]', wrap)?.addEventListener('click', () => {
+        video.pause();
+        wrap.hidden = true;
+      });
+    });
+  };
+
   const init = () => {
     initAnnouncement();
     initHeader();
@@ -561,6 +577,7 @@
     initCards();
     initCart();
     $$('[data-product]').forEach(initProduct);
+    initStoryVideo();
     initRecommendations();
     initFooter();
     initCollection();
@@ -577,6 +594,7 @@
     initSliders(event.target);
     initCards(event.target);
     $$('[data-product]', event.target).forEach(initProduct);
+    initStoryVideo(event.target);
     initRecommendations();
   });
 })();

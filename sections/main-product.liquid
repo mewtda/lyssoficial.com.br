@@ -181,6 +181,26 @@
   </div>
 </div>
 
+{%- liquid
+  assign video_ns = section.settings.video_metafield | split: '.' | first | strip
+  assign video_key = section.settings.video_metafield | split: '.' | last | strip
+  assign story_video = product.metafields[video_ns][video_key].value
+-%}
+{%- if story_video != blank -%}
+  <div class="story-video" data-story-video>
+    <button type="button" class="story-video__frame" aria-label="{{ product.title | escape }} – vídeo" data-story-video-toggle>
+      {%- if story_video.media_type == 'video' -%}
+        {{ story_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', image_size: '540x' }}
+      {%- else -%}
+        <video src="{{ story_video }}" autoplay loop muted playsinline preload="metadata"></video>
+      {%- endif -%}
+    </button>
+    <button type="button" class="story-video__close" aria-label="{{ 'general.close' | t }}" data-story-video-close>
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+{%- endif -%}
+
 <script type="application/ld+json">
   {{ product | structured_data }}
 </script>
@@ -195,6 +215,13 @@
       "id": "show_dynamic_checkout",
       "label": "Mostrar botões de checkout rápido",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "video_metafield",
+      "label": "Metafield do vídeo flutuante",
+      "info": "namespace.chave do metafield de produto (arquivo de vídeo ou URL). Ex.: custom.video",
+      "default": "custom.video"
     }
   ],
   "blocks": [
