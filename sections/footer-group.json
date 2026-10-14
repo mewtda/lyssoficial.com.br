@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Rodapé",
@@ -39,7 +48,10 @@
     },
     "about": {
       "type": "footer-about",
-      "settings": {}
+      "settings": {
+        "text": "<p>Criamos joias de personalidade marcante, que orquestram com ousadia feminilidade e modernidade. Feitas inteiramente à mão, são fruto do precioso e minucioso savoir-faire de nossos artesãos, transmitido de geração em geração. Nascida de um croqui, cada criação está pronta para deixar seu estojo e finalmente encontrar você, para ser usada com orgulho.</p>",
+        "menu": ""
+      }
     },
     "footer": {
       "type": "footer",
@@ -61,7 +73,8 @@
         "m3": {
           "type": "social",
           "settings": {
-            "heading": "Siga-nos"
+            "heading": "Siga-nos",
+            "text": ""
           }
         }
       },
@@ -70,7 +83,13 @@
         "m2",
         "m3"
       ],
-      "settings": {}
+      "settings": {
+        "show_newsletter": true,
+        "newsletter_heading": "Ganhe 10% OFF na primeira compra",
+        "newsletter_text": "<p>Ao continuar, você aceita nossos termos e nossa política de privacidade.</p>",
+        "monogram": "shopify://shop_images/semassinatura_offwhite.png",
+        "show_payment": false
+      }
     }
   },
   "order": [
