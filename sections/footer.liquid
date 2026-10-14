@@ -1,0 +1,212 @@
+<div class="footer scheme-accent">
+  <div class="footer__top">
+    <div class="footer__newsletter">
+      <div>
+        {%- if section.settings.newsletter_heading != blank -%}
+          <p class="footer__newsletter-title">{{ section.settings.newsletter_heading }}</p>
+        {%- endif -%}
+        {%- if section.settings.newsletter_text != blank -%}
+          <div class="text-small rte">{{ section.settings.newsletter_text }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.show_newsletter -%}
+        {%- form 'customer', id: 'FooterNewsletter', class: 'footer__newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="field">
+            <label for="FooterNewsletterEmail" class="visually-hidden">{{ 'newsletter.email' | t }}</label>
+            <input
+              id="FooterNewsletterEmail"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              autocomplete="email"
+              placeholder="{{ 'newsletter.email' | t }}"
+              required
+            >
+            <button type="submit" class="field__button" aria-label="{{ 'newsletter.subscribe' | t }}">
+              {% render 'icon', icon: 'arrow' %}
+            </button>
+          </div>
+          {%- if form.errors -%}
+            <p class="footer__newsletter-message errors">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- elsif form.posted_successfully? -%}
+            <p class="footer__newsletter-message form-success">{{ 'newsletter.success' | t }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+
+    <div class="footer__columns">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <details class="footer__column" data-footer-accordion {{ block.shopify_attributes }}>
+              <summary class="footer__column-title">
+                {{ block.settings.heading | default: block.settings.menu.title }}
+                {% render 'icon', icon: 'chevron' %}
+              </summary>
+              {%- if block.settings.menu != blank -%}
+                <ul class="footer__links" role="list">
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}" class="link-animation">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </details>
+          {%- when 'text' -%}
+            <details class="footer__column" data-footer-accordion {{ block.shopify_attributes }}>
+              <summary class="footer__column-title">
+                {{ block.settings.heading }}
+                {% render 'icon', icon: 'chevron' %}
+              </summary>
+              <div class="footer__links rte text-small">{{ block.settings.text }}</div>
+            </details>
+          {%- when 'social' -%}
+            <details class="footer__column" data-footer-accordion {{ block.shopify_attributes }}>
+              <summary class="footer__column-title">
+                {{ block.settings.heading }}
+                {% render 'icon', icon: 'chevron' %}
+              </summary>
+              <div class="footer__links">
+                {%- if block.settings.text != blank -%}
+                  <div class="rte text-small">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {% render 'social-icons' %}
+              </div>
+            </details>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    {%- if section.settings.monogram != blank -%}
+      {{ section.settings.monogram | image_url: width: 300 | image_tag: class: 'footer__monogram', loading: 'lazy', alt: shop.name, widths: '100, 200, 300' }}
+    {%- else -%}
+      <span class="footer__monogram-text" aria-hidden="true">{{ shop.name | slice: 0 | upcase }}</span>
+    {%- endif -%}
+
+    {%- if section.settings.show_payment -%}
+      <ul class="footer__payment" role="list">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <span class="footer__copyright">&copy;&nbsp;{{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rodapé",
+  "tag": "footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Mostrar newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Título da newsletter",
+      "default": "Ganhe 10% OFF na primeira compra"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_text",
+      "label": "Texto da newsletter",
+      "default": "<p>Ao continuar, você aceita nossos termos e nossa política de privacidade.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "monogram",
+      "label": "Monograma / logo do rodapé"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment",
+      "label": "Mostrar ícones de pagamento",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Sobre"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Atendimento"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Segunda a sexta, das 9h às 18h.</p>"
+        }
+      ]
+    },
+    {
+      "type": "social",
+      "name": "Redes sociais",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Siga-nos"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto"
+        },
+        {
+          "type": "paragraph",
+          "content": "Configure os links em Configurações do tema > Redes sociais."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Rodapé",
+      "blocks": [
+        { "type": "menu" },
+        { "type": "text" },
+        { "type": "social" }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

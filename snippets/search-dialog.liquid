@@ -1,0 +1,27 @@
+{% doc %}
+  Renders the predictive search panel that drops below the header.
+
+  @example
+  {% render 'search-dialog' %}
+{% enddoc %}
+
+<div class="search-dialog" id="SearchDialog" role="dialog" aria-modal="true" aria-label="{{ 'sections.header.search' | t }}" data-search-dialog>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="search-dialog__form field">
+    <label for="SearchDialogInput" class="visually-hidden">{{ 'sections.header.search' | t }}</label>
+    <input
+      id="SearchDialogInput"
+      class="field__input"
+      type="search"
+      name="q"
+      placeholder="{{ 'sections.header.search' | t }}"
+      autocomplete="off"
+      data-search-input
+    >
+    <input type="hidden" name="type" value="product">
+    <button type="button" class="field__button" aria-label="{{ 'general.close' | t }}" data-search-close>
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </form>
+  <div class="search-dialog__results" data-search-results aria-live="polite"></div>
+</div>
+<div class="overlay" data-search-overlay></div>

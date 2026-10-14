@@ -1,0 +1,18 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_text": "#1d1d1c",
+      "color_background": "#ffffff",
+      "color_accent_background": "#f6f2ec",
+      "color_accent_text": "#3b3b3b",
+      "color_button": "#000000",
+      "color_button_text": "#ffffff",
+      "color_sale": "#1d1d1c",
+      "free_shipping_threshold": 300,
+      "card_show_second_image": true,
+      "card_badge_tag": "new",
+      "card_badge_label": "NEW"
+    }
+  }
+}

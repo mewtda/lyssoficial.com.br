@@ -1,0 +1,81 @@
+{
+  "type": "footer",
+  "name": "Rodapé",
+  "sections": {
+    "reassurance": {
+      "type": "reassurance",
+      "blocks": {
+        "r1": {
+          "type": "item",
+          "settings": {
+            "title": "Parcele em até 3x sem juros",
+            "text": "Pagamento parcelado disponível para todo o site."
+          }
+        },
+        "r2": {
+          "type": "item",
+          "settings": {
+            "title": "Envio em 24h",
+            "text": "Entrega expressa disponível para todo o Brasil."
+          }
+        },
+        "r3": {
+          "type": "item",
+          "settings": {
+            "title": "Garantia de 1 ano",
+            "text": "Todas as nossas joias têm garantia de um ano a partir da data da compra."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "layout": "slider",
+        "autoplay_speed": 5
+      }
+    },
+    "about": {
+      "type": "footer-about",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "m1": {
+          "type": "menu",
+          "settings": {
+            "heading": "Sobre",
+            "menu": "footer"
+          }
+        },
+        "m2": {
+          "type": "text",
+          "settings": {
+            "heading": "Atendimento",
+            "text": "<p>Segunda a sexta, das 9h às 18h.</p>"
+          }
+        },
+        "m3": {
+          "type": "social",
+          "settings": {
+            "heading": "Siga-nos"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "reassurance",
+    "about",
+    "footer"
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "all_products": "Jewelry",
+    "breadcrumbs": "Breadcrumbs",
+    "cancel": "Cancel",
+    "close": "Close",
+    "next": "Next",
+    "previous": "Previous",
+    "page": "Page {{ page }}",
+    "pagination": "Pagination",
+    "read_more": "Read more",
+    "read_less": "Read less",
+    "slide": "Go to slide {{ number }}"
+  },
+  "blogs": {
+    "back": "Back to {{ title }}",
+    "read_more": "Read more"
+  },
+  "cart": {
+    "title": "Your cart",
+    "count": {
+      "one": "({{ count }}) item",
+      "other": "({{ count }}) items"
+    },
+    "checkout": "Checkout",
+    "continue_shopping": "Continue shopping",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "empty": "Your cart is empty",
+    "note": "Order note",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "taxes_note": "Shipping and discounts calculated at checkout.",
+    "view_cart": "View cart"
+  },
+  "collections": {
+    "all_collections": "Collections",
+    "apply": "Apply",
+    "clear_all": "Clear all",
+    "empty": "No products found",
+    "filter": "Filter",
+    "from": "From",
+    "to": "To",
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "sort_by": "Sort"
+  },
+  "customer": {
+    "account": {
+      "addresses": "View addresses ({{ count }})",
+      "details": "Your details",
+      "logout": "Log out",
+      "no_orders": "You haven't placed any orders yet.",
+      "orders": "Orders",
+      "title": "My account"
+    },
+    "activate": {
+      "decline": "Decline invitation",
+      "submit": "Activate account",
+      "title": "Activate account"
+    },
+    "addresses": {
+      "add": "Add address",
+      "default": "Default",
+      "delete": "Delete",
+      "save": "Save address",
+      "set_default": "Set as default",
+      "title": "Addresses"
+    },
+    "fields": {
+      "address1": "Address",
+      "address2": "Apartment, suite, etc.",
+      "city": "City",
+      "country": "Country",
+      "email": "Email",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "password": "Password",
+      "password_confirm": "Confirm password",
+      "phone": "Phone",
+      "province": "State",
+      "zip": "Postal code"
+    },
+    "login": {
+      "forgot": "Forgot your password?",
+      "guest": "Continue as guest",
+      "submit": "Sign in",
+      "title": "Sign in"
+    },
+    "order": {
+      "billing_address": "Billing address",
+      "date": "Date",
+      "number": "Order",
+      "product": "Product",
+      "shipping_address": "Shipping address",
+      "status": "Status",
+      "title": "Order {{ name }}",
+      "total": "Total"
+    },
+    "recover": {
+      "submit": "Submit",
+      "success": "We've sent you an email with a link to reset your password.",
+      "title": "Reset your password"
+    },
+    "register": {
+      "submit": "Create account",
+      "title": "Create account"
+    },
+    "reset": {
+      "submit": "Reset password",
+      "title": "Reset password"
+    }
+  },
+  "gift_card": {
+    "balance": "Balance",
+    "disabled": "Disabled",
+    "expired": "Expired",
+    "heading": "Your {{ value }} gift card",
+    "title": "Gift card"
+  },
+  "newsletter": {
+    "email": "Your email",
+    "subscribe": "Subscribe",
+    "success": "Thanks for subscribing!"
+  },
+  "password": {
+    "enter": "Enter using password",
+    "password": "Password"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "on_sale": "Sale",
+      "placeholder_title": "Product name",
+      "price_from": "From {{ price }}",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "sections": {
+    "announcement": {
+      "label": "Announcements"
+    },
+    "featured_collection": {
+      "view_all": "View all"
+    },
+    "header": {
+      "account": "Account",
+      "cart": "Cart",
+      "login": "Sign in",
+      "main_navigation": "Main navigation",
+      "menu": "Menu",
+      "my_account": "My account",
+      "search": "Search"
+    },
+    "not_found": {
+      "text": "The page you're looking for doesn't exist or has moved.",
+      "title": "Page not found"
+    },
+    "search": {
+      "count": {
+        "one": "{{ count }} result",
+        "other": "{{ count }} results"
+      },
+      "no_results": "No results for “{{ terms }}”",
+      "products": "You might be interested in:",
+      "results_for": "Results for “{{ terms }}”",
+      "title": "Search",
+      "view_all": "View all results"
+    }
+  }
+}

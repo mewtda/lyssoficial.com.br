@@ -1,0 +1,103 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-slider",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "subheading": "NEW IN",
+            "heading": "Nova coleção",
+            "link_label": "Descobrir",
+            "link": "shopify://collections/all"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "subheading": "seleção",
+            "heading": "Golden Hour",
+            "link_label": "Descobrir",
+            "link": "shopify://collections/all"
+          }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "subheading": "Curated",
+            "heading": "Icons",
+            "link_label": "SHOP",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "height_mobile": 500,
+        "autoplay": true,
+        "autoplay_speed": 6
+      }
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "em alta",
+        "collection": "all",
+        "products_to_show": 12,
+        "layout": "slider",
+        "columns_desktop": 4
+      }
+    },
+    "banners": {
+      "type": "collection-banners",
+      "blocks": {
+        "b1": {
+          "type": "banner",
+          "settings": {
+            "heading": "Ao redor do pescoço",
+            "link_label": "Descobrir",
+            "ratio_mobile": "2 / 1"
+          }
+        },
+        "b2": {
+          "type": "banner",
+          "settings": {
+            "heading": "Into the Blue",
+            "link_label": "A seleção",
+            "ratio_mobile": "16 / 9"
+          }
+        },
+        "b3": {
+          "type": "banner",
+          "settings": {
+            "heading": "Anéis",
+            "link_label": "SHOP",
+            "ratio_mobile": "1 / 1"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "layout": "stack"
+      }
+    },
+    "editorial": {
+      "type": "editorial-video",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "best_sellers",
+    "banners",
+    "editorial"
+  ]
+}

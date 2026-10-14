@@ -1,0 +1,180 @@
+{
+  "accessibility": {
+    "skip_to_content": "Pular para o conteúdo"
+  },
+  "general": {
+    "all_products": "Joias",
+    "breadcrumbs": "Navegação estrutural",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "page": "Página {{ page }}",
+    "pagination": "Paginação",
+    "read_more": "Ver mais",
+    "read_less": "Ver menos",
+    "slide": "Ir para o slide {{ number }}"
+  },
+  "blogs": {
+    "back": "Voltar para {{ title }}",
+    "read_more": "Ler mais"
+  },
+  "cart": {
+    "title": "Seu carrinho",
+    "count": {
+      "one": "({{ count }}) item",
+      "other": "({{ count }}) itens"
+    },
+    "checkout": "Finalizar compra",
+    "continue_shopping": "Continuar comprando",
+    "decrease": "Diminuir quantidade",
+    "increase": "Aumentar quantidade",
+    "empty": "Seu carrinho está vazio",
+    "note": "Observações do pedido",
+    "quantity": "Quantidade",
+    "remove": "Remover",
+    "subtotal": "Subtotal",
+    "taxes_note": "Frete e descontos calculados no checkout.",
+    "view_cart": "Ver carrinho"
+  },
+  "collections": {
+    "all_collections": "Coleções",
+    "apply": "Aplicar",
+    "clear_all": "Limpar filtros",
+    "empty": "Nenhum produto encontrado",
+    "filter": "Filtrar",
+    "from": "De",
+    "to": "Até",
+    "product_count": {
+      "one": "{{ count }} produto",
+      "other": "{{ count }} produtos"
+    },
+    "sort_by": "Ordenar"
+  },
+  "customer": {
+    "account": {
+      "addresses": "Ver endereços ({{ count }})",
+      "details": "Seus dados",
+      "logout": "Sair",
+      "no_orders": "Você ainda não fez nenhum pedido.",
+      "orders": "Pedidos",
+      "title": "Minha conta"
+    },
+    "activate": {
+      "decline": "Recusar convite",
+      "submit": "Ativar conta",
+      "title": "Ativar conta"
+    },
+    "addresses": {
+      "add": "Adicionar endereço",
+      "default": "Padrão",
+      "delete": "Excluir",
+      "save": "Salvar endereço",
+      "set_default": "Definir como padrão",
+      "title": "Endereços"
+    },
+    "fields": {
+      "address1": "Endereço",
+      "address2": "Complemento",
+      "city": "Cidade",
+      "country": "País",
+      "email": "E-mail",
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "password": "Senha",
+      "password_confirm": "Confirmar senha",
+      "phone": "Telefone",
+      "province": "Estado",
+      "zip": "CEP"
+    },
+    "login": {
+      "forgot": "Esqueceu sua senha?",
+      "guest": "Continuar como visitante",
+      "submit": "Entrar",
+      "title": "Entrar"
+    },
+    "order": {
+      "billing_address": "Endereço de cobrança",
+      "date": "Data",
+      "number": "Pedido",
+      "product": "Produto",
+      "shipping_address": "Endereço de entrega",
+      "status": "Status",
+      "title": "Pedido {{ name }}",
+      "total": "Total"
+    },
+    "recover": {
+      "submit": "Enviar",
+      "success": "Enviamos um e-mail com o link para redefinir sua senha.",
+      "title": "Redefinir senha"
+    },
+    "register": {
+      "submit": "Criar conta",
+      "title": "Criar conta"
+    },
+    "reset": {
+      "submit": "Redefinir senha",
+      "title": "Redefinir senha"
+    }
+  },
+  "gift_card": {
+    "balance": "Saldo",
+    "disabled": "Desativado",
+    "expired": "Expirado",
+    "heading": "Seu vale-presente de {{ value }}",
+    "title": "Vale-presente"
+  },
+  "newsletter": {
+    "email": "Seu e-mail",
+    "subscribe": "Inscrever-se",
+    "success": "Obrigado por se inscrever!"
+  },
+  "password": {
+    "enter": "Entrar com senha",
+    "password": "Senha"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao carrinho",
+      "on_sale": "Promo",
+      "placeholder_title": "Nome do produto",
+      "price_from": "A partir de {{ price }}",
+      "regular_price": "Preço normal",
+      "sale_price": "Preço promocional",
+      "sold_out": "Esgotado",
+      "unavailable": "Indisponível"
+    }
+  },
+  "sections": {
+    "announcement": {
+      "label": "Anúncios"
+    },
+    "featured_collection": {
+      "view_all": "Ver tudo"
+    },
+    "header": {
+      "account": "Conta",
+      "cart": "Carrinho",
+      "login": "Entrar",
+      "main_navigation": "Navegação principal",
+      "menu": "Menu",
+      "my_account": "Minha conta",
+      "search": "Buscar"
+    },
+    "not_found": {
+      "text": "A página que você procura não existe ou foi movida.",
+      "title": "Página não encontrada"
+    },
+    "search": {
+      "count": {
+        "one": "{{ count }} resultado",
+        "other": "{{ count }} resultados"
+      },
+      "no_results": "Nenhum resultado para “{{ terms }}”",
+      "products": "Você pode se interessar por:",
+      "results_for": "Resultados para “{{ terms }}”",
+      "title": "Buscar",
+      "view_all": "Ver todos os resultados"
+    }
+  }
+}

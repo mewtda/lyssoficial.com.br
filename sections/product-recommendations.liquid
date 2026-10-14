@@ -1,0 +1,65 @@
+<div
+  class="featured-products section-padding"
+  style="--pt-mobile: 32px; --pb-mobile: 48px; --pt-desktop: 48px; --pb-desktop: 64px;"
+  data-recommendations
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}&intent=related"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="h3 featured-products__heading page-width">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <div class="page-width">
+      <div
+        class="slider"
+        data-slider
+        style="--per-view-mobile: 2; --per-view-tablet: 3; --per-view-desktop: 4; --slider-gap-mobile: 4px; --slider-gap-desktop: 4px;"
+      >
+        <div class="slider__track" data-slider-track>
+          {%- for product in recommendations.products -%}
+            <div class="slider__slide" data-slide>
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        </div>
+        <button type="button" class="slider__arrow slider__arrow--prev" aria-label="{{ 'general.previous' | t }}" data-slider-prev>
+          {% render 'icon', icon: 'arrow' %}
+        </button>
+        <button type="button" class="slider__arrow slider__arrow--next" aria-label="{{ 'general.next' | t }}" data-slider-next>
+          {% render 'icon', icon: 'arrow' %}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Recomendações",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "você também vai amar"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Número de produtos",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "Recomendações"
+    }
+  ]
+}
+{% endschema %}

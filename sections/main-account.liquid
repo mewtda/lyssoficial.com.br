@@ -1,0 +1,50 @@
+<div class="customer customer--wide">
+  <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
+  <div class="cart-page__layout">
+    <div>
+      <h2 class="h5" style="margin-bottom: 16px;">{{ 'customer.account.orders' | t }}</h2>
+      {%- paginate customer.orders by 20 -%}
+        {%- if customer.orders.size > 0 -%}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.order.number' | t }}</th>
+                <th scope="col">{{ 'customer.order.date' | t }}</th>
+                <th scope="col">{{ 'customer.order.status' | t }}</th>
+                <th scope="col">{{ 'customer.order.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr>
+                  <td><a href="{{ order.customer_url }}" class="underline">{{ order.name }}</a></td>
+                  <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+                  <td>{{ order.fulfillment_status_label }}</td>
+                  <td>{{ order.total_net_amount | money }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        {%- else -%}
+          <p>{{ 'customer.account.no_orders' | t }}</p>
+        {%- endif -%}
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+    <div class="cart-page__summary">
+      <h2 class="h5">{{ 'customer.account.details' | t }}</h2>
+      <p>{{ customer.name }}<br>{{ customer.email }}</p>
+      {{ customer.default_address | format_address }}
+      <a href="{{ routes.account_addresses_url }}" class="caption underline">{{ 'customer.account.addresses' | t: count: customer.addresses_count }}</a>
+      <a href="{{ routes.account_logout_url }}" class="button button--secondary">{{ 'customer.account.logout' | t }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Conta"
+}
+{% endschema %}

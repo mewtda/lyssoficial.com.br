@@ -1,0 +1,56 @@
+<div class="customer">
+  <h1 class="customer__title">{{ 'customer.login.title' | t }}</h1>
+
+  <div data-login-panel>
+    {%- form 'customer_login' -%}
+      {{ form.errors | default_errors }}
+      <div class="field">
+        <label for="CustomerEmail" class="visually-hidden">{{ 'customer.fields.email' | t }}</label>
+        <input id="CustomerEmail" class="field__input" type="email" name="customer[email]" autocomplete="email" placeholder="{{ 'customer.fields.email' | t }}" required>
+      </div>
+      {%- if form.password_needed -%}
+        <div class="field">
+          <label for="CustomerPassword" class="visually-hidden">{{ 'customer.fields.password' | t }}</label>
+          <input id="CustomerPassword" class="field__input" type="password" name="customer[password]" autocomplete="current-password" placeholder="{{ 'customer.fields.password' | t }}" required>
+        </div>
+      {%- endif -%}
+      <button type="submit" class="button button--full">{{ 'customer.login.submit' | t }}</button>
+    {%- endform -%}
+    <div class="customer__links">
+      <a href="#recover" data-recover-toggle>{{ 'customer.login.forgot' | t }}</a>
+      <a href="{{ routes.account_register_url }}">{{ 'customer.register.title' | t }}</a>
+    </div>
+  </div>
+
+  <div id="recover" hidden data-recover-panel>
+    <h2 class="h5" style="margin-bottom: 16px; text-align: center;">{{ 'customer.recover.title' | t }}</h2>
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="form-success" data-recover-success>{{ 'customer.recover.success' | t }}</p>
+      {%- endif -%}
+      {{ form.errors | default_errors }}
+      <div class="field">
+        <label for="RecoverEmail" class="visually-hidden">{{ 'customer.fields.email' | t }}</label>
+        <input id="RecoverEmail" class="field__input" type="email" name="email" autocomplete="email" placeholder="{{ 'customer.fields.email' | t }}" required>
+      </div>
+      <button type="submit" class="button button--full">{{ 'customer.recover.submit' | t }}</button>
+    {%- endform -%}
+    <div class="customer__links">
+      <a href="#login" data-recover-toggle>{{ 'general.cancel' | t }}</a>
+    </div>
+  </div>
+
+  {%- if shop.checkout.guest_login -%}
+    <div class="customer__links">
+      {%- form 'guest_login' -%}
+        <button type="submit" class="button button--secondary button--full">{{ 'customer.login.guest' | t }}</button>
+      {%- endform -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Login"
+}
+{% endschema %}

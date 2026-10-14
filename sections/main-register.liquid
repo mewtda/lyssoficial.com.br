@@ -1,0 +1,32 @@
+<div class="customer">
+  <h1 class="customer__title">{{ 'customer.register.title' | t }}</h1>
+  {%- form 'create_customer' -%}
+    {{ form.errors | default_errors }}
+    <div class="field">
+      <label for="RegisterFirstName" class="visually-hidden">{{ 'customer.fields.first_name' | t }}</label>
+      <input id="RegisterFirstName" class="field__input" type="text" name="customer[first_name]" autocomplete="given-name" placeholder="{{ 'customer.fields.first_name' | t }}">
+    </div>
+    <div class="field">
+      <label for="RegisterLastName" class="visually-hidden">{{ 'customer.fields.last_name' | t }}</label>
+      <input id="RegisterLastName" class="field__input" type="text" name="customer[last_name]" autocomplete="family-name" placeholder="{{ 'customer.fields.last_name' | t }}">
+    </div>
+    <div class="field">
+      <label for="RegisterEmail" class="visually-hidden">{{ 'customer.fields.email' | t }}</label>
+      <input id="RegisterEmail" class="field__input" type="email" name="customer[email]" autocomplete="email" placeholder="{{ 'customer.fields.email' | t }}" required>
+    </div>
+    <div class="field">
+      <label for="RegisterPassword" class="visually-hidden">{{ 'customer.fields.password' | t }}</label>
+      <input id="RegisterPassword" class="field__input" type="password" name="customer[password]" autocomplete="new-password" placeholder="{{ 'customer.fields.password' | t }}" required>
+    </div>
+    <button type="submit" class="button button--full">{{ 'customer.register.submit' | t }}</button>
+  {%- endform -%}
+  <div class="customer__links">
+    <a href="{{ routes.account_login_url }}">{{ 'customer.login.title' | t }}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cadastro"
+}
+{% endschema %}

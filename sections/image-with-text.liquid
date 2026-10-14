@@ -1,0 +1,105 @@
+<div
+  class="section-padding"
+  style="--pt-mobile: {{ section.settings.padding_top | times: 0.6 | round }}px; --pb-mobile: {{ section.settings.padding_bottom | times: 0.6 | round }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="image-with-text {% if section.settings.image_position == 'right' %}image-with-text--reverse{% endif %}">
+    <div class="image-with-text__media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 50vw, 100vw', widths: '375, 750, 1000, 1600' }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="image-with-text__content">
+      {%- if section.settings.subheading != blank -%}
+        <p class="caption">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '#' }}" class="button">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Imagem com texto",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posição da imagem",
+      "options": [
+        { "value": "left", "label": "Esquerda" },
+        { "value": "right", "label": "Direita" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sobretítulo",
+      "default": "SAVOIR-FAIRE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Feito à mão"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Cada peça é moldada, polida e finalizada à mão por nossos artesãos.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espaço no topo",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espaço na base",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Imagem com texto"
+    }
+  ]
+}
+{% endschema %}

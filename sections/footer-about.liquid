@@ -1,0 +1,46 @@
+<div class="footer-about section-padding" style="--pt-mobile: 56px; --pb-mobile: 56px; --pt-desktop: 104px; --pb-desktop: 104px;">
+  {%- if section.settings.text != blank -%}
+    <div class="footer-about__text-wrap">
+      <div class="footer-about__text rte" id="FooterAboutText-{{ section.id }}" data-read-more-target>
+        {{ section.settings.text }}
+      </div>
+      <button type="button" class="footer-about__toggle" aria-expanded="false" aria-controls="FooterAboutText-{{ section.id }}" data-read-more data-label-more="{{ 'general.read_more' | t }}" data-label-less="{{ 'general.read_less' | t }}">
+        {{ 'general.read_more' | t }}
+      </button>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.menu != blank -%}
+    <ul class="footer-about__links" role="list">
+      {%- for link in section.settings.menu.links -%}
+        <li><a href="{{ link.url }}" class="link-animation">{{ link.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Sobre a marca",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Criamos joias de personalidade marcante, que orquestram com ousadia feminilidade e modernidade. Feitas inteiramente à mão, são fruto do precioso e minucioso savoir-faire de nossos artesãos, transmitido de geração em geração. Nascida de um croqui, cada criação está pronta para deixar seu estojo e finalmente encontrar você, para ser usada com orgulho.</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Links de categorias",
+      "info": "Exibidos em linha no desktop."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sobre a marca"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,212 @@
+{%- liquid
+  assign menu = section.settings.menu
+  assign logo_alt = section.settings.logo.alt | default: shop.name
+  assign logo = section.settings.logo | default: settings.logo
+-%}
+
+<header
+  class="header"
+  data-header
+  style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width | times: 0.75 | round }}px;"
+>
+  <div class="header__logo-wrap">
+    <a href="{{ routes.root_url }}" class="header__logo">
+      {%- if request.page_type == 'index' -%}
+        <h1 class="visually-hidden">{{ shop.name }}</h1>
+      {%- endif -%}
+      {%- if logo != blank -%}
+        {{ logo | image_url: width: 600 | image_tag: alt: logo_alt, loading: 'eager', widths: '200, 300, 400, 600', sizes: '(min-width: 768px) 200px, 120px' }}
+      {%- else -%}
+        <span class="header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+
+  <div class="header__nav-wrap">
+    <button
+      type="button"
+      class="icon-button header__menu-toggle"
+      aria-controls="MobileMenu"
+      aria-expanded="false"
+      aria-label="{{ 'sections.header.menu' | t }}"
+      data-menu-toggle
+    >
+      <span data-menu-icon-open>{% render 'icon', icon: 'menu' %}</span>
+      <span data-menu-icon-close hidden>{% render 'icon', icon: 'close' %}</span>
+    </button>
+
+    {%- if menu != blank -%}
+      <nav class="header__nav" aria-label="{{ 'sections.header.main_navigation' | t }}">
+        <ul class="header__nav-list" role="list">
+          {%- for link in menu.links -%}
+            {%- liquid
+              assign promo = nil
+              for block in section.blocks
+                assign wanted = block.settings.menu_item | strip | downcase
+                assign current = link.title | strip | downcase
+                if wanted == current
+                  assign promo = block
+                endif
+              endfor
+            -%}
+            <li class="header__nav-item">
+              {%- if link.links.size > 0 or promo -%}
+                <a href="{{ link.url }}" class="header__nav-link" aria-haspopup="true">{{ link.title }}</a>
+                <div class="mega-menu" data-mega-menu>
+                  {% render 'mega-menu-content', link: link, promo: promo %}
+                </div>
+              {%- else -%}
+                <a href="{{ link.url }}" class="header__nav-link"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+
+  <div class="header__icons">
+    <button type="button" class="icon-button" aria-label="{{ 'sections.header.search' | t }}" aria-controls="SearchDialog" aria-expanded="false" data-search-toggle>
+      {% render 'icon', icon: 'search' %}
+    </button>
+    <div class="header__localization">
+      {% render 'localization-form' %}
+    </div>
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{{ routes.account_url }}" class="icon-button desktop-only" aria-label="{{ 'sections.header.account' | t }}">
+        {% render 'icon', icon: 'account' %}
+      </a>
+    {%- endif -%}
+    <a href="{{ routes.cart_url }}" class="icon-button" aria-label="{{ 'sections.header.cart' | t }}" data-cart-toggle>
+      {% render 'icon', icon: 'cart' %}
+      <span class="cart-count" data-cart-count data-count="{{ cart.item_count }}">{{ cart.item_count }}</span>
+    </a>
+  </div>
+</header>
+
+<div class="mobile-menu" id="MobileMenu" data-mobile-menu>
+  <div class="mobile-menu__scroll">
+    {%- if menu != blank -%}
+      {%- for link in menu.links -%}
+        {%- liquid
+          assign promo = nil
+          for block in section.blocks
+            assign wanted = block.settings.menu_item | strip | downcase
+            assign current = link.title | strip | downcase
+            if wanted == current
+              assign promo = block
+            endif
+          endfor
+        -%}
+        {%- if link.links.size > 0 or promo -%}
+          <details class="mobile-menu__item">
+            <summary>
+              <span>{{ link.title }}</span>
+              {% render 'icon', icon: 'chevron' %}
+            </summary>
+            <div class="mobile-menu__panel">
+              {% render 'mega-menu-content', link: link, promo: promo %}
+            </div>
+          </details>
+        {%- else -%}
+          <div class="mobile-menu__item">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  <div class="mobile-menu__footer">
+    {%- if shop.customer_accounts_enabled -%}
+      <a href="{{ routes.account_url }}" class="mobile-menu__account">
+        {% render 'icon', icon: 'account' %}
+        <span>
+          {%- if customer -%}
+            {{ 'sections.header.my_account' | t }}
+          {%- else -%}
+            {{ 'sections.header.login' | t }}
+          {%- endif -%}
+        </span>
+      </a>
+    {%- endif -%}
+    {% render 'localization-form' %}
+  </div>
+</div>
+
+<div class="overlay" data-header-overlay></div>
+
+{% schema %}
+{
+  "name": "Cabeçalho",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Se vazio, usa o logo das configurações do tema ou o nome da loja."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega menu (imagens)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Item do menu",
+          "info": "Título exato do item de primeiro nível (ex.: Joias)."
+        },
+        {
+          "type": "header",
+          "content": "Imagem 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "label_1",
+          "label": "Legenda"
+        },
+        {
+          "type": "url",
+          "id": "link_1",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Imagem 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "label_2",
+          "label": "Legenda"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

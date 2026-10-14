@@ -1,0 +1,140 @@
+<div
+  class="editorial section-padding"
+  style="--pt-mobile: {{ section.settings.padding_top_mobile }}px; --pb-mobile: {{ section.settings.padding_bottom_mobile }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
+>
+  {%- if section.settings.heading != blank or section.settings.text != blank -%}
+    <div class="editorial__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="h2 editorial__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="editorial__body rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="editorial__media-wrap">
+    <div class="editorial__media">
+      {%- if section.settings.video_mobile != blank -%}
+        {{ section.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
+      {%- elsif section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
+      {%- elsif section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'mobile-only', loading: 'lazy', sizes: '100vw', widths: '375, 750, 1000, 1200' }}
+      {%- endif -%}
+
+      {%- if section.settings.video != blank -%}
+        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'desktop-only', image_size: '1920x' }}
+      {%- elsif section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'desktop-only', loading: 'lazy', sizes: '100vw', widths: '1000, 1500, 2000, 2400' }}
+      {%- endif -%}
+
+      {%- if section.settings.video == blank and section.settings.video_mobile == blank and section.settings.image == blank -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.button_label != blank -%}
+    <div class="editorial__cta">
+      <a href="{{ section.settings.button_link | default: '#' }}" class="button">{{ section.settings.button_label }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Editorial com vídeo",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Mãos, tempo e exigência."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Cada peça é pensada como uma assinatura. Linhas marcantes, presença afirmada e um savoir-faire artesanal de exceção.</p>"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo (desktop)"
+    },
+    {
+      "type": "video",
+      "id": "video_mobile",
+      "label": "Vídeo (celular)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem",
+      "info": "Usada se não houver vídeo."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Nosso savoir-faire"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Topo (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Base (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 144
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Topo (celular)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Base (celular)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial com vídeo"
+    }
+  ]
+}
+{% endschema %}

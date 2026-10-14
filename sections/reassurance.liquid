@@ -1,0 +1,91 @@
+<div class="reassurance section-padding" style="--pt-mobile: 40px; --pb-mobile: 40px; --pt-desktop: 40px; --pb-desktop: 40px;">
+  {%- if section.settings.layout == 'slider' -%}
+    <div class="slider" data-slider data-loop {% if section.blocks.size > 1 %}data-autoplay="{{ section.settings.autoplay_speed | times: 1000 }}"{% endif %}>
+      <div class="slider__track" data-slider-track>
+        {%- for block in section.blocks -%}
+          <div class="slider__slide" data-slide {{ block.shopify_attributes }}>
+            <div class="reassurance__item">
+              <p class="reassurance__title">{{ block.settings.title }}</p>
+              <p class="reassurance__text">{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if section.blocks.size > 1 -%}
+        <div class="slider__dots" data-slider-dots>
+          {%- for block in section.blocks -%}
+            <button type="button" class="slider__dot" aria-label="{{ 'general.slide' | t: number: forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %} data-slider-dot="{{ forloop.index0 }}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <div class="reassurance__grid page-width" style="--columns: {{ section.blocks.size | at_least: 1 }};">
+      {%- for block in section.blocks -%}
+        <div class="reassurance__item" {{ block.shopify_attributes }}>
+          <p class="reassurance__title">{{ block.settings.title }}</p>
+          <p class="reassurance__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Garantias",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "slider", "label": "Carrossel (um por vez)" },
+        { "value": "grid", "label": "Colunas" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Intervalo do carrossel",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Garantia",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Parcele em até 3x sem juros"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Pagamento parcelado disponível para todo o site."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Garantias",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item", "settings": { "title": "Envio em 24h", "text": "Entrega expressa disponível para todo o Brasil." } },
+        { "type": "item", "settings": { "title": "Garantia de 1 ano", "text": "Todas as nossas joias têm garantia de um ano a partir da data da compra." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+<div class="cart-drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-label="{{ 'cart.title' | t }}" tabindex="-1" data-cart-drawer>
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__heading">
+      {{ 'cart.count' | t: count: cart.item_count }}
+    </h2>
+    <button type="button" class="icon-button" aria-label="{{ 'general.close' | t }}" data-cart-close>
+      {% render 'icon', icon: 'close' %}
+    </button>
+  </div>
+
+  {% render 'cart-progress' %}
+
+  <div class="cart-drawer__body" data-cart-count-source="{{ cart.item_count }}">
+    {%- if cart.item_count > 0 -%}
+      {%- for item in cart.items -%}
+        {% render 'cart-line-item', item: item, index: forloop.index %}
+      {%- endfor -%}
+    {%- else -%}
+      <div class="cart-drawer__empty">
+        <p class="h5">{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      {%- for discount in cart.cart_level_discount_applications -%}
+        <div class="cart-totals text-small">
+          <span>{{ discount.title }}</span>
+          <span>-{{ discount.total_allocated_amount | money }}</span>
+        </div>
+      {%- endfor -%}
+      <div class="cart-totals">
+        <span>{{ 'cart.subtotal' | t }}</span>
+        <span>{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-note-text">{{ 'cart.taxes_note' | t }}</p>
+      <form action="{{ routes.cart_url }}" method="post">
+        <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+      </form>
+      <a href="{{ routes.cart_url }}" class="caption underline" style="text-align: center;">{{ 'cart.view_cart' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+<div class="overlay cart-drawer-overlay" data-cart-overlay></div>
+
+{% schema %}
+{
+  "name": "Carrinho lateral"
+}
+{% endschema %}

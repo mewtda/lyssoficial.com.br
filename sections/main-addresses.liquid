@@ -1,0 +1,54 @@
+<div class="customer customer--wide">
+  <a href="{{ routes.account_url }}" class="caption underline">&larr; {{ 'customer.account.title' | t }}</a>
+  <h1 class="customer__title" style="margin-top: 24px;">{{ 'customer.addresses.title' | t }}</h1>
+
+  <div class="cart-page__layout">
+    <div>
+      {%- paginate customer.addresses by 10 -%}
+        {%- for address in customer.addresses -%}
+          <div style="padding: 16px 0; border-bottom: 1px solid rgba(var(--color-text-rgb), 0.1);">
+            {%- if address == customer.default_address -%}
+              <p class="caption" style="margin-bottom: 6px;">{{ 'customer.addresses.default' | t }}</p>
+            {%- endif -%}
+            {{ address | format_address }}
+            {%- form 'customer_address', address -%}
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="cart-item__remove" style="margin-top: 8px;">{{ 'customer.addresses.delete' | t }}</button>
+            {%- endform -%}
+          </div>
+        {%- endfor -%}
+        {%- if paginate.pages > 1 -%}
+          {% render 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+
+    <div>
+      <h2 class="h5" style="margin-bottom: 16px;">{{ 'customer.addresses.add' | t }}</h2>
+      {%- form 'customer_address', customer.new_address -%}
+        {{ form.errors | default_errors }}
+        <div class="field"><input class="field__input" type="text" name="address[first_name]" placeholder="{{ 'customer.fields.first_name' | t }}" aria-label="{{ 'customer.fields.first_name' | t }}" autocomplete="given-name"></div>
+        <div class="field"><input class="field__input" type="text" name="address[last_name]" placeholder="{{ 'customer.fields.last_name' | t }}" aria-label="{{ 'customer.fields.last_name' | t }}" autocomplete="family-name"></div>
+        <div class="field"><input class="field__input" type="text" name="address[address1]" placeholder="{{ 'customer.fields.address1' | t }}" aria-label="{{ 'customer.fields.address1' | t }}" autocomplete="address-line1"></div>
+        <div class="field"><input class="field__input" type="text" name="address[address2]" placeholder="{{ 'customer.fields.address2' | t }}" aria-label="{{ 'customer.fields.address2' | t }}" autocomplete="address-line2"></div>
+        <div class="field"><input class="field__input" type="text" name="address[city]" placeholder="{{ 'customer.fields.city' | t }}" aria-label="{{ 'customer.fields.city' | t }}" autocomplete="address-level2"></div>
+        <div class="field">
+          <select class="field__input" name="address[country]" aria-label="{{ 'customer.fields.country' | t }}" autocomplete="country">
+            {{ all_country_option_tags }}
+          </select>
+        </div>
+        <div class="field"><input class="field__input" type="text" name="address[province]" placeholder="{{ 'customer.fields.province' | t }}" aria-label="{{ 'customer.fields.province' | t }}" autocomplete="address-level1"></div>
+        <div class="field"><input class="field__input" type="text" name="address[zip]" placeholder="{{ 'customer.fields.zip' | t }}" aria-label="{{ 'customer.fields.zip' | t }}" autocomplete="postal-code"></div>
+        <div class="field"><input class="field__input" type="tel" name="address[phone]" placeholder="{{ 'customer.fields.phone' | t }}" aria-label="{{ 'customer.fields.phone' | t }}" autocomplete="tel"></div>
+        <label class="facet__value"><input type="checkbox" name="address[default]" value="1"> {{ 'customer.addresses.set_default' | t }}</label>
+        <button type="submit" class="button button--full">{{ 'customer.addresses.save' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Endereços"
+}
+{% endschema %}

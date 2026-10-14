@@ -1,0 +1,105 @@
+{% doc %}
+  Renders a product card with hover image swap, badge and overlay info.
+
+  @param {product} [product] - The product to render; renders a placeholder when blank
+  @param {string} [class] - Extra classes for the wrapper
+  @param {string} [sizes] - Image sizes attribute
+  @param {boolean} [eager] - Load images eagerly
+
+  @example
+  {% render 'product-card', product: product %}
+{% enddoc %}
+
+{%- liquid
+  assign image_sizes = sizes | default: '(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw'
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+  assign has_secondary = false
+  if product and settings.card_show_second_image and product.media.size > 1
+    assign has_secondary = true
+  endif
+  assign badge_tag = settings.card_badge_tag | strip | downcase
+  assign show_badge = false
+  if product and badge_tag != blank
+    for tag in product.tags
+      assign t_down = tag | downcase
+      if t_down == badge_tag
+        assign show_badge = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+<div class="card {% if has_secondary %}card--has-secondary{% endif %} {{ class }}">
+  {%- if product -%}
+    <div class="card__media {% if has_secondary %}card__media--scroll{% endif %}">
+      <a href="{{ product.url }}" class="card__link" aria-label="{{ product.title | escape }}"></a>
+      {%- if has_secondary -%}
+        <div class="card__scroller" data-card-scroller>
+          {%- for media in product.media limit: 3 -%}
+            <div class="card__image {% if forloop.first %}card__image--primary{% elsif forloop.index == 2 %}card__image--secondary{% endif %}">
+              <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                {{
+                  media.preview_image
+                  | image_url: width: 1200
+                  | image_tag: widths: '330, 535, 750, 1000, 1200', sizes: image_sizes, loading: loading, alt: product.title
+                }}
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="card__mobile-dots" aria-hidden="true">
+          {%- for media in product.media limit: 3 -%}
+            <span class="card__mobile-dot {% if forloop.first %}is-active{% endif %}"></span>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="card__image card__image--primary">
+          {%- if product.featured_media -%}
+            {{
+              product.featured_media.preview_image
+              | image_url: width: 1200
+              | image_tag: widths: '330, 535, 750, 1000, 1200', sizes: image_sizes, loading: loading, alt: product.title
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="card__badges">
+      {%- if product.available == false -%}
+        <span class="card__badge">{{ 'products.product.sold_out' | t }}</span>
+      {%- elsif product.compare_at_price > product.price -%}
+        <span class="card__badge">{{ 'products.product.on_sale' | t }}</span>
+      {%- elsif show_badge -%}
+        <span class="card__badge">{{ settings.card_badge_label }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="card__info">
+      <div class="card__row">
+        <h3 class="card__title">
+          <a href="{{ product.url }}">{{ product.title | escape }}</a>
+        </h3>
+        {% render 'price', product: product %}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="card__media">
+      <div class="card__image card__image--primary">
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    </div>
+    <div class="card__info">
+      <div class="card__row">
+        <h3 class="card__title">{{ 'products.product.placeholder_title' | t }}</h3>
+        <div class="price">{{ 1990 | money }}</div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>

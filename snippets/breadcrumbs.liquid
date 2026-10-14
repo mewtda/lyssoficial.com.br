@@ -1,0 +1,26 @@
+{% doc %}
+  Renders breadcrumbs for product and collection pages.
+
+  @param {string} [class] - Extra classes
+
+  @example
+  {% render 'breadcrumbs' %}
+{% enddoc %}
+
+<nav class="breadcrumbs {{ class }}" aria-label="{{ 'general.breadcrumbs' | t }}">
+  {%- if request.page_type == 'product' -%}
+    {%- liquid
+      assign crumb_collection = collection
+      if crumb_collection == blank
+        assign crumb_collection = product.collections | first
+      endif
+    -%}
+    <a href="{{ routes.all_products_collection_url }}">{{ 'general.all_products' | t }}</a>
+    {%- if crumb_collection -%}
+      / <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+    {%- endif -%}
+  {%- elsif request.page_type == 'collection' -%}
+    <a href="{{ routes.all_products_collection_url }}">{{ 'general.all_products' | t }}</a>
+    / <span aria-current="page">{{ collection.title }}</span>
+  {%- endif -%}
+</nav>

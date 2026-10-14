@@ -1,0 +1,66 @@
+<div class="customer customer--wide">
+  <a href="{{ routes.account_url }}" class="caption underline">&larr; {{ 'customer.account.title' | t }}</a>
+  <h1 class="customer__title" style="margin-top: 24px;">{{ 'customer.order.title' | t: name: order.name }}</h1>
+  <p style="text-align: center; margin-bottom: 32px;">{{ order.created_at | time_tag: format: 'date_at_time' }}</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'customer.order.product' | t }}</th>
+        <th scope="col">{{ 'cart.quantity' | t }}</th>
+        <th scope="col">{{ 'customer.order.total' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr>
+          <td>
+            {{ line_item.title | link_to: line_item.product.url }}
+            {%- if line_item.fulfillment -%}
+              <br><span class="text-xs">{{ line_item.fulfillment.tracking_company }} {{ line_item.fulfillment.tracking_number }}</span>
+            {%- endif -%}
+          </td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">{{ 'cart.subtotal' | t }}</td>
+        <td>{{ order.line_items_subtotal_price | money }}</td>
+      </tr>
+      {%- for shipping_method in order.shipping_methods -%}
+        <tr>
+          <td colspan="2">{{ shipping_method.title }}</td>
+          <td>{{ shipping_method.price | money }}</td>
+        </tr>
+      {%- endfor -%}
+      {%- for tax_line in order.tax_lines -%}
+        <tr>
+          <td colspan="2">{{ tax_line.title }}</td>
+          <td>{{ tax_line.price | money }}</td>
+        </tr>
+      {%- endfor -%}
+      <tr>
+        <td colspan="2"><strong>{{ 'customer.order.total' | t }}</strong></td>
+        <td><strong>{{ order.total_net_amount | money_with_currency }}</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="cart-page__layout" style="margin-top: 40px;">
+    <div>
+      <h2 class="h5" style="margin-bottom: 8px;">{{ 'customer.order.shipping_address' | t }}</h2>
+      {{ order.shipping_address | format_address }}
+    </div>
+    <div>
+      <h2 class="h5" style="margin-bottom: 8px;">{{ 'customer.order.billing_address' | t }}</h2>
+      {{ order.billing_address | format_address }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pedido"
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+<article class="article">
+  {%- if article.image -%}
+    <div class="article__hero">
+      {{ article.image | image_url: width: 2400 | image_tag: loading: 'eager', sizes: '100vw', widths: '750, 1000, 1500, 2000, 2400', alt: article.title }}
+    </div>
+  {%- endif -%}
+  <header class="article__header">
+    <p class="caption">{{ article.published_at | time_tag: format: 'date' }}</p>
+    <h1 class="h2" style="margin-top: 12px;">{{ article.title | escape }}</h1>
+  </header>
+  <div class="article__body rte">{{ article.content }}</div>
+  <div class="article__body" style="margin-top: 48px;">
+    <a href="{{ blog.url }}" class="caption underline">&larr; {{ 'blogs.back' | t: title: blog.title }}</a>
+  </div>
+</article>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Artigo"
+}
+{% endschema %}

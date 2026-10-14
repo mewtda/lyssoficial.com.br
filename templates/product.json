@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "heading": "Descrição",
+            "open": true
+          }
+        },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Entrega e devoluções",
+            "content": "<p>Envio em até 24h úteis. Trocas e devoluções gratuitas em até 30 dias.</p>"
+          }
+        },
+        "care": {
+          "type": "collapsible",
+          "settings": {
+            "heading": "Cuidados",
+            "content": "<p>Evite contato com água, perfumes e cremes. Guarde sua joia no estojo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "shipping",
+        "care"
+      ],
+      "settings": {
+        "show_dynamic_checkout": true
+      }
+    },
+    "related": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "você também vai amar"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

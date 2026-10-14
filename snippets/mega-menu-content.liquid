@@ -1,0 +1,63 @@
+{% doc %}
+  Renders the links and promo cards of a mega menu panel.
+
+  @param {object} link - The top-level menu link
+  @param {object} [promo] - Matching mega menu block, if any
+
+  @example
+  {% render 'mega-menu-content', link: link, promo: promo %}
+{% enddoc %}
+
+{%- assign has_grandchildren = false -%}
+{%- for child in link.links -%}
+  {%- if child.links.size > 0 -%}
+    {%- assign has_grandchildren = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if has_grandchildren -%}
+  {%- for child in link.links -%}
+    <div class="mega-menu__links">
+      <a href="{{ child.url }}" class="mega-menu__title desktop-only">{{ child.title }}</a>
+      <ul class="mega-menu__list">
+        {%- for grandchild in child.links -%}
+          <li><a href="{{ grandchild.url }}" class="link-animation">{{ grandchild.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endfor -%}
+{%- else -%}
+  <div class="mega-menu__links">
+    <span class="mega-menu__title desktop-only">{{ link.title }}</span>
+    <ul class="mega-menu__list">
+      {%- for child in link.links -%}
+        <li><a href="{{ child.url }}" class="link-animation"{% if child.active %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{%- if promo -%}
+  {%- for i in (1..2) -%}
+    {%- liquid
+      assign image_key = 'image_' | append: i
+      assign label_key = 'label_' | append: i
+      assign url_key = 'link_' | append: i
+      assign promo_image = promo.settings[image_key]
+      assign promo_label = promo.settings[label_key]
+      assign promo_url = promo.settings[url_key]
+    -%}
+    {%- if promo_image != blank or promo_label != blank -%}
+      <a href="{{ promo_url | default: '#' }}" class="mega-menu__card group">
+        <div class="mega-menu__card-media">
+          {%- if promo_image != blank -%}
+            {{ promo_image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 200px, 50vw', widths: '300, 400, 600' }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <span class="mega-menu__card-label group-link-animation">{{ promo_label }}</span>
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

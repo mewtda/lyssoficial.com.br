@@ -1,0 +1,163 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Maison",
+    "theme_version": "1.0.0",
+    "theme_author": "Lyss",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Largura do logo (desktop)",
+        "min": 60,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "default": 140
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texto",
+        "default": "#1d1d1c"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fundo",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_background",
+        "label": "Fundo de destaque (barra de anúncio e rodapé)",
+        "default": "#f6f2ec"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "Texto de destaque",
+        "default": "#3b3b3b"
+      },
+      {
+        "type": "color",
+        "id": "color_button",
+        "label": "Botão",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_button_text",
+        "label": "Texto do botão",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Preço promocional",
+        "default": "#1d1d1c"
+      }
+    ]
+  },
+  {
+    "name": "Carrinho",
+    "settings": [
+      {
+        "type": "range",
+        "id": "free_shipping_threshold",
+        "label": "Frete grátis a partir de",
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "default": 300,
+        "info": "Em unidades da moeda da loja. 0 desativa a barra de progresso."
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message",
+        "label": "Mensagem de progresso",
+        "default": "Faltam [amount] para ganhar frete grátis"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_success",
+        "label": "Mensagem de frete grátis atingido",
+        "default": "Você ganhou frete grátis!"
+      }
+    ]
+  },
+  {
+    "name": "Cards de produto",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "card_show_second_image",
+        "label": "Mostrar segunda imagem ao passar o mouse",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "card_badge_tag",
+        "label": "Tag que exibe o selo",
+        "default": "new",
+        "info": "Produtos com esta tag exibem o selo no canto superior."
+      },
+      {
+        "type": "text",
+        "id": "card_badge_label",
+        "label": "Texto do selo",
+        "default": "NEW"
+      }
+    ]
+  },
+  {
+    "name": "Redes sociais",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin",
+        "label": "LinkedIn"
+      }
+    ]
+  }
+]

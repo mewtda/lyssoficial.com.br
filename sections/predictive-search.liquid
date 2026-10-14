@@ -1,0 +1,23 @@
+{%- if predictive_search.performed -%}
+  <div id="PredictiveSearchResults">
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <span class="search-dialog__label">{{ 'sections.search.products' | t }}</span>
+      <ul class="search-dialog__grid" role="list">
+        {%- for product in predictive_search.resources.products limit: 8 -%}
+          <li>{% render 'product-card', product: product, sizes: '(min-width: 768px) 25vw, 50vw' %}</li>
+        {%- endfor -%}
+      </ul>
+      <a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product" class="search-dialog__all caption underline">
+        {{ 'sections.search.view_all' | t }}
+      </a>
+    {%- else -%}
+      <p class="search-dialog__empty">{{ 'sections.search.no_results' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Busca preditiva"
+}
+{% endschema %}

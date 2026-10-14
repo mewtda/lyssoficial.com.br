@@ -1,0 +1,26 @@
+{% doc %}
+  Renders numbered pagination links.
+
+  @param {object} paginate - The paginate object
+
+  @example
+  {% render 'pagination', paginate: paginate %}
+{% enddoc %}
+
+<nav class="pagination" aria-label="{{ 'general.pagination' | t }}">
+  {%- if paginate.previous -%}
+    <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.previous' | t }}">&larr;</a>
+  {%- endif -%}
+  {%- for part in paginate.parts -%}
+    {%- if part.is_link -%}
+      <a href="{{ part.url }}">{{ part.title }}</a>
+    {%- elsif part.title == paginate.current_page -%}
+      <span aria-current="page">{{ part.title }}</span>
+    {%- else -%}
+      <span>{{ part.title }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if paginate.next -%}
+    <a href="{{ paginate.next.url }}" aria-label="{{ 'general.next' | t }}">&rarr;</a>
+  {%- endif -%}
+</nav>

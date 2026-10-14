@@ -1,0 +1,23 @@
+<div class="search-page">
+  <div class="search-page__header">
+    <h1 class="search-page__title">{{ 'collections.all_collections' | t }}</h1>
+  </div>
+  <div class="collections-list">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="collection-tile">
+        {%- if collection.featured_image -%}
+          {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 33vw, 50vw', widths: '375, 535, 750, 1000', alt: collection.title }}
+        {%- else -%}
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        <span class="collection-tile__title h5">{{ collection.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Lista de coleções"
+}
+{% endschema %}

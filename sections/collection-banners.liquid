@@ -1,0 +1,149 @@
+<div
+  class="collection-banners {% if section.settings.layout == 'grid' %}collection-banners--grid{% endif %} section-padding"
+  style="--pt-mobile: {{ section.settings.padding_top }}px; --pb-mobile: {{ section.settings.padding_bottom }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
+>
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign mobile_image = block.settings.image_mobile | default: block.settings.image
+      assign ratio_desktop = '3016 / 2000'
+      if block.settings.image != blank
+        assign ratio_desktop = block.settings.image.width | append: ' / ' | append: block.settings.image.height
+      endif
+    -%}
+    <a
+      href="{{ block.settings.link | default: '#' }}"
+      class="collection-banner"
+      style="--ratio-mobile: {{ block.settings.ratio_mobile }}; --ratio-desktop: {{ ratio_desktop }}; --banner-text: {{ block.settings.text_color }}; --banner-overlay: {{ block.settings.overlay | divided_by: 100.0 }};"
+      {{ block.shopify_attributes }}
+    >
+      <div class="collection-banner__media">
+        {%- if block.settings.image != blank -%}
+          {{ mobile_image | image_url: width: 1200 | image_tag: class: 'mobile-only', sizes: '100vw', widths: '375, 535, 750, 1000, 1200', loading: 'lazy', alt: block.settings.heading }}
+          {{ block.settings.image | image_url: width: 3000 | image_tag: class: 'desktop-only', sizes: '100vw', widths: '750, 1000, 1500, 2000, 2500, 3000', loading: 'lazy', alt: block.settings.heading }}
+        {%- else -%}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="collection-banner__content">
+        {%- if block.settings.heading != blank -%}
+          <h2 class="h2">{{ block.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if block.settings.link_label != blank -%}
+          <span class="caption underline">{{ block.settings.link_label }}</span>
+        {%- endif -%}
+      </div>
+    </a>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Banners de coleção",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "stack", "label": "Empilhado (largura total)" },
+        { "value": "grid", "label": "Grade de 2 colunas" }
+      ],
+      "default": "stack"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Espaço no topo",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Espaço na base",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem (desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Imagem (celular)"
+        },
+        {
+          "type": "select",
+          "id": "ratio_mobile",
+          "label": "Proporção no celular",
+          "options": [
+            { "value": "2 / 1", "label": "2:1" },
+            { "value": "16 / 9", "label": "16:9" },
+            { "value": "1 / 1", "label": "Quadrado" },
+            { "value": "3 / 4", "label": "Retrato" }
+          ],
+          "default": "2 / 1"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Colares"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Texto do link",
+          "default": "Descobrir"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Cor do texto",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "overlay",
+          "label": "Sombra inferior",
+          "min": 0,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banners de coleção",
+      "blocks": [
+        { "type": "banner" },
+        { "type": "banner" },
+        { "type": "banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,57 @@
+<div class="cart-page" data-cart-page>
+  <h1 class="cart-page__title">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-page__layout" id="CartPageForm">
+      <div>
+        {% render 'cart-progress' %}
+        {%- for item in cart.items -%}
+          {% render 'cart-line-item', item: item, index: forloop.index %}
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-page__summary">
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="cart-totals text-small">
+            <span>{{ discount.title }}</span>
+            <span>-{{ discount.total_allocated_amount | money }}</span>
+          </div>
+        {%- endfor -%}
+        <div class="cart-totals">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="cart-note-text">{{ 'cart.taxes_note' | t }}</p>
+        {%- if section.settings.show_note -%}
+          <div class="cart-page__note">
+            <label for="CartNote" class="text-small">{{ 'cart.note' | t }}</label>
+            <textarea id="CartNote" name="note">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+        <button type="submit" name="checkout" class="button button--full">{{ 'cart.checkout' | t }}</button>
+        {%- if additional_checkout_buttons -%}
+          <div class="cart-page__dynamic">{{ content_for_additional_checkout_buttons }}</div>
+        {%- endif -%}
+      </div>
+    </form>
+  {%- else -%}
+    <div class="cart-drawer__empty" style="padding: 64px 0;">
+      <p class="h5">{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'cart.continue_shopping' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Carrinho",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Permitir observação no pedido",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

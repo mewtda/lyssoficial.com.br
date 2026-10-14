@@ -1,0 +1,24 @@
+{% doc %}
+  Renders a compact language switcher (e.g. PT / EN).
+
+  @example
+  {% render 'localization-form' %}
+{% enddoc %}
+
+{%- if localization.available_languages.size > 1 -%}
+  {%- form 'localization', class: 'localization-form' -%}
+    {%- for language in localization.available_languages -%}
+      {%- unless forloop.first %}<span aria-hidden="true">/</span>{% endunless -%}
+      <button
+        type="submit"
+        name="locale_code"
+        value="{{ language.iso_code }}"
+        lang="{{ language.iso_code }}"
+        {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+        aria-label="{{ language.endonym_name | capitalize }}"
+      >
+        {{- language.iso_code | split: '-' | first | upcase -}}
+      </button>
+    {%- endfor -%}
+  {%- endform -%}
+{%- endif -%}
