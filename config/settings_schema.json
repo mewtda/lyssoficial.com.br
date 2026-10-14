@@ -33,7 +33,7 @@
     ]
   },
   {
-    "name": "WhatsApp",
+    "name": "Atendimento e loja",
     "settings": [
       {
         "type": "text",
@@ -60,6 +60,29 @@
         "label": "Mensagem na página de produto",
         "info": "O link do produto é adicionado no final.",
         "default": "Olá! Gostaria de ajuda com este produto:"
+      },
+      {
+        "type": "header",
+        "content": "Loja física"
+      },
+      {
+        "type": "text",
+        "id": "store_label",
+        "label": "Texto da loja física",
+        "info": "Aparece no menu do celular e no rodapé. Deixe vazio para esconder.",
+        "default": "Visite nossa loja física"
+      },
+      {
+        "type": "text",
+        "id": "store_note",
+        "label": "Destaque",
+        "default": "em breve"
+      },
+      {
+        "type": "url",
+        "id": "store_link",
+        "label": "Link (endereço / mapa)",
+        "info": "Opcional. Use quando a loja abrir."
       }
     ]
   },

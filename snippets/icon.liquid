@@ -1,7 +1,7 @@
 {% doc %}
   Renders an inline SVG icon.
 
-  @param {string} icon - Icon name: menu, close, search, account, cart, chevron, arrow, plus, minus, filter, instagram, whatsapp, facebook, tiktok, pinterest, linkedin
+  @param {string} icon - Icon name: menu, close, search, account, cart, chevron, arrow, plus, minus, filter, instagram, whatsapp, store, facebook, tiktok, pinterest, linkedin
   @param {string} [class] - Extra classes
 
   @example
@@ -31,6 +31,8 @@
     <svg class="icon {{ class }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 7h18M6 12h12M10 17h4"/></svg>
   {%- when 'whatsapp' -%}
     <svg class="icon {{ class }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4l-4.5 1.1z"/><path d="M9 8.5c.2-.5.6-.6.9-.6h.4c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.6c.2-.2.4-.2.7-.1l1.6.7c.2.1.4.3.4.5v.4c0 .4-.2.7-.6.9-.6.3-1.4.4-2.2.1-2.4-.8-4.4-2.8-5.2-5.2-.2-.8-.2-1.6 0-2.1z"/></svg>
+  {%- when 'store' -%}
+    <svg class="icon {{ class }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 9.5V20h16V9.5M3 9.5l1.8-5h14.4l1.8 5H3zM3 9.5c0 1.4 1.2 2.5 2.6 2.5s2.7-1.1 2.7-2.5c0 1.4 1.2 2.5 2.6 2.5h.2c1.4 0 2.6-1.1 2.6-2.5 0 1.4 1.2 2.5 2.7 2.5S21 10.9 21 9.5M10 20v-5h4v5"/></svg>
   {%- when 'instagram' -%}
     <svg class="icon {{ class }}" aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8a3.1 3.1 0 100-6.2 3.1 3.1 0 000 6.2zm6.2-8.2a1.1 1.1 0 11-2.3 0 1.1 1.1 0 012.3 0z"/></svg>
   {%- when 'facebook' -%}

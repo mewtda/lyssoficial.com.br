@@ -38,26 +38,91 @@
 {%- endif -%}
 
 {%- if promo -%}
-  {%- for i in (1..2) -%}
-    {%- liquid
-      assign image_key = 'image_' | append: i
-      assign label_key = 'label_' | append: i
-      assign url_key = 'link_' | append: i
-      assign promo_image = promo.settings[image_key]
-      assign promo_label = promo.settings[label_key]
-      assign promo_url = promo.settings[url_key]
-    -%}
-    {%- if promo_image != blank or promo_label != blank -%}
-      <a href="{{ promo_url | default: '#' }}" class="mega-menu__card group">
-        <div class="mega-menu__card-media">
-          {%- if promo_image != blank -%}
-            {{ promo_image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 200px, 50vw', widths: '300, 400, 600' }}
-          {%- else -%}
-            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- assign promo_type = promo.settings.content_type | default: 'images' -%}
+  {%- case promo_type -%}
+    {%- when 'products' -%}
+      {%- if promo.settings.products != blank -%}
+        <div class="mega-menu__featured">
+          {%- if promo.settings.featured_heading != blank -%}
+            <p class="mega-menu__title">{{ promo.settings.featured_heading }}</p>
           {%- endif -%}
+          <ul class="mega-menu__featured-list" role="list">
+            {%- for product in promo.settings.products limit: 5 -%}
+              <li>
+                <a href="{{ product.url }}" class="mega-product">
+                  <span class="mega-product__media">
+                    {%- if product.featured_media -%}
+                      {{ product.featured_media.preview_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: product.title, sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500', class: 'mega-product__image' }}
+                    {%- else -%}
+                      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                    {%- if product.media.size > 1 -%}
+                      {{ product.media[1].preview_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500', class: 'mega-product__image mega-product__image--hover' }}
+                    {%- endif -%}
+                    {%- if product.available == false -%}
+                      <span class="mega-product__badge">{{ 'products.product.sold_out' | t }}</span>
+                    {%- elsif product.compare_at_price > product.price -%}
+                      <span class="mega-product__badge">{{ 'products.product.on_sale' | t }}</span>
+                    {%- endif -%}
+                  </span>
+                  <span class="mega-product__title">{{ product.title | escape }}</span>
+                  {% render 'price', product: product %}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
         </div>
-        <span class="mega-menu__card-label group-link-animation">{{ promo_label }}</span>
-      </a>
-    {%- endif -%}
-  {%- endfor -%}
+      {%- endif -%}
+    {%- when 'collections' -%}
+      {%- if promo.settings.collections != blank -%}
+        <div class="mega-menu__featured">
+          {%- if promo.settings.featured_heading != blank -%}
+            <p class="mega-menu__title">{{ promo.settings.featured_heading }}</p>
+          {%- endif -%}
+          <ul class="mega-menu__featured-list" role="list">
+            {%- for collection in promo.settings.collections limit: 5 -%}
+              {%- assign collection_image = collection.featured_image | default: collection.products.first.featured_media.preview_image -%}
+              <li>
+                <a href="{{ collection.url }}" class="mega-collection">
+                  <span class="mega-collection__media">
+                    {%- if collection_image -%}
+                      {{ collection_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: collection.title, sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500' }}
+                    {%- else -%}
+                      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                    <span class="mega-collection__overlay">
+                      <span class="mega-collection__title">{{ collection.title | escape }}</span>
+                      <span class="mega-collection__count">{{ collection.products_count }} {% if collection.products_count == 1 %}peça{% else %}peças{% endif %}</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      {%- for i in (1..2) -%}
+        {%- liquid
+          assign image_key = 'image_' | append: i
+          assign label_key = 'label_' | append: i
+          assign url_key = 'link_' | append: i
+          assign promo_image = promo.settings[image_key]
+          assign promo_label = promo.settings[label_key]
+          assign promo_url = promo.settings[url_key]
+        -%}
+        {%- if promo_image != blank or promo_label != blank -%}
+          <a href="{{ promo_url | default: '#' }}" class="mega-menu__card group">
+            <div class="mega-menu__card-media">
+              {%- if promo_image != blank -%}
+                {{ promo_image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 200px, 50vw', widths: '300, 400, 600' }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <span class="mega-menu__card-label group-link-animation">{{ promo_label }}</span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+  {%- endcase -%}
 {%- endif -%}

@@ -1,0 +1,26 @@
+{% doc %}
+  Renders the physical store notice (label + highlight), linked when a URL is set.
+
+  @param {string} [class] - Extra classes
+
+  @example
+  {% render 'store-notice', class: 'footer__store' %}
+{% enddoc %}
+
+{%- if settings.store_label != blank -%}
+  {%- if settings.store_link != blank -%}
+    <a href="{{ settings.store_link }}" class="store-notice {{ class }}" target="_blank" rel="noopener">
+  {%- else -%}
+    <p class="store-notice {{ class }}">
+  {%- endif -%}
+  {% render 'icon', icon: 'store' %}
+  <span class="store-notice__label">{{ settings.store_label }}</span>
+  {%- if settings.store_note != blank -%}
+    <span class="store-notice__note">{{ settings.store_note }}</span>
+  {%- endif -%}
+  {%- if settings.store_link != blank -%}
+    </a>
+  {%- else -%}
+    </p>
+  {%- endif -%}
+{%- endif -%}

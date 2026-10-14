@@ -127,6 +127,22 @@
         {%- endif -%}
       {%- endfor -%}
     {%- endif -%}
+
+    <div class="mobile-menu__contact">
+      {%- assign whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' -%}
+      {%- if whatsapp_number != blank -%}
+        <a
+          href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text&type=phone_number&app_absent=0"
+          class="mobile-menu__whatsapp"
+          target="_blank"
+          rel="noopener"
+        >
+          {% render 'icon', icon: 'whatsapp' %}
+          <span>{{ settings.whatsapp_header_label }}</span>
+        </a>
+      {%- endif -%}
+      {% render 'store-notice', class: 'mobile-menu__store' %}
+    </div>
   </div>
   <div class="mobile-menu__footer">
     {%- if shop.customer_accounts_enabled -%}
@@ -168,13 +184,51 @@
   "blocks": [
     {
       "type": "mega_menu",
-      "name": "Mega menu (imagens)",
+      "name": "Mega menu (destaques)",
       "settings": [
         {
           "type": "text",
           "id": "menu_item",
           "label": "Item do menu",
           "info": "Título exato do item de primeiro nível (ex.: Joias)."
+        },
+        {
+          "type": "select",
+          "id": "content_type",
+          "label": "O que destacar",
+          "options": [
+            { "value": "images", "label": "Imagens" },
+            { "value": "products", "label": "Produtos" },
+            { "value": "collections", "label": "Coleções" }
+          ],
+          "default": "images"
+        },
+        {
+          "type": "text",
+          "id": "featured_heading",
+          "label": "Título dos destaques",
+          "info": "Usado para produtos e coleções.",
+          "default": "Destaques"
+        },
+        {
+          "type": "header",
+          "content": "Produtos"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Produtos (até 5)",
+          "limit": 5
+        },
+        {
+          "type": "header",
+          "content": "Coleções"
+        },
+        {
+          "type": "collection_list",
+          "id": "collections",
+          "label": "Coleções (até 5)",
+          "limit": 5
         },
         {
           "type": "header",

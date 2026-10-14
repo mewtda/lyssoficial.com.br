@@ -80,6 +80,12 @@
     </div>
   </div>
 
+  {%- if settings.store_label != blank -%}
+    <div class="footer__store-row">
+      {% render 'store-notice', class: 'footer__store' %}
+    </div>
+  {%- endif -%}
+
   <div class="footer__bottom">
     {%- if section.settings.monogram != blank -%}
       {{ section.settings.monogram | image_url: width: 300 | image_tag: class: 'footer__monogram', loading: 'lazy', alt: shop.name, widths: '100, 200, 300' }}

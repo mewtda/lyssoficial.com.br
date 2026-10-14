@@ -662,9 +662,34 @@
     });
   };
 
+  const initNavScroll = () => {
+    const nav = $('.header__nav');
+    if (!nav) return;
+    const update = () => {
+      const max = nav.scrollWidth - nav.clientWidth;
+      nav.classList.toggle('is-overflowing', max > 1);
+      nav.classList.toggle('is-at-start', nav.scrollLeft <= 1);
+      nav.classList.toggle('is-at-end', nav.scrollLeft >= max - 1);
+    };
+    nav.addEventListener('scroll', update, { passive: true });
+    nav.addEventListener(
+      'wheel',
+      (event) => {
+        if (!nav.classList.contains('is-overflowing') || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+        event.preventDefault();
+        nav.scrollLeft += event.deltaY;
+      },
+      { passive: false }
+    );
+    window.addEventListener('resize', update);
+    if (document.fonts) document.fonts.ready.then(update);
+    update();
+  };
+
   const init = () => {
     initAnnouncement();
     initHeader();
+    initNavScroll();
     initSearch();
     initSliders();
     initCards();
