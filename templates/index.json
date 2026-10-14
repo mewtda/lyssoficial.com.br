@@ -83,6 +83,7 @@
         "b1": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/Editorial_Dourado_no_Campo_de_Tulipas.png",
             "ratio_mobile": "2 / 1",
             "heading": "Ao redor do pescoço",
             "link_label": "Descobrir",
