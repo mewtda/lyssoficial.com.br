@@ -42,7 +42,7 @@
   {%- case promo_type -%}
     {%- when 'products' -%}
       {%- if promo.settings.products != blank -%}
-        <div class="mega-menu__featured">
+        <div class="mega-menu__featured mega-menu__featured--{{ promo.settings.featured_size | default: 'fill' }}">
           {%- if promo.settings.featured_heading != blank -%}
             <p class="mega-menu__title">{{ promo.settings.featured_heading }}</p>
           {%- endif -%}
@@ -52,12 +52,12 @@
                 <a href="{{ product.url }}" class="mega-product">
                   <span class="mega-product__media">
                     {%- if product.featured_media -%}
-                      {{ product.featured_media.preview_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: product.title, sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500', class: 'mega-product__image' }}
+                      {{ product.featured_media.preview_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title, sizes: '(min-width: 768px) 25vw, 60vw', widths: '240, 360, 500, 700', class: 'mega-product__image' }}
                     {%- else -%}
                       {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
                     {%- if product.media.size > 1 -%}
-                      {{ product.media[1].preview_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500', class: 'mega-product__image mega-product__image--hover' }}
+                      {{ product.media[1].preview_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 768px) 25vw, 60vw', widths: '240, 360, 500, 700', class: 'mega-product__image mega-product__image--hover' }}
                     {%- endif -%}
                     {%- if product.available == false -%}
                       <span class="mega-product__badge">{{ 'products.product.sold_out' | t }}</span>
@@ -75,7 +75,7 @@
       {%- endif -%}
     {%- when 'collections' -%}
       {%- if promo.settings.collections != blank -%}
-        <div class="mega-menu__featured">
+        <div class="mega-menu__featured mega-menu__featured--{{ promo.settings.featured_size | default: 'fill' }}">
           {%- if promo.settings.featured_heading != blank -%}
             <p class="mega-menu__title">{{ promo.settings.featured_heading }}</p>
           {%- endif -%}
@@ -86,7 +86,7 @@
                 <a href="{{ collection.url }}" class="mega-collection">
                   <span class="mega-collection__media">
                     {%- if collection_image -%}
-                      {{ collection_image | image_url: width: 500 | image_tag: loading: 'lazy', alt: collection.title, sizes: '(min-width: 768px) 180px, 40vw', widths: '240, 360, 500' }}
+                      {{ collection_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: collection.title, sizes: '(min-width: 768px) 25vw, 60vw', widths: '240, 360, 500, 700' }}
                     {%- else -%}
                       {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}

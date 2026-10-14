@@ -198,9 +198,32 @@
     $('[data-slider-prev]', slider)?.addEventListener('click', prev);
     dots.forEach((dot) => dot.addEventListener('click', () => goTo(Number(dot.dataset.sliderDot))));
 
+    const stripes = $('[data-slider-stripes]', slider);
+    const buildStripes = () => {
+      if (!stripes) return;
+      const count = maxScroll() > 4 ? Math.ceil((maxScroll() - 4) / Math.max(1, slideWidth())) + 1 : 0;
+      if (stripes.children.length !== count) {
+        stripes.innerHTML = '';
+        for (let i = 0; i < count; i += 1) {
+          const stripe = document.createElement('button');
+          stripe.type = 'button';
+          stripe.className = 'slider__stripe';
+          stripe.setAttribute('aria-label', String(i + 1));
+          stripe.addEventListener('click', () => goTo(i));
+          stripes.appendChild(stripe);
+        }
+      }
+      stripes.hidden = count < 2;
+    };
+
     const updateDots = () => {
       const index = track.scrollLeft >= maxScroll() - 4 ? slides().length - 1 : currentIndex();
       dots.forEach((dot, i) => dot.setAttribute('aria-current', i === index ? 'true' : 'false'));
+      if (stripes) {
+        const items = Array.from(stripes.children);
+        const active = track.scrollLeft >= maxScroll() - 4 ? items.length - 1 : currentIndex();
+        items.forEach((item, i) => item.classList.toggle('is-active', i === active));
+      }
     };
     let frame;
     track.addEventListener(
@@ -211,6 +234,15 @@
       },
       { passive: true }
     );
+    if (stripes) {
+      const refresh = () => {
+        buildStripes();
+        updateDots();
+      };
+      window.addEventListener('resize', refresh);
+      window.addEventListener('load', refresh);
+      refresh();
+    }
 
     slider.goTo = goTo;
 
@@ -593,17 +625,64 @@
 
   const initStoryVideo = (root = document) => {
     $$('[data-story-video]', root).forEach((wrap) => {
-      const video = $('video', wrap);
-      if (!video) return;
-      $('[data-story-video-toggle]', wrap)?.addEventListener('click', () => {
-        const expanded = wrap.classList.toggle('is-expanded');
-        video.muted = !expanded;
+      const videos = $$('[data-story-media]', wrap);
+      if (!videos.length) return;
+      const bars = $$('[data-story-bar]', wrap);
+      const multi = videos.length > 1;
+      let index = 0;
+
+      const isExpanded = () => wrap.classList.contains('is-expanded');
+
+      const show = (next) => {
+        index = (next + videos.length) % videos.length;
+        videos.forEach((video, i) => {
+          const active = i === index;
+          video.classList.toggle('is-active', active);
+          if (!active) {
+            video.pause();
+            video.currentTime = 0;
+          }
+        });
+        bars.forEach((bar, i) => bar.style.setProperty('--progress', i < index ? 1 : 0));
+        const video = videos[index];
+        video.muted = !isExpanded();
+        video.loop = !(multi && isExpanded());
+        if (video.preload === 'none') video.preload = 'auto';
         video.play().catch(() => {});
+      };
+
+      videos.forEach((video, i) => {
+        video.addEventListener('timeupdate', () => {
+          if (i !== index || !bars[i] || !video.duration) return;
+          bars[i].style.setProperty('--progress', video.currentTime / video.duration);
+        });
+        video.addEventListener('ended', () => {
+          if (i === index && multi && isExpanded()) show(index + 1);
+        });
       });
+
+      const setExpanded = (expanded) => {
+        wrap.classList.toggle('is-expanded', expanded);
+        const video = videos[index];
+        video.muted = !expanded;
+        video.loop = !(multi && expanded);
+        if (expanded) video.currentTime = 0;
+        video.play().catch(() => {});
+      };
+
+      $('[data-story-video-toggle]', wrap)?.addEventListener('click', () => setExpanded(!isExpanded()));
+      $('[data-story-prev]', wrap)?.addEventListener('click', () => show(index - 1));
+      $('[data-story-next]', wrap)?.addEventListener('click', () => show(index + 1));
       $('[data-story-video-close]', wrap)?.addEventListener('click', () => {
-        video.pause();
+        if (isExpanded()) {
+          setExpanded(false);
+          return;
+        }
+        videos.forEach((video) => video.pause());
         wrap.hidden = true;
       });
+
+      show(0);
     });
   };
 

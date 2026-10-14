@@ -1,0 +1,60 @@
+{% doc %}
+  Renders one video of the floating story player.
+
+  @param {object} video - Video file (from a file_reference metafield) or a video URL
+  @param {number} index - 0-based position in the story
+
+  @example
+  {% render 'story-video-item', video: video, index: 0 %}
+{% enddoc %}
+
+{%- liquid
+  assign is_first = false
+  if index == 0
+    assign is_first = true
+  endif
+  assign preload = 'none'
+  if is_first
+    assign preload = 'metadata'
+  endif
+-%}
+{%- if video.media_type == 'video' -%}
+  {%- liquid
+    assign mp4_sources = video.sources | where: 'format', 'mp4' | sort: 'height'
+    assign source = mp4_sources.first
+    for candidate in mp4_sources
+      assign short_side = candidate.width
+      if candidate.height < candidate.width
+        assign short_side = candidate.height
+      endif
+      if short_side <= 720
+        assign source = candidate
+      endif
+    endfor
+    if source == blank
+      assign source = video.sources | last
+    endif
+  -%}
+  <video
+    class="story-video__media{% if is_first %} is-active{% endif %}"
+    src="{{ source.url }}"
+    {% if video.preview_image %}poster="{{ video.preview_image | image_url: width: 540 }}"{% endif %}
+    {% if is_first %}autoplay{% endif %}
+    loop
+    muted
+    playsinline
+    preload="{{ preload }}"
+    data-story-media
+  ></video>
+{%- elsif video != blank -%}
+  <video
+    class="story-video__media{% if is_first %} is-active{% endif %}"
+    src="{{ video }}"
+    {% if is_first %}autoplay{% endif %}
+    loop
+    muted
+    playsinline
+    preload="{{ preload }}"
+    data-story-media
+  ></video>
+{%- endif -%}
