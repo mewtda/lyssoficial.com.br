@@ -15,10 +15,14 @@
         "s1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Retrato_editorial_entre_tulipas_e_margaridas.png",
             "subheading": "NEW IN",
             "heading": "Nova coleção",
             "link_label": "Descobrir",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "alignment": "left",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         },
         "s2": {
@@ -27,7 +31,10 @@
             "subheading": "seleção",
             "heading": "Golden Hour",
             "link_label": "Descobrir",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "alignment": "left",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         },
         "s3": {
@@ -36,7 +43,10 @@
             "subheading": "Curated",
             "heading": "Icons",
             "link_label": "SHOP",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/all",
+            "alignment": "left",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         }
       },
@@ -55,10 +65,16 @@
       "type": "featured-collection",
       "settings": {
         "heading": "em alta",
+        "heading_style": "h3",
         "collection": "all",
         "products_to_show": 12,
         "layout": "slider",
-        "columns_desktop": 4
+        "columns_desktop": 4,
+        "show_view_all": false,
+        "padding_top": 24,
+        "padding_bottom": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 32
       }
     },
     "banners": {
@@ -67,25 +83,34 @@
         "b1": {
           "type": "banner",
           "settings": {
+            "ratio_mobile": "2 / 1",
             "heading": "Ao redor do pescoço",
             "link_label": "Descobrir",
-            "ratio_mobile": "2 / 1"
+            "link": "",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         },
         "b2": {
           "type": "banner",
           "settings": {
+            "ratio_mobile": "16 / 9",
             "heading": "Into the Blue",
             "link_label": "A seleção",
-            "ratio_mobile": "16 / 9"
+            "link": "",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         },
         "b3": {
           "type": "banner",
           "settings": {
+            "ratio_mobile": "1 / 1",
             "heading": "Anéis",
             "link_label": "SHOP",
-            "ratio_mobile": "1 / 1"
+            "link": "",
+            "text_color": "#ffffff",
+            "overlay": 0
           }
         }
       },
@@ -95,31 +120,85 @@
         "b3"
       ],
       "settings": {
-        "layout": "stack"
+        "layout": "stack",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
-    },
-    "editorial": {
-      "type": "editorial-video",
-      "settings": {}
     },
     "elas_usam": {
       "type": "elas-usam",
       "blocks": {
         "l1": {
           "type": "look",
-          "settings": {}
+          "settings": {
+            "name": "@cliente",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
         },
         "l2": {
           "type": "look",
-          "settings": {}
+          "settings": {
+            "name": "@cliente",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
         },
         "l3": {
           "type": "look",
-          "settings": {}
+          "settings": {
+            "name": "@cliente",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
         },
         "l4": {
           "type": "look",
-          "settings": {}
+          "settings": {
+            "name": "@cliente",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
         }
       },
       "block_order": [
@@ -128,7 +207,29 @@
         "l3",
         "l4"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "Lyss na vida real",
+        "heading": "Elas Usam",
+        "text": "<p>Clientes e amigas da marca com suas peças favoritas. Toque nos pontos para ver cada joia.</p>",
+        "cta_label": "Ver peça",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "editorial": {
+      "type": "editorial-video",
+      "settings": {
+        "heading": "Mãos, tempo e exigência.",
+        "text": "<p>Cada peça é pensada como uma assinatura. Linhas marcantes, presença afirmada e um savoir-faire artesanal de exceção.</p>",
+        "button_label": "Nosso savoir-faire",
+        "button_link": "",
+        "padding_top": 96,
+        "padding_bottom": 144,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 80
+      }
     }
   },
   "order": [
