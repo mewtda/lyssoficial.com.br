@@ -45,9 +45,9 @@
         "mega_menu_VEC4qQ": {
           "type": "mega_menu",
           "settings": {
-            "menu_item": "",
-            "content_type": "images",
-            "featured_heading": "Mais vendidos",
+            "menu_item": "Mais vendidos",
+            "content_type": "products",
+            "featured_heading": "",
             "products": [
               "anel-baguete",
               "anel-bee",
