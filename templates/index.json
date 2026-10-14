@@ -108,6 +108,7 @@
           "type": "banner",
           "settings": {
             "image": "shopify://shop_images/Aneis_Dourados_em_Jardim_Florescente.png",
+            "image_mobile": "shopify://shop_images/Cinco_Aneis_Dourados_no_Jardim_Dourado_mo.png",
             "ratio_mobile": "1 / 1",
             "heading": "Anéis",
             "link_label": "SHOP",
