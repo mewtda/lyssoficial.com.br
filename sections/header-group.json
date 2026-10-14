@@ -42,12 +42,34 @@
     "header": {
       "type": "header",
       "blocks": {
+        "mega_menu_kRzEFc": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Brincos",
+            "content_type": "products",
+            "featured_heading": "Destaques",
+            "featured_size": "fill",
+            "products": [
+              "brinco-argola-crystal",
+              "brinco-argola-estrela-de-luz",
+              "brinco-argola-lumiere",
+              "brinco-argola-star",
+              "brinco-caixos"
+            ],
+            "collections": [],
+            "label_1": "",
+            "link_1": "",
+            "label_2": "",
+            "link_2": ""
+          }
+        },
         "mega_menu_VEC4qQ": {
           "type": "mega_menu",
           "settings": {
             "menu_item": "Mais vendidos",
             "content_type": "products",
-            "featured_heading": "",
+            "featured_heading": "Destaques",
+            "featured_size": "fill",
             "products": [
               "anel-baguete",
               "anel-bee",
@@ -64,6 +86,7 @@
         }
       },
       "block_order": [
+        "mega_menu_kRzEFc",
         "mega_menu_VEC4qQ"
       ],
       "settings": {
