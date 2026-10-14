@@ -107,12 +107,13 @@
         "b3": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/Aneis_Dourados_em_Jardim_Florescente.png",
             "ratio_mobile": "1 / 1",
             "heading": "Anéis",
             "link_label": "SHOP",
             "link": "",
             "text_color": "#ffffff",
-            "overlay": 0
+            "overlay": 55
           }
         }
       },
