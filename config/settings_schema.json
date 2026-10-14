@@ -33,6 +33,37 @@
     ]
   },
   {
+    "name": "WhatsApp",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número do WhatsApp",
+        "info": "Só números, com DDI e DDD. Ex.: 5531998312415",
+        "default": "5531998312415"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_header_label",
+        "label": "Texto no cabeçalho (desktop)",
+        "default": "Atendimento"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_product_label",
+        "label": "Botão na página de produto",
+        "default": "Fale com nossa Personal Shopper"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_product_message",
+        "label": "Mensagem na página de produto",
+        "info": "O link do produto é adicionado no final.",
+        "default": "Olá! Gostaria de ajuda com este produto:"
+      }
+    ]
+  },
+  {
     "name": "Cores",
     "settings": [
       {

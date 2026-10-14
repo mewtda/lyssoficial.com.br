@@ -92,12 +92,41 @@
     "editorial": {
       "type": "editorial-video",
       "settings": {}
+    },
+    "elas_usam": {
+      "type": "elas-usam",
+      "blocks": {
+        "l1": {
+          "type": "look",
+          "settings": {}
+        },
+        "l2": {
+          "type": "look",
+          "settings": {}
+        },
+        "l3": {
+          "type": "look",
+          "settings": {}
+        },
+        "l4": {
+          "type": "look",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "best_sellers",
     "banners",
+    "elas_usam",
     "editorial"
   ]
 }

@@ -121,6 +121,22 @@
       {%- endunless -%}
 
       <div class="product__buy">
+        {%- assign whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' -%}
+        {%- if whatsapp_number != blank -%}
+          {%- liquid
+            assign product_link = request.origin | append: product.url
+            assign whatsapp_text = settings.whatsapp_product_message | append: ' ' | append: product_link | url_encode
+          -%}
+          <a
+            href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text={{ whatsapp_text }}&type=phone_number&app_absent=0"
+            class="button button--secondary button--full product__whatsapp"
+            target="_blank"
+            rel="noopener"
+          >
+            {% render 'icon', icon: 'whatsapp' %}
+            {{ settings.whatsapp_product_label }}
+          </a>
+        {%- endif -%}
         <button
           type="submit"
           name="add"

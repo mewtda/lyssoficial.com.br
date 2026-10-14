@@ -1,0 +1,302 @@
+{%- liquid
+  assign look_count = section.blocks.size
+-%}
+
+<div
+  class="elas-usam section-padding"
+  data-elas-usam
+  style="--pt-mobile: {{ section.settings.padding_top_mobile }}px; --pb-mobile: {{ section.settings.padding_bottom_mobile }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="elas-usam__header page-width">
+    <div class="elas-usam__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="elas-usam__eyebrow caption">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="elas-usam__heading">
+        {%- assign words = section.settings.heading | split: ' ' -%}
+        {%- for word in words -%}
+          {%- if forloop.last and words.size > 1 -%}
+            <em>{{ word }}</em>
+          {%- else -%}
+            {{ word }}{% unless forloop.last %} {% endunless %}
+          {%- endif -%}
+        {%- endfor -%}
+      </h2>
+    </div>
+    <div class="elas-usam__aside">
+      {%- if section.settings.text != blank -%}
+        <div class="elas-usam__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if look_count > 1 -%}
+        <div class="elas-usam__nav">
+          <button type="button" class="elas-usam__arrow elas-usam__arrow--prev" aria-label="{{ 'general.previous' | t }}" data-elas-prev>
+            {% render 'icon', icon: 'arrow' %}
+          </button>
+          <span class="elas-usam__counter" aria-hidden="true">
+            <span data-elas-current>01</span> / {{ look_count | prepend: '0' | slice: -2, 2 }}
+          </span>
+          <button type="button" class="elas-usam__arrow" aria-label="{{ 'general.next' | t }}" data-elas-next>
+            {% render 'icon', icon: 'arrow' %}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="elas-usam__track" data-elas-track>
+    {%- for block in section.blocks -%}
+      {%- assign look_number = forloop.index | prepend: '0' | slice: -2, 2 -%}
+      <article class="look" data-look {{ block.shopify_attributes }}>
+        <div class="look__media" data-look-media>
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1400
+              | image_tag:
+                widths: '400, 600, 800, 1000, 1400',
+                sizes: '(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 82vw',
+                loading: 'lazy',
+                alt: block.settings.image.alt,
+                class: 'look__image'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'look__image placeholder-svg' }}
+          {%- endif -%}
+
+          <span class="look__number" aria-hidden="true">N°{{ look_number }}</span>
+          {%- if block.settings.name != blank -%}
+            <span class="look__name">{{ block.settings.name }}</span>
+          {%- endif -%}
+
+          {%- assign spot_index = 0 -%}
+          {%- for i in (1..4) -%}
+            {%- liquid
+              assign product_key = 'product_' | append: i
+              assign x_key = 'x_' | append: i
+              assign y_key = 'y_' | append: i
+              assign spot_product = block.settings[product_key]
+              assign x = block.settings[x_key]
+              assign y = block.settings[y_key]
+              assign show_spot = false
+              if spot_product != blank or request.design_mode
+                assign show_spot = true
+              endif
+              if spot_product == blank and request.design_mode and i > 2
+                assign show_spot = false
+              endif
+            -%}
+            {%- if show_spot -%}
+              {%- liquid
+                assign spot_index = spot_index | plus: 1
+                assign pop_x = 'right'
+                if x > 55
+                  assign pop_x = 'left'
+                endif
+                assign pop_y = 'down'
+                if y > 55
+                  assign pop_y = 'up'
+                endif
+                assign pop_id = 'Look-' | append: block.id | append: '-' | append: i
+              -%}
+              <div class="hotspot" style="--x: {{ x }}%; --y: {{ y }}%;" data-hotspot data-spot="{{ spot_index }}">
+                <button
+                  type="button"
+                  class="hotspot__dot"
+                  aria-expanded="false"
+                  aria-controls="{{ pop_id }}"
+                  aria-label="{% if spot_product != blank %}{{ spot_product.title | escape }}{% else %}Produto {{ spot_index }}{% endif %}"
+                  data-hotspot-toggle
+                >
+                  <span class="hotspot__pulse" aria-hidden="true"></span>
+                  <span class="hotspot__index" aria-hidden="true">{{ spot_index }}</span>
+                </button>
+                <div class="hotspot__pop hotspot__pop--{{ pop_x }} hotspot__pop--{{ pop_y }}" id="{{ pop_id }}" data-hotspot-pop>
+                  {%- if spot_product != blank -%}
+                    <a href="{{ spot_product.url }}" class="hotspot__card">
+                      <span class="hotspot__thumb">
+                        {%- if spot_product.featured_media -%}
+                          {{ spot_product.featured_media.preview_image | image_url: width: 240 | image_tag: loading: 'lazy', alt: spot_product.title, sizes: '80px', widths: '160, 240' }}
+                        {%- endif -%}
+                      </span>
+                      <span class="hotspot__body">
+                        <span class="hotspot__title">{{ spot_product.title | escape }}</span>
+                        {% render 'price', product: spot_product %}
+                        <span class="hotspot__cta">
+                          {{ section.settings.cta_label }}
+                          {% render 'icon', icon: 'arrow' %}
+                        </span>
+                      </span>
+                    </a>
+                  {%- else -%}
+                    <div class="hotspot__card">
+                      <span class="hotspot__thumb"></span>
+                      <span class="hotspot__body">
+                        <span class="hotspot__title">Escolha um produto</span>
+                        <span class="price">{{ 19900 | money }}</span>
+                      </span>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if spot_index > 0 -%}
+          <ol class="look__list" role="list">
+            {%- assign list_index = 0 -%}
+            {%- for i in (1..4) -%}
+              {%- liquid
+                assign product_key = 'product_' | append: i
+                assign spot_product = block.settings[product_key]
+              -%}
+              {%- if spot_product != blank -%}
+                {%- assign list_index = list_index | plus: 1 -%}
+                <li>
+                  <a href="{{ spot_product.url }}" class="look__item" data-look-item="{{ list_index }}">
+                    <span class="look__item-index">{{ list_index }}</span>
+                    <span class="look__item-title">{{ spot_product.title | escape }}</span>
+                    {% render 'price', product: spot_product %}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+
+  {%- if look_count > 1 -%}
+    <div class="elas-usam__progress page-width" aria-hidden="true">
+      <span class="elas-usam__bar"><span data-elas-bar></span></span>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Elas Usam",
+  "tag": "section",
+  "class": "elas-usam-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sobretítulo",
+      "default": "Lyss na vida real"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "info": "A última palavra fica em itálico.",
+      "default": "Elas Usam"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Clientes e amigas da marca com suas peças favoritas. Toque nos pontos para ver cada joia.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto do link do produto",
+      "default": "Ver peça"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Topo (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Base (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Topo (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Base (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto",
+          "info": "Formato retrato (4:5) recomendado."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome / @ da cliente",
+          "default": "@cliente"
+        },
+        { "type": "header", "content": "Ponto 1" },
+        { "type": "product", "id": "product_1", "label": "Produto" },
+        { "type": "range", "id": "x_1", "label": "Posição horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40 },
+        { "type": "range", "id": "y_1", "label": "Posição vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 30 },
+        { "type": "header", "content": "Ponto 2" },
+        { "type": "product", "id": "product_2", "label": "Produto" },
+        { "type": "range", "id": "x_2", "label": "Posição horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 62 },
+        { "type": "range", "id": "y_2", "label": "Posição vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 58 },
+        { "type": "header", "content": "Ponto 3" },
+        { "type": "product", "id": "product_3", "label": "Produto" },
+        { "type": "range", "id": "x_3", "label": "Posição horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 30 },
+        { "type": "range", "id": "y_3", "label": "Posição vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 70 },
+        { "type": "header", "content": "Ponto 4" },
+        { "type": "product", "id": "product_4", "label": "Produto" },
+        { "type": "range", "id": "x_4", "label": "Posição horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 70 },
+        { "type": "range", "id": "y_4", "label": "Posição vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 20 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elas Usam",
+      "blocks": [
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" }
+      ]
+    }
+  ]
+}
+{% endschema %}

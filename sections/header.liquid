@@ -66,6 +66,18 @@
   </div>
 
   <div class="header__icons">
+    {%- assign whatsapp_number = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')' -%}
+    {%- if whatsapp_number != blank -%}
+      <a
+        href="https://api.whatsapp.com/send/?phone={{ whatsapp_number }}&text&type=phone_number&app_absent=0"
+        class="header__whatsapp desktop-only"
+        target="_blank"
+        rel="noopener"
+      >
+        {% render 'icon', icon: 'whatsapp' %}
+        <span>{{ settings.whatsapp_header_label }}</span>
+      </a>
+    {%- endif -%}
     <button type="button" class="icon-button" aria-label="{{ 'sections.header.search' | t }}" aria-controls="SearchDialog" aria-expanded="false" data-search-toggle>
       {% render 'icon', icon: 'search' %}
     </button>

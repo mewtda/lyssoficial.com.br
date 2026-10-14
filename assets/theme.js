@@ -569,6 +569,99 @@
     });
   };
 
+  const initElasUsam = (root = document) => {
+    $$('[data-elas-usam]', root).forEach((section) => {
+      const track = $('[data-elas-track]', section);
+      if (!track) return;
+      const looks = $$('[data-look]', section);
+      const prev = $('[data-elas-prev]', section);
+      const next = $('[data-elas-next]', section);
+      const current = $('[data-elas-current]', section);
+      const bar = $('[data-elas-bar]', section);
+      const hotspots = $$('[data-hotspot]', section);
+
+      const closeAll = (except) => {
+        hotspots.forEach((spot) => {
+          if (spot === except) return;
+          spot.classList.remove('is-open');
+          $('[data-hotspot-toggle]', spot)?.setAttribute('aria-expanded', 'false');
+        });
+      };
+
+      hotspots.forEach((spot) => {
+        const toggle = $('[data-hotspot-toggle]', spot);
+        toggle?.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const open = !spot.classList.contains('is-open');
+          closeAll(spot);
+          spot.classList.toggle('is-open', open);
+          toggle.setAttribute('aria-expanded', String(open));
+        });
+        if (desktop.matches) {
+          spot.addEventListener('mouseenter', () => {
+            closeAll(spot);
+            spot.classList.add('is-open');
+            toggle?.setAttribute('aria-expanded', 'true');
+          });
+          spot.addEventListener('mouseleave', () => {
+            spot.classList.remove('is-open');
+            toggle?.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('[data-hotspot-pop]')) closeAll();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeAll();
+      });
+
+      looks.forEach((look) => {
+        const spots = $$('[data-hotspot]', look);
+        $$('[data-look-item]', look).forEach((item) => {
+          const spot = spots.find((s) => s.dataset.spot === item.dataset.lookItem);
+          if (!spot) return;
+          item.addEventListener('mouseenter', () => spot.classList.add('is-highlighted'));
+          item.addEventListener('mouseleave', () => spot.classList.remove('is-highlighted'));
+        });
+      });
+
+      const step = () => (looks[1] ? looks[1].offsetLeft - looks[0].offsetLeft : track.clientWidth);
+      prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const max = track.scrollWidth - track.clientWidth;
+        const ratio = max > 0 ? track.scrollLeft / max : 0;
+        if (bar) {
+          const width = max > 0 ? (track.clientWidth / track.scrollWidth) * 100 : 100;
+          bar.style.setProperty('--elas-bar-width', `${width}%`);
+          bar.style.setProperty('--elas-bar-offset', `${(ratio * (100 - width) * 100) / width}%`);
+        }
+        const index = Math.min(looks.length, Math.round(track.scrollLeft / (step() || 1)) + 1);
+        if (current) current.textContent = String(index).padStart(2, '0');
+        if (prev) prev.disabled = track.scrollLeft <= 2;
+        if (next) next.disabled = track.scrollLeft >= max - 2;
+      };
+      track.addEventListener(
+        'scroll',
+        () => {
+          closeAll();
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+          }
+        },
+        { passive: true }
+      );
+      window.addEventListener('resize', update);
+      update();
+    });
+  };
+
   const init = () => {
     initAnnouncement();
     initHeader();
@@ -578,6 +671,7 @@
     initCart();
     $$('[data-product]').forEach(initProduct);
     initStoryVideo();
+    initElasUsam();
     initRecommendations();
     initFooter();
     initCollection();
@@ -595,6 +689,7 @@
     initCards(event.target);
     $$('[data-product]', event.target).forEach(initProduct);
     initStoryVideo(event.target);
+    initElasUsam(event.target);
     initRecommendations();
   });
 })();
