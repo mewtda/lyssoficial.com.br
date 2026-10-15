@@ -96,6 +96,8 @@
         "b2": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/ased.png",
+            "image_mobile": "shopify://shop_images/ased2.png",
             "ratio_mobile": "16 / 9",
             "heading": "Into the Blue",
             "link_label": "A seleção",
@@ -107,13 +109,11 @@
         "b3": {
           "type": "banner",
           "settings": {
-            "image": "shopify://shop_images/Aneis_Dourados_em_Jardim_Florescente.png",
-            "image_mobile": "shopify://shop_images/Cinco_Aneis_Dourados_no_Jardim_Dourado_mo.png",
             "ratio_mobile": "1 / 1",
             "heading": "Anéis",
             "link_label": "SHOP",
             "link": "",
-            "text_color": "#ffffff",
+            "text_color": "#FFFFFF",
             "overlay": 55
           }
         }
