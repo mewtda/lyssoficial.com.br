@@ -109,8 +109,10 @@
         "b3": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/Retrato_Dourado_com_Aneis_Luxuosos_1.png",
+            "image_mobile": "shopify://shop_images/mobile.png",
             "ratio_mobile": "1 / 1",
-            "heading": "Anéis",
+            "heading": "Entre os dedos, a elegância",
             "link_label": "SHOP",
             "link": "",
             "text_color": "#ffffff",
