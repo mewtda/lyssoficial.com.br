@@ -27,12 +27,12 @@
         },
         "s2": {
           "type": "slide",
-          "disabled": true,
           "settings": {
-            "subheading": "seleção",
-            "heading": "Golden Hour",
-            "link_label": "Descobrir",
-            "link": "shopify://collections/all",
+            "image": "shopify://shop_images/aa.jpg",
+            "subheading": "EXPERIÊNCIA EXCLUSIVA",
+            "heading": "Conheça nossa loja física",
+            "link_label": "",
+            "link": "",
             "alignment": "left",
             "text_color": "#ffffff",
             "overlay": 0
