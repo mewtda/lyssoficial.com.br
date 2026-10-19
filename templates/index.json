@@ -79,60 +79,6 @@
         "padding_bottom_mobile": 32
       }
     },
-    "banners": {
-      "type": "collection-banners",
-      "blocks": {
-        "b1": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/123.png",
-            "image_mobile": "shopify://shop_images/123.png",
-            "ratio_mobile": "2 / 1",
-            "heading": "Ao redor do pescoço",
-            "link_label": "Descobrir",
-            "link": "shopify://collections/colares",
-            "text_color": "#ffffff",
-            "overlay": 60
-          }
-        },
-        "b2": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/ased.png",
-            "image_mobile": "shopify://shop_images/ased2.png",
-            "ratio_mobile": "16 / 9",
-            "heading": "Emoldurando o rosto",
-            "link_label": "A seleção",
-            "link": "shopify://collections/brincos",
-            "text_color": "#ffffff",
-            "overlay": 0
-          }
-        },
-        "b3": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/Retrato_Dourado_com_Aneis_Luxuosos_1.png",
-            "image_mobile": "shopify://shop_images/mobile.png",
-            "ratio_mobile": "1 / 1",
-            "heading": "Entre os dedos, a elegância",
-            "link_label": "DESCOBRIR",
-            "link": "shopify://collections/aneis",
-            "text_color": "#ffffff",
-            "overlay": 55
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
-      "settings": {
-        "layout": "stack",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "elas_usam": {
       "type": "elas-usam",
       "blocks": {
@@ -230,6 +176,60 @@
         "padding_bottom_mobile": 48
       }
     },
+    "banners": {
+      "type": "collection-banners",
+      "blocks": {
+        "b1": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/123.png",
+            "image_mobile": "shopify://shop_images/123.png",
+            "ratio_mobile": "2 / 1",
+            "heading": "Ao redor do pescoço",
+            "link_label": "Descobrir",
+            "link": "shopify://collections/colares",
+            "text_color": "#ffffff",
+            "overlay": 60
+          }
+        },
+        "b2": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/ased.png",
+            "image_mobile": "shopify://shop_images/ased2.png",
+            "ratio_mobile": "16 / 9",
+            "heading": "Emoldurando o rosto",
+            "link_label": "A seleção",
+            "link": "shopify://collections/brincos",
+            "text_color": "#ffffff",
+            "overlay": 0
+          }
+        },
+        "b3": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/Retrato_Dourado_com_Aneis_Luxuosos_1.png",
+            "image_mobile": "shopify://shop_images/mobile.png",
+            "ratio_mobile": "1 / 1",
+            "heading": "Entre os dedos, a elegância",
+            "link_label": "DESCOBRIR",
+            "link": "shopify://collections/aneis",
+            "text_color": "#ffffff",
+            "overlay": 55
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "layout": "stack",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "editorial": {
       "type": "editorial-video",
       "settings": {
@@ -248,8 +248,8 @@
   "order": [
     "hero",
     "best_sellers",
-    "banners",
     "elas_usam",
+    "banners",
     "editorial"
   ]
 }
