@@ -120,7 +120,7 @@
         "type": "color",
         "id": "color_text",
         "label": "Texto",
-        "default": "#1d1d1c"
+        "default": "#453536"
       },
       {
         "type": "color",
@@ -132,19 +132,19 @@
         "type": "color",
         "id": "color_accent_background",
         "label": "Fundo de destaque (barra de anúncio e rodapé)",
-        "default": "#f6f2ec"
+        "default": "#baa58d"
       },
       {
         "type": "color",
         "id": "color_accent_text",
         "label": "Texto de destaque",
-        "default": "#3b3b3b"
+        "default": "#453536"
       },
       {
         "type": "color",
         "id": "color_button",
         "label": "Botão",
-        "default": "#000000"
+        "default": "#453536"
       },
       {
         "type": "color",
@@ -156,7 +156,7 @@
         "type": "color",
         "id": "color_sale",
         "label": "Preço promocional",
-        "default": "#1d1d1c"
+        "default": "#453536"
       }
     ]
   },
