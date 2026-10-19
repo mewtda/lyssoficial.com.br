@@ -27,6 +27,7 @@
         },
         "s2": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "subheading": "seleção",
             "heading": "Golden Hour",
@@ -233,6 +234,7 @@
       "settings": {
         "heading": "Mãos, tempo e exigência.",
         "text": "<p>Cada peça é pensada como uma assinatura. Linhas marcantes, presença afirmada e um saper fare artesanal de exceção.</p>",
+        "video": "shopify://files/videos/IMG_0001.MOV",
         "button_label": "Nosso saper fare",
         "button_link": "",
         "padding_top": 96,
