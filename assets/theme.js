@@ -9,6 +9,11 @@
     const bottom = Math.max(0, header.getBoundingClientRect().bottom);
     document.documentElement.style.setProperty('--menu-top', `${bottom}px`);
     document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+    const link = $('.header__nav-link', header);
+    if (link && link.offsetParent) {
+      const gap = header.getBoundingClientRect().bottom - link.getBoundingClientRect().bottom;
+      document.documentElement.style.setProperty('--mega-bridge', `${Math.max(0, Math.ceil(gap)) + 1}px`);
+    }
     const bar = $('[data-announcement]');
     if (bar) document.documentElement.style.setProperty('--announcement-height', `${bar.offsetHeight}px`);
   };

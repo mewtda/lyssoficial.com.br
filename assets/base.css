@@ -723,6 +723,7 @@ details > summary::-webkit-details-marker {
   background: var(--color-bg);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(-4px);
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
@@ -731,6 +732,7 @@ details > summary::-webkit-details-marker {
 .header__nav-item:focus-within .mega-menu {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: none;
 }
 
@@ -2988,7 +2990,8 @@ details > summary::-webkit-details-marker {
   left: 0;
   right: 0;
   bottom: 100%;
-  height: 40px;
+  /* Only bridges the gap below the nav links, so it never covers them */
+  height: var(--mega-bridge, 20px);
 }
 
 .header {
