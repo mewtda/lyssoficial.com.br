@@ -1,11 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-page",
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "show_title": true
+      }
+    },
+    "image_with_text_UYexjA": {
+      "type": "image-with-text",
+      "name": "Imagem com texto",
+      "settings": {
+        "image": "shopify://shop_images/IMG_7722_JPG.webp",
+        "image_position": "left",
+        "subheading": "A fundadora",
+        "heading": "Tati Abras",
+        "text": "<p><strong>Diretora criativa da Lyss, Tati Abras faz das joias a sua linguagem há mais de duas décadas. De Belo Horizonte, onde vive e cria, construiu um olhar apurado para o acessório que acompanha a mulher em cada gesto.</strong></p><p><strong>São anos de experiência dedicados a joias e acessórios, um repertório que ela traduz em forma, proporção e detalhe. Dessa vivência nasceu o desejo que move a marca: criar joias ao mesmo tempo delicadas e marcantes, feitas para durar além das estações.</strong></p><p><strong>À frente da direção criativa, ela traduz em ouro, pedra e forma a mesma bússola que guia a Lyss: elegância com rumo, sem pressa e com leveza.</strong></p>",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_with_text_UYexjA"
   ]
 }
