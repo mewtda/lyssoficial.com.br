@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -14,14 +23,16 @@
           "type": "collapsible",
           "settings": {
             "heading": "Entrega e devoluções",
-            "content": "<p>Envio em até 24h úteis. Trocas e devoluções gratuitas em até 30 dias.</p>"
+            "content": "<p>Queremos que sua experiência com a LYSS seja especial em todos os detalhes.</p><h3><strong>DEVOLUÇÃO</strong></h3><p>Para compras realizadas em nosso site, você pode solicitar a devolução em até <strong>7 dias corridos</strong> após o recebimento do pedido, conforme previsto pelo <strong>Código de Defesa do Consumidor</strong>.</p><p>A peça deverá estar <strong>sem sinais de uso, em perfeito estado, com etiquetas e embalagem original</strong>.</p><h3><strong>TROCAS</strong></h3><p>Caso deseje realizar uma troca, <strong>entre em contato com nossa equipe</strong> informando o número do pedido e o motivo da solicitação. A troca estará <strong>sujeita à disponibilidade da peça desejada</strong>.</p><h3><strong>PEÇAS COM DEFEITO</strong></h3><p>Caso identifique qualquer problema ao receber sua peça, <strong>entre em contato conosco</strong> para que possamos <strong>avaliar e orientar</strong> sobre o procedimento.</p><h3><strong>REEMBOLSO</strong></h3><p>Após o recebimento e análise da peça devolvida, <strong>o reembolso será realizado</strong> de acordo com a <strong>forma de pagamento utilizada</strong> na compra.</p><p>Para solicitar uma troca ou devolução, entre em contato através dos nossos <strong>canais de atendimento</strong>.</p>",
+            "page": ""
           }
         },
         "care": {
           "type": "collapsible",
           "settings": {
             "heading": "Cuidados",
-            "content": "<p>Evite contato com água, perfumes e cremes. Guarde sua joia no estojo.</p>"
+            "content": "<p>Evite contato com água, perfumes e cremes. Guarde sua joia no estojo.</p>",
+            "page": ""
           }
         }
       },
@@ -31,13 +42,15 @@
         "care"
       ],
       "settings": {
-        "show_dynamic_checkout": true
+        "show_dynamic_checkout": true,
+        "video_metafield": "custom.product"
       }
     },
     "related": {
       "type": "product-recommendations",
       "settings": {
-        "heading": "você também vai amar"
+        "heading": "você também vai amar",
+        "limit": 8
       }
     }
   },
