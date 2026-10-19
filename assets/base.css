@@ -2166,7 +2166,7 @@ details > summary::-webkit-details-marker {
   flex-direction: column;
   gap: 20px;
   border: 0;
-  margin: 0;
+  margin: 0 0 24px;
   padding: 0;
 }
 
@@ -3857,6 +3857,7 @@ details > summary::-webkit-details-marker {
   }
 
   .header__nav {
+    gap: 0;
     min-width: 0;
     max-width: 100%;
     overflow-x: auto;
@@ -3868,19 +3869,34 @@ details > summary::-webkit-details-marker {
     display: none;
   }
 
-  .header__nav.is-overflowing {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
-    mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+  /* Edge fades: sticky gradients instead of mask-image, which would clip the mega menu */
+  .header__nav::before,
+  .header__nav::after {
+    content: '';
+    position: sticky;
+    z-index: 1;
+    flex: 0 0 32px;
+    align-self: stretch;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
-  .header__nav.is-overflowing.is-at-start {
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
-    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  .header__nav::before {
+    left: 0;
+    margin-right: -32px;
+    background: linear-gradient(to right, var(--color-bg), transparent);
   }
 
-  .header__nav.is-overflowing.is-at-end {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 32px);
-    mask-image: linear-gradient(to right, transparent, #000 32px);
+  .header__nav::after {
+    right: 0;
+    margin-left: -32px;
+    background: linear-gradient(to left, var(--color-bg), transparent);
+  }
+
+  .header__nav.is-overflowing:not(.is-at-start)::before,
+  .header__nav.is-overflowing:not(.is-at-end)::after {
+    opacity: 1;
   }
 
   .header__nav-list {
