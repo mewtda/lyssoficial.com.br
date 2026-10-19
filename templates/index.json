@@ -90,7 +90,7 @@
             "ratio_mobile": "2 / 1",
             "heading": "Ao redor do pescoço",
             "link_label": "Descobrir",
-            "link": "",
+            "link": "shopify://collections/colares",
             "text_color": "#ffffff",
             "overlay": 60
           }
@@ -140,7 +140,7 @@
           "type": "look",
           "settings": {
             "image": "shopify://shop_images/222.jpg",
-            "name": "@cliente",
+            "name": "",
             "product_1": "colar-berloque-many-chain",
             "x_1": 41,
             "y_1": 35,
@@ -159,7 +159,7 @@
           "type": "look",
           "settings": {
             "image": "shopify://shop_images/aaaa.jpg",
-            "name": "@cliente",
+            "name": "",
             "product_1": "anel-baguete",
             "x_1": 56,
             "y_1": 33,
@@ -178,7 +178,7 @@
           "type": "look",
           "settings": {
             "image": "shopify://shop_images/IMG_7330_JPG_6ebcdddb-b35f-4e1f-8140-ab934c83eefb.jpg",
-            "name": "@cliente",
+            "name": "",
             "product_1": "brinco-shell",
             "x_1": 41,
             "y_1": 22,
@@ -197,7 +197,7 @@
           "type": "look",
           "settings": {
             "image": "shopify://shop_images/33333.jpg",
-            "name": "@cliente",
+            "name": "",
             "product_1": "brinco-sandrine",
             "x_1": 65,
             "y_1": 48,
