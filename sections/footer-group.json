@@ -48,6 +48,7 @@
     },
     "about": {
       "type": "footer-about",
+      "disabled": true,
       "settings": {
         "text": "<p>Criamos joias de personalidade marcante, que orquestram com ousadia feminilidade e modernidade. Feitas inteiramente à mão, são fruto do precioso e minucioso <em>saper fare</em> de nossos artesãos, transmitido de geração em geração. <strong>Concebida com exclusividade</strong>, cada criação está pronta para deixar seu estojo e finalmente encontrar você, para ser usada com orgulho<br/><br/></p>",
         "menu": ""
