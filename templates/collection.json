@@ -12,10 +12,9 @@
     "main": {
       "type": "main-collection",
       "custom_css": [
-        ".card__row{justify-content:flex-start!important;gap:10px!important}",
-        ".card__title{flex:0 1 auto!important}",
-        ".card__row .price{margin-left:0!important}",
-        "@media(max-width:749px){.card__row{flex-direction:column!important;align-items:flex-start!important;gap:4px!important}.card__row .price{margin:0!important}}"
+        ".card__row{display:flex!important; flex-direction:column!important; align-items:flex-start!important; gap:4px!important;}",
+        ".card__title{width:100%!important; margin:0!important;}",
+        ".card__row .price{margin:0!important; width:100%!important; justify-content:flex-start!important;}"
       ],
       "settings": {
         "show_title": false,
