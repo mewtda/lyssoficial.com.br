@@ -1,6 +1,300 @@
+{% doc %}
+  @prompt
+    Crie um pop-up de vídeo de boas-vindas que apareça sobre a loja quando o visitante entrar na página. Inclua no editor um seletor para o lojista carregar ou escolher seu próprio vídeo. Tente reproduzir automaticamente sem som, com controles acessíveis para reproduzir, pausar e ativar o áudio, e um botão de fechar bem visível para continuar navegando. Se a reprodução automática for bloqueada, mostre um botão de reproduzir. Adapte o tamanho para celular e computador, permita fechar pelo teclado e não mostre um pop-up vazio enquanto nenhum vídeo estiver selecionado. Use textos em português do Brasil e um visual que combine com o tema.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% if block.settings.video != blank %}
+  {% style %}
+    .ai-welcome-video-{{ ai_gen_id }} {
+      display: block;
+      width: 100%;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(25, 20, 19, 0.72);
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__dialog {
+      position: relative;
+      width: min(100%, {{ block.settings.desktop_width }}px);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+      padding: 24px;
+      color: {{ block.settings.text_color }};
+      background: {{ block.settings.background_color }};
+      border: 1px solid rgba(69, 53, 54, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__close {
+      position: absolute;
+      z-index: 2;
+      top: 10px;
+      right: 10px;
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      color: {{ block.settings.close_text_color }};
+      background: {{ block.settings.close_background }};
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      font: inherit;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__close:focus-visible,
+    .ai-welcome-video-{{ ai_gen_id }}__play:focus-visible,
+    .ai-welcome-video-{{ ai_gen_id }}__sound:focus-visible,
+    .ai-welcome-video-{{ ai_gen_id }}__media:focus-visible {
+      outline: 3px solid {{ block.settings.text_color }};
+      outline-offset: 3px;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__heading {
+      margin: 0 54px 16px 0;
+      color: inherit;
+      font-size: clamp(20px, 4vw, 28px);
+      line-height: 1.25;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__media {
+      display: block;
+      width: 100%;
+      max-height: min(65vh, 720px);
+      background: #171717;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__play,
+    .ai-welcome-video-{{ ai_gen_id }}__sound {
+      min-height: 44px;
+      padding: 10px 16px;
+      color: {{ block.settings.button_text_color }};
+      background: {{ block.settings.button_color }};
+      border: 1px solid {{ block.settings.button_color }};
+      border-radius: 4px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .ai-welcome-video-{{ ai_gen_id }}__play[hidden] {
+      display: none;
+    }
+
+    @media screen and (max-width: 749px) {
+      .ai-welcome-video-{{ ai_gen_id }}__overlay {
+        padding: 12px;
+      }
+
+      .ai-welcome-video-{{ ai_gen_id }}__dialog {
+        width: 100%;
+        max-height: calc(100vh - 24px);
+        padding: 18px;
+      }
+
+      .ai-welcome-video-{{ ai_gen_id }}__media {
+        max-height: 55vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ai-welcome-video-{{ ai_gen_id }}__overlay,
+      .ai-welcome-video-{{ ai_gen_id }}__dialog {
+        scroll-behavior: auto;
+      }
+    }
+  {% endstyle %}
+
+  <welcome-video-{{ ai_gen_id }} class="ai-welcome-video-{{ ai_gen_id }}" style="width: {{ block.settings.desktop_width_percent }}%;" {{ block.shopify_attributes }}>
+    <div class="ai-welcome-video-{{ ai_gen_id }}__overlay" role="presentation">
+      <section class="ai-welcome-video-{{ ai_gen_id }}__dialog" role="dialog" aria-modal="true" aria-labelledby="ai-welcome-title-{{ ai_gen_id }}" tabindex="-1">
+        <button class="ai-welcome-video-{{ ai_gen_id }}__close" type="button" aria-label="Fechar vídeo de boas-vindas">×</button>
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-welcome-video-{{ ai_gen_id }}__heading" id="ai-welcome-title-{{ ai_gen_id }}">{{ block.settings.heading | escape }}</h2>
+        {% else %}
+          <h2 class="ai-welcome-video-{{ ai_gen_id }}__heading" id="ai-welcome-title-{{ ai_gen_id }}">Boas-vindas</h2>
+        {% endif %}
+        {{ block.settings.video | video_tag: class: 'ai-welcome-video-' | append: ai_gen_id | append: '__media', controls: true, autoplay: true, muted: true, playsinline: true, preload: 'metadata' }}
+        <div class="ai-welcome-video-{{ ai_gen_id }}__controls">
+          <button class="ai-welcome-video-{{ ai_gen_id }}__play" type="button" hidden>Reproduzir vídeo</button>
+          <button class="ai-welcome-video-{{ ai_gen_id }}__sound" type="button" aria-pressed="false">Ativar áudio</button>
+        </div>
+      </section>
+    </div>
+  </welcome-video-{{ ai_gen_id }}>
+
+  <script>
+    (function() {
+      const tagName = 'welcome-video-{{ ai_gen_id }}';
+      if (customElements.get(tagName)) return;
+      class WelcomeVideo extends HTMLElement {
+        connectedCallback() {
+          this.overlay = this.querySelector('.ai-welcome-video-{{ ai_gen_id }}__overlay');
+          this.dialog = this.querySelector('.ai-welcome-video-{{ ai_gen_id }}__dialog');
+          this.video = this.querySelector('video');
+          this.closeButton = this.querySelector('.ai-welcome-video-{{ ai_gen_id }}__close');
+          this.playButton = this.querySelector('.ai-welcome-video-{{ ai_gen_id }}__play');
+          this.soundButton = this.querySelector('.ai-welcome-video-{{ ai_gen_id }}__sound');
+          if (!this.video) {
+            this.remove();
+            return;
+          }
+          this.previousFocus = document.activeElement;
+          this.close = () => {
+            if (!this.isConnected) return;
+            this.video.pause();
+            this.overlay.remove();
+            if (this.previousFocus && this.previousFocus.focus) this.previousFocus.focus();
+            this.remove();
+          };
+          this.closeButton.addEventListener('click', this.close);
+          this.playButton.addEventListener('click', () => {
+            const result = this.video.play();
+            if (result && result.catch) result.catch(() => { this.playButton.hidden = false; });
+          });
+          this.soundButton.addEventListener('click', () => {
+            this.video.muted = !this.video.muted;
+            this.soundButton.textContent = this.video.muted ? 'Ativar áudio' : 'Silenciar áudio';
+            this.soundButton.setAttribute('aria-pressed', String(!this.video.muted));
+          });
+          this.video.addEventListener('play', () => { this.playButton.hidden = true; });
+          this.video.addEventListener('pause', () => { if (!this.video.ended) this.playButton.hidden = false; });
+          this.video.addEventListener('ended', () => { this.playButton.hidden = false; });
+          this.overlay.addEventListener('click', (event) => { if (event.target === this.overlay) this.close(); });
+          this.keyHandler = (event) => {
+            if (event.key === 'Escape' && this.isConnected) {
+              event.preventDefault();
+              this.close();
+            }
+            if (event.key === 'Tab' && this.isConnected) {
+              const focusable = Array.from(this.dialog.querySelectorAll('button, video[controls]')).filter((element) => !element.hidden && !element.disabled);
+              if (!focusable.length) return;
+              const first = focusable[0];
+              const last = focusable[focusable.length - 1];
+              if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+              else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+            }
+          };
+          document.addEventListener('keydown', this.keyHandler);
+          this.addEventListener('shopify:block:select', () => { this.dialog.focus(); });
+          this.closeButton.focus();
+          const result = this.video.play();
+          if (result && result.catch) result.catch(() => { if (this.isConnected) this.playButton.hidden = false; });
+        }
+        disconnectedCallback() {
+          if (this.keyHandler) document.removeEventListener('keydown', this.keyHandler);
+        }
+      }
+      customElements.define(tagName, WelcomeVideo);
+    })();
+  </script>
+{% endif %}
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Vídeo de boas-vindas",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo de boas-vindas"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Boas-vindas à nossa loja"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width",
+      "label": "Largura do pop-up",
+      "min": 320,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 680
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Largura do bloco no desktop",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Cores"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Fundo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Texto",
+      "default": "#453536"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Botões",
+      "default": "#453536"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Texto dos botões",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "close_background",
+      "label": "Fundo do botão fechar",
+      "default": "#453536"
+    },
+    {
+      "type": "color",
+      "id": "close_text_color",
+      "label": "Ícone fechar",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vídeo de boas-vindas"
+    }
+  ],
+  "tag": null,
+  "class": "welcome-video-block"
+}
 {% endschema %}
