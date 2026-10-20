@@ -47,8 +47,20 @@
     {%- for block in section.blocks -%}
       {%- assign look_number = forloop.index | prepend: '0' | slice: -2, 2 -%}
       <article class="look" data-look {{ block.shopify_attributes }}>
+        {%- liquid
+          assign has_video = false
+          if block.settings.video != blank
+            assign has_video = true
+          endif
+          assign has_products = false
+          if block.settings.product_1 != blank or block.settings.product_2 != blank or block.settings.product_3 != blank or block.settings.product_4 != blank
+            assign has_products = true
+          endif
+        -%}
         <div class="look__media" data-look-media>
-          {%- if block.settings.image != blank -%}
+          {%- if has_video -%}
+            {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, preload: 'metadata', class: 'look__image', image_size: '1080x' }}
+          {%- elsif block.settings.image != blank -%}
             {{
               block.settings.image
               | image_url: width: 1400
@@ -69,6 +81,7 @@
           {%- endif -%}
 
           {%- assign spot_index = 0 -%}
+          {%- unless has_video -%}
           {%- for i in (1..4) -%}
             {%- liquid
               assign product_key = 'product_' | append: i
@@ -140,9 +153,10 @@
               </div>
             {%- endif -%}
           {%- endfor -%}
+          {%- endunless -%}
         </div>
 
-        {%- if spot_index > 0 -%}
+        {%- if has_products -%}
           <ol class="look__list" role="list">
             {%- assign list_index = 0 -%}
             {%- for i in (1..4) -%}
@@ -261,6 +275,12 @@
           "id": "image",
           "label": "Foto",
           "info": "Formato retrato (4:5) recomendado."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo",
+          "info": "Opcional. Substitui a foto e esconde os pontos; os produtos aparecem só na lista abaixo."
         },
         {
           "type": "text",
