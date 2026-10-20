@@ -40,7 +40,7 @@
               {%- if forloop.first and request.page_type != 'index' -%}
                 <h1 class="h1">{{ block.settings.heading }}</h1>
               {%- else -%}
-                <h2 class="h1">{{ block.settings.heading }}</h2>
+<h2 class="h1" {% if forloop.index == 2 %}style="font-size: 48px;"{% endif %}>{{ block.settings.heading }}</h2>
               {%- endif -%}
             {%- endif -%}
             {%- if block.settings.link_label != blank -%}
