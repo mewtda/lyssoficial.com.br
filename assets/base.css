@@ -1270,23 +1270,14 @@ details > summary::-webkit-details-marker {
     opacity: 0;
   }
 
-  .card__info {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3;
-    min-height: 0;
-    padding: 16px;
-    pointer-events: none;
-  }
-
-  .card__info a {
-    pointer-events: auto;
-  }
 }
 
 @media (min-width: 768px) {
+  .card__info {
+    min-height: 0;
+    padding: 12px 4px 0;
+  }
+
   .card__badge {
     font-size: 14px;
   }
@@ -1299,7 +1290,7 @@ details > summary::-webkit-details-marker {
 
 @media (min-width: 1024px) {
   .card__info {
-    padding: 20px;
+    padding: 16px 4px 0;
   }
 
   .card__badge {
