@@ -261,7 +261,9 @@
         },
         "p6": {
           "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/aa.jpg"
+          }
         },
         "p7": {
           "type": "photo",
