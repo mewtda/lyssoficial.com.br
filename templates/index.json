@@ -232,23 +232,12 @@
     },
     "editorial": {
       "type": "editorial-video",
-      "settings": {
-        "heading": "Vivencie a LYSS de perto",
-        "text": "<p>Venha conhecer nosso espaço físico e vivenciar de perto o toque, os detalhes e a exclusividade de cada criação <strong>LYSS</strong></p>",
-        "video": "shopify://files/videos/IMG_0001.MOV",
-        "button_label": "",
-        "button_link": "",
-        "padding_top": 96,
-        "padding_bottom": 144,
-        "padding_top_mobile": 56,
-        "padding_bottom_mobile": 80,
-        "layout": "mosaic",
-        "show_store": true
-      },
       "blocks": {
         "p1": {
           "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/6218e3f2-4116-49dd-9b92-988db8b52184.jpg"
+          }
         },
         "p2": {
           "type": "photo",
@@ -298,7 +287,20 @@
         "p8",
         "p9",
         "p10"
-      ]
+      ],
+      "settings": {
+        "layout": "mosaic",
+        "show_store": true,
+        "heading": "Vivencie a LYSS de perto",
+        "text": "<p>Venha conhecer nosso espaço físico e vivenciar de perto o toque, os detalhes e a exclusividade de cada criação <strong>LYSS</strong></p>",
+        "video": "shopify://files/videos/IMG_0001.MOV",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 96,
+        "padding_bottom": 144,
+        "padding_top_mobile": 56,
+        "padding_bottom_mobile": 80
+      }
     },
     "1792456469a5ad72c7": {
       "type": "_blocks",
