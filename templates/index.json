@@ -32,7 +32,7 @@
             "subheading": "EXPERIÊNCIA EXCLUSIVA",
             "heading": "Descubra a Lyss",
             "link_label": "",
-            "link": "",
+            "link": "/#loja",
             "alignment": "left",
             "text_color": "#ffffff",
             "overlay": 10
@@ -291,6 +291,7 @@
       "settings": {
         "layout": "mosaic",
         "show_store": true,
+        "anchor": "loja",
         "heading": "Vivencie a LYSS de perto",
         "text": "<p>Venha conhecer nosso espaço físico e vivenciar de perto o toque, os detalhes e a exclusividade de cada criação <strong>LYSS</strong></p>",
         "video": "shopify://files/videos/IMG_0001.MOV",
