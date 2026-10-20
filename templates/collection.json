@@ -11,9 +11,7 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "custom_css": [
-        ".product-item__info {justify-content: flex-start !important; gap: 12px !important;}"
-      ],
+      "custom_css": [],
       "settings": {
         "show_title": false,
         "show_description": false,
