@@ -65,6 +65,11 @@
     },
     "best_sellers": {
       "type": "featured-collection",
+      "custom_css": [
+        ".card__row {justify-content: flex-start !important; gap: 10px !important;}",
+        ".card__title {flex: 0 1 auto !important;}",
+        ".card__row .price {margin-left: 0 !important;}"
+      ],
       "settings": {
         "heading": "em alta",
         "heading_style": "h3",
