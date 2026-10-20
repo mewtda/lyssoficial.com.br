@@ -11,12 +11,7 @@
   "sections": {
     "main": {
       "type": "main-collection",
-      "custom_css": [
-        ".card__row {justify-content: flex-start !important; gap: 10px !important;}",
-        ".card__title {flex: 0 1 auto !important;}",
-        ".card__row .price {margin-left: 0 !important;}",
-        "@media screen and (max-width: 749px) {.card__row {justify-content: flex-start !important; gap: 6px !important; flex-wrap: wrap !important; } .card__title {flex: 0 1 auto !important; } .card__row .price {margin-left: 0 !important; }}"
-      ],
+      "custom_css": [],
       "settings": {
         "show_title": false,
         "show_description": false,
