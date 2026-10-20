@@ -168,6 +168,8 @@
       "settings": {
         "eyebrow": "Lyss na vida real",
         "heading": "Elas Usam",
+        "heading_size": 132,
+        "heading_size_mobile": 48,
         "text": "<p>Clientes e amigas da marca com suas peças favoritas. Toque nos pontos para ver cada joia.</p>",
         "cta_label": "Ver peça",
         "padding_top": 80,
@@ -241,7 +243,9 @@
         },
         "p2": {
           "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/aaaaa.jpg"
+          }
         },
         "p3": {
           "type": "photo",
