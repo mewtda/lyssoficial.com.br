@@ -25,7 +25,16 @@
           <a href="{{ settings[key] }}" target="_blank" rel="noopener" aria-label="{{ network | capitalize }}">
             {% render 'icon', icon: network %}
           </a>
-        </li>
+        </li>{% if network == 'instagram' %}
+  <li>
+    <a href="https://wa.me/5531998312415" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8A8.5 8.5 0 0 1 12.5 20a8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8A8.5 8.5 0 0 1 12.5 3H13a8.48 8.48 0 0 1 8 8v.5z"/>
+        <path d="M9 9c.3-.4.6-.4.9-.4h.5l.8 1.9c.1.2 0 .4-.1.6l-.6.7c.6 1.1 1.5 2 2.6 2.6l.7-.6c.2-.1.4-.2.6-.1l1.9.8v.5c0 .3 0 .6-.4.9-.5.4-1.2.5-1.8.3-2.8-.9-5-3.1-5.9-5.9-.2-.6-.1-1.3.3-1.8z"/>
+      </svg>
+    </a>
+  </li>
+{% endif %}
       {%- endif -%}
     {%- endfor -%}
   </ul>
