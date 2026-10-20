@@ -1,4 +1,5 @@
 <div
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
   class="editorial section-padding"
   style="--pt-mobile: {{ section.settings.padding_top_mobile }}px; --pb-mobile: {{ section.settings.padding_bottom_mobile }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
 >
@@ -118,6 +119,13 @@
       "label": "Mostrar endereço da loja sobre o vídeo",
       "info": "Apenas no mosaico. Endereço e horário vêm das configurações do tema > Loja física.",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Âncora do link",
+      "info": "Para levar até esta seção, use o link /#loja (troque \"loja\" se mudar este campo).",
+      "default": "loja"
     },
     {
       "type": "text",

@@ -1460,6 +1460,7 @@ details > summary::-webkit-details-marker {
 }
 
 .editorial {
+  scroll-margin-top: var(--header-height);
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -1819,8 +1820,8 @@ details > summary::-webkit-details-marker {
 .footer {
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  padding: 64px 16px;
+  gap: 32px;
+  padding: 40px 16px 24px;
   font-weight: 300;
 }
 
@@ -1833,11 +1834,11 @@ details > summary::-webkit-details-marker {
 .footer__newsletter {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .footer__newsletter-title {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-weight: 500;
 }
 
@@ -1913,13 +1914,21 @@ details > summary::-webkit-details-marker {
 
 .footer__bottom {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 12px 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(var(--color-text-rgb), 0.15);
 }
 
 .footer__monogram {
-  max-width: 48px;
+  max-width: 40px;
+}
+
+.footer__store {
+  font-style: normal;
+  line-height: 1.5;
 }
 
 .footer__monogram-text {
@@ -1946,7 +1955,7 @@ details > summary::-webkit-details-marker {
 
 @media (min-width: 768px) {
   .footer {
-    padding: 64px 32px;
+    padding: 48px 32px 24px;
   }
 
   .footer__top {
@@ -1954,12 +1963,16 @@ details > summary::-webkit-details-marker {
   }
 
   .footer__newsletter {
-    gap: 24px;
+    gap: 16px;
   }
 
   .footer__columns {
     grid-template-columns: repeat(2, 1fr);
-    gap: 48px 32px;
+    gap: 32px;
+  }
+
+  .footer__bottom {
+    justify-content: space-between;
   }
 
   .footer__column {
@@ -1980,52 +1993,45 @@ details > summary::-webkit-details-marker {
   }
 
   .footer__monogram {
-    max-width: 72px;
+    max-width: 48px;
   }
 
   .footer__monogram-text {
-    font-size: 56px;
+    font-size: 40px;
   }
 }
 
 @media (min-width: 1024px) {
   .footer {
-    padding: 64px 48px;
+    padding: 48px 48px 24px;
   }
 
   .footer__top {
     flex-direction: row;
     justify-content: space-between;
-    gap: 96px;
+    gap: 64px;
   }
 
   .footer__newsletter {
-    width: 40%;
+    width: 32%;
   }
 
   .footer__columns {
     flex: 1;
-    max-width: 1000px;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px;
-  }
-
-  .footer__monogram {
-    max-width: 112px;
-  }
-
-  .footer__monogram-text {
-    font-size: 80px;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 40px;
   }
 }
 
 @media (min-width: 1280px) {
   .footer {
-    padding: 64px 64px;
+    padding: 48px 64px 24px;
   }
 
   .footer__top {
-    gap: 160px;
+    gap: 96px;
   }
 }
 
@@ -4142,19 +4148,6 @@ a.store-notice__head:hover .store-notice__label {
   height: 20px;
 }
 
-.footer__store-row {
-  display: flex;
-  justify-content: center;
-  padding-top: 24px;
-  border-top: 1px solid currentColor;
-}
-
-@media (min-width: 768px) {
-  .footer__store-row {
-    justify-content: flex-start;
-  }
-}
-
 /* Account icon: keep icon-button layout when also .desktop-only */
 @media (min-width: 768px) {
   .icon-button.desktop-only {
@@ -4307,7 +4300,7 @@ a.store-notice__head:hover .store-notice__label {
 
 .footer__credit-logo {
   width: auto;
-  height: 32px;
+  height: 24px;
 }
 
 /* Mega menu featured: size options */

@@ -77,14 +77,28 @@
             </details>
         {%- endcase -%}
       {%- endfor -%}
+
+      {%- if settings.store_label != blank -%}
+        <details class="footer__column" data-footer-accordion>
+          <summary class="footer__column-title">
+            {{ settings.store_label }}
+            {% render 'icon', icon: 'chevron' %}
+          </summary>
+          <address class="footer__links footer__store text-small">
+            {%- if settings.store_address != blank -%}
+              <span>{{ settings.store_address | escape | newline_to_br }}</span>
+            {%- endif -%}
+            {%- if settings.store_hours != blank -%}
+              <span>{{ settings.store_hours | escape | newline_to_br }}</span>
+            {%- endif -%}
+            {%- if settings.store_link != blank -%}
+              <a href="{{ settings.store_link }}" class="link-animation" target="_blank" rel="noopener">Como chegar</a>
+            {%- endif -%}
+          </address>
+        </details>
+      {%- endif -%}
     </div>
   </div>
-
-  {%- if settings.store_label != blank -%}
-    <div class="footer__store-row">
-      {% render 'store-notice', class: 'footer__store' %}
-    </div>
-  {%- endif -%}
 
   <div class="footer__bottom">
     {%- if section.settings.monogram != blank -%}
