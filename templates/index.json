@@ -35,7 +35,7 @@
             "link": "",
             "alignment": "left",
             "text_color": "#ffffff",
-            "overlay": 0
+            "overlay": 10
           }
         },
         "s3": {
