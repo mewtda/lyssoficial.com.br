@@ -22,6 +22,10 @@
     "card_show_second_image": true,
     "card_badge_tag": "new",
     "card_badge_label": "NEW",
+    "store_note": "",
+    "store_address": "Rua Modesto Carvalho Araújo, 384, Belo Horizonte, Brazil, 30320410",
+    "store_hours": "Seg a sexta das 10 às 19\nSábado das 10 às 14",
+    "store_link": "https://www.google.com/maps/search/?api=1&query=Rua+Modesto+Carvalho+Ara%C3%BAjo%2C+384%2C+Belo+Horizonte%2C+30320410",
     "sections": {
       "cart-drawer": {
         "type": "cart-drawer",

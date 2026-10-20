@@ -241,8 +241,64 @@
         "padding_top": 96,
         "padding_bottom": 144,
         "padding_top_mobile": 56,
-        "padding_bottom_mobile": 80
-      }
+        "padding_bottom_mobile": 80,
+        "layout": "mosaic",
+        "show_store": true
+      },
+      "blocks": {
+        "p1": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p2": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p3": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p4": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p5": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p6": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p7": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p8": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p9": {
+          "type": "photo",
+          "settings": {}
+        },
+        "p10": {
+          "type": "photo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "p8",
+        "p9",
+        "p10"
+      ]
     },
     "1792456469a5ad72c7": {
       "type": "_blocks",

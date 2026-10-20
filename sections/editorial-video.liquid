@@ -13,27 +13,81 @@
     </div>
   {%- endif -%}
 
-  <div class="editorial__media-wrap">
-    <div class="editorial__media">
-      {%- if section.settings.video_mobile != blank -%}
-        {{ section.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
-      {%- elsif section.settings.video != blank -%}
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
-      {%- elsif section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'mobile-only', loading: 'lazy', sizes: '100vw', widths: '375, 750, 1000, 1200' }}
+  {%- if section.settings.layout == 'mosaic' -%}
+    {%- liquid
+      assign reel_video = section.settings.video_mobile | default: section.settings.video
+      assign tile_count = 0
+      for block in section.blocks
+        if block.settings.image != blank or request.design_mode
+          assign tile_count = tile_count | plus: 1
+        endif
+      endfor
+    -%}
+    <div class="editorial__showcase{% if tile_count == 0 %} editorial__showcase--solo{% endif %}">
+      {%- if tile_count > 0 -%}
+        <div class="editorial__mosaic">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              <div class="editorial__tile" {{ block.shopify_attributes }}>
+                {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 25vw, 40vw', widths: '300, 600, 900' }}
+              </div>
+            {%- elsif request.design_mode -%}
+              <div class="editorial__tile" {{ block.shopify_attributes }}>
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
       {%- endif -%}
 
-      {%- if section.settings.video != blank -%}
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'desktop-only', image_size: '1920x' }}
-      {%- elsif section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'desktop-only', loading: 'lazy', sizes: '100vw', widths: '1000, 1500, 2000, 2400' }}
-      {%- endif -%}
+      <div class="editorial__reel">
+        {%- if reel_video != blank -%}
+          {{ reel_video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '1080x' }}
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 768px) 36vw, 90vw', widths: '375, 750, 1000, 1200' }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
 
-      {%- if section.settings.video == blank and section.settings.video_mobile == blank and section.settings.image == blank -%}
-        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-      {%- endif -%}
+        {%- if section.settings.show_store and settings.store_label != blank -%}
+          <div class="editorial__reel-info">
+            <p class="editorial__reel-label">{{ settings.store_label }}</p>
+            {%- if settings.store_address != blank -%}
+              <p class="editorial__reel-address">{{ settings.store_address | escape | newline_to_br }}</p>
+            {%- endif -%}
+            {%- if settings.store_hours != blank -%}
+              <p class="editorial__reel-hours">{{ settings.store_hours | escape | newline_to_br }}</p>
+            {%- endif -%}
+            {%- if settings.store_link != blank -%}
+              <a href="{{ settings.store_link }}" class="editorial__reel-link" target="_blank" rel="noopener">Como chegar</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
     </div>
-  </div>
+  {%- else -%}
+    <div class="editorial__media-wrap">
+      <div class="editorial__media">
+        {%- if section.settings.video_mobile != blank -%}
+          {{ section.settings.video_mobile | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
+        {%- elsif section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'mobile-only', image_size: '1080x' }}
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'mobile-only', loading: 'lazy', sizes: '100vw', widths: '375, 750, 1000, 1200' }}
+        {%- endif -%}
+
+        {%- if section.settings.video != blank -%}
+          {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'desktop-only', image_size: '1920x' }}
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'desktop-only', loading: 'lazy', sizes: '100vw', widths: '1000, 1500, 2000, 2400' }}
+        {%- endif -%}
+
+        {%- if section.settings.video == blank and section.settings.video_mobile == blank and section.settings.image == blank -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
 
   {%- if section.settings.button_label != blank -%}
     <div class="editorial__cta">
@@ -47,6 +101,24 @@
   "name": "Editorial com vídeo",
   "tag": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "full", "label": "Vídeo inteiro" },
+        { "value": "mosaic", "label": "Mosaico de fotos + vídeo vertical" }
+      ],
+      "default": "full",
+      "info": "No mosaico, adicione as fotos como blocos. O vídeo usa o \"Vídeo (celular)\" ou, se vazio, o \"Vídeo (desktop)\"."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_store",
+      "label": "Mostrar endereço da loja sobre o vídeo",
+      "info": "Apenas no mosaico. Endereço e horário vêm das configurações do tema > Loja física.",
+      "default": true
+    },
     {
       "type": "text",
       "id": "heading",
@@ -129,6 +201,20 @@
       "step": 4,
       "unit": "px",
       "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Foto do mosaico",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        }
+      ]
     }
   ],
   "presets": [

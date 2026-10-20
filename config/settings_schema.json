@@ -76,13 +76,26 @@
         "type": "text",
         "id": "store_note",
         "label": "Destaque",
-        "default": "em breve"
+        "info": "Selo ao lado do texto (ex.: \"novo\"). Deixe vazio para esconder."
+      },
+      {
+        "type": "textarea",
+        "id": "store_address",
+        "label": "Endereço",
+        "default": "Rua Modesto Carvalho Araújo, 384, Belo Horizonte, Brazil, 30320410"
+      },
+      {
+        "type": "textarea",
+        "id": "store_hours",
+        "label": "Horário de funcionamento",
+        "info": "Uma linha por horário.",
+        "default": "Seg a sexta das 10 às 19\nSábado das 10 às 14"
       },
       {
         "type": "url",
         "id": "store_link",
         "label": "Link (endereço / mapa)",
-        "info": "Opcional. Use quando a loja abrir."
+        "info": "Ex.: link do Google Maps."
       }
     ]
   },
