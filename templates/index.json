@@ -46,7 +46,7 @@
             "heading": "Icons",
             "link_label": "SHOP",
             "link": "shopify://collections/all",
-            "alignment": "left",
+            "alignment": "center",
             "text_color": "#ffffff",
             "overlay": 0
           }
@@ -243,6 +243,31 @@
         "padding_top_mobile": 56,
         "padding_bottom_mobile": 80
       }
+    },
+    "1792456469a5ad72c7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a6d9933_rkCzMJ": {
+          "type": "ai_gen_block_a6d9933",
+          "settings": {
+            "video": "shopify://files/videos/LYSS 1ºPostagem - Stories completo.mov",
+            "heading": "",
+            "desktop_width": 680,
+            "desktop_width_percent": 100,
+            "background_color": "#ffffff",
+            "text_color": "#453536",
+            "button_color": "#453536",
+            "button_text_color": "#ffffff",
+            "close_background": "#453536",
+            "close_text_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a6d9933_rkCzMJ"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -250,6 +275,7 @@
     "best_sellers",
     "elas_usam",
     "banners",
-    "editorial"
+    "editorial",
+    "1792456469a5ad72c7"
   ]
 }
