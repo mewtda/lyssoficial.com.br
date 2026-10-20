@@ -3340,10 +3340,16 @@ details > summary::-webkit-details-marker {
 
 .elas-usam__heading {
   font-family: var(--font-heading);
-  font-size: clamp(48px, 13vw, 132px);
+  font-size: var(--heading-min, 48px);
   font-weight: 300;
   line-height: 0.9;
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .elas-usam__heading {
+    font-size: min(var(--heading-max, 132px), 13vw);
+  }
 }
 
 .elas-usam__heading em {

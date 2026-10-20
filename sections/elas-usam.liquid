@@ -12,7 +12,7 @@
       {%- if section.settings.eyebrow != blank -%}
         <p class="elas-usam__eyebrow caption">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      <h2 class="elas-usam__heading">
+      <h2 class="elas-usam__heading" style="--heading-min: {{ section.settings.heading_size_mobile }}px; --heading-max: {{ section.settings.heading_size }}px;">
         {%- assign words = section.settings.heading | split: ' ' -%}
         {%- for word in words -%}
           {%- if forloop.last and words.size > 1 -%}
@@ -206,6 +206,26 @@
       "label": "Título",
       "info": "A última palavra fica em itálico.",
       "default": "Elas Usam"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Tamanho do título (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 132
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Tamanho do título (celular)",
+      "min": 24,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 48
     },
     {
       "type": "richtext",
