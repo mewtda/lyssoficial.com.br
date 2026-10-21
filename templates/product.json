@@ -43,6 +43,11 @@
       ],
       "settings": {
         "show_dynamic_checkout": true,
+        "desktop_layout": "grid",
+        "gallery_width": 60,
+        "fit_screen": true,
+        "zoom_lightbox": true,
+        "zoom_hover": false,
         "video_metafield": "custom.product"
       }
     },
