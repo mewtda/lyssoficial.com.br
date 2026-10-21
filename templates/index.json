@@ -59,6 +59,7 @@
         "s3"
       ],
       "settings": {
+        "full_height_mobile": true,
         "height_mobile": 500,
         "autoplay": false,
         "autoplay_speed": 6
@@ -75,6 +76,8 @@
         "heading": "em alta",
         "heading_style": "h3",
         "collection": "all",
+        "heading_2": "Acessórios para cabelo",
+        "collection_2": "acessorioscabelo",
         "products_to_show": 12,
         "layout": "slider",
         "columns_desktop": 4,
