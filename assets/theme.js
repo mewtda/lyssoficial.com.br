@@ -590,7 +590,11 @@
       if (variant.featured_media && gallery?.goTo) {
         const slides = $$('[data-slide]', gallery);
         const index = slides.findIndex((slide) => slide.dataset.mediaId === String(variant.featured_media.id));
-        if (index >= 0) gallery.goTo(index);
+        const track = $('[data-slider-track]', gallery);
+        // Grid layouts on desktop don't scroll sideways, so bring the image into view instead
+        if (index >= 0 && track && getComputedStyle(track).display === 'grid') {
+          slides[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else if (index >= 0) gallery.goTo(index);
       }
 
       try {
@@ -620,6 +624,128 @@
       } finally {
         button.classList.remove('is-loading');
       }
+    });
+  };
+
+  const initProductZoom = (root) => {
+    const gallery = $('[data-product-gallery]', root);
+    if (!gallery || gallery.dataset.zoomReady) return;
+    gallery.dataset.zoomReady = 'true';
+    const items = $$('[data-zoom-src]', gallery);
+    if (!items.length) return;
+
+    // Magnifier that follows the mouse
+    if (root.classList.contains('product--hover-zoom')) {
+      const canHover = window.matchMedia('(hover: hover) and (min-width: 768px)');
+      items.forEach((item) => {
+        const img = $('img', item);
+        let loaded = false;
+        item.addEventListener('mouseenter', () => {
+          if (!canHover.matches) return;
+          if (!loaded && img) {
+            img.removeAttribute('srcset');
+            img.src = item.dataset.zoomSrc;
+            loaded = true;
+          }
+          item.classList.add('is-hover-zoom');
+        });
+        item.addEventListener('mousemove', (event) => {
+          const rect = item.getBoundingClientRect();
+          item.style.setProperty('--zoom-x', `${((event.clientX - rect.left) / rect.width) * 100}%`);
+          item.style.setProperty('--zoom-y', `${((event.clientY - rect.top) / rect.height) * 100}%`);
+        });
+        item.addEventListener('mouseleave', () => item.classList.remove('is-hover-zoom'));
+      });
+    }
+
+    // Full screen view, click on the image to zoom in
+    const dialog = $('[data-zoom-dialog]', root);
+    if (!gallery.hasAttribute('data-zoom-lightbox') || !dialog) return;
+    const stage = $('[data-zoom-stage]', dialog);
+    const img = $('[data-zoom-img]', dialog);
+    const counter = $('[data-zoom-counter]', dialog);
+    const scale = 2.5;
+    let current = 0;
+    let lastFocus;
+
+    const unzoom = () => {
+      stage.classList.remove('is-zoomed');
+      img.style.width = '';
+    };
+    const show = (index) => {
+      current = (index + items.length) % items.length;
+      unzoom();
+      img.src = items[current].dataset.zoomSrc;
+      img.alt = $('img', items[current])?.alt || '';
+      if (counter) counter.textContent = `${current + 1} / ${items.length}`;
+    };
+    const zoomAt = (clientX, clientY) => {
+      const rect = img.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width;
+      const y = (clientY - rect.top) / rect.height;
+      img.style.width = `${rect.width * scale}px`;
+      stage.classList.add('is-zoomed');
+      stage.scrollLeft = x * img.offsetWidth - stage.clientWidth / 2;
+      stage.scrollTop = y * img.offsetHeight - stage.clientHeight / 2;
+    };
+    const onKey = (event) => {
+      if (event.key === 'Escape') close();
+      if (event.key === 'ArrowRight') show(current + 1);
+      if (event.key === 'ArrowLeft') show(current - 1);
+    };
+    const open = (index) => {
+      lastFocus = document.activeElement;
+      show(index);
+      dialog.hidden = false;
+      lockScroll(true);
+      document.addEventListener('keydown', onKey);
+      $('[data-zoom-close]', dialog).focus();
+    };
+    const close = () => {
+      dialog.hidden = true;
+      unzoom();
+      lockScroll(false);
+      document.removeEventListener('keydown', onKey);
+      lastFocus?.focus();
+    };
+
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => open(index));
+      item.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        open(index);
+      });
+    });
+    $('[data-zoom-close]', dialog).addEventListener('click', close);
+    $('[data-zoom-prev]', dialog)?.addEventListener('click', () => show(current - 1));
+    $('[data-zoom-next]', dialog)?.addEventListener('click', () => show(current + 1));
+
+    stage.addEventListener('click', (event) => {
+      if (stage.classList.contains('is-zoomed')) unzoom();
+      else if (event.target === img) zoomAt(event.clientX, event.clientY);
+    });
+    // With the mouse the zoomed image pans with the cursor; on touch it scrolls
+    stage.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse' || !stage.classList.contains('is-zoomed')) return;
+      const rect = stage.getBoundingClientRect();
+      stage.scrollLeft = ((event.clientX - rect.left) / rect.width) * (stage.scrollWidth - stage.clientWidth);
+      stage.scrollTop = ((event.clientY - rect.top) / rect.height) * (stage.scrollHeight - stage.clientHeight);
+    });
+
+    let touchX = null;
+    stage.addEventListener(
+      'touchstart',
+      (event) => {
+        touchX = stage.classList.contains('is-zoomed') || event.touches.length > 1 ? null : event.touches[0].clientX;
+      },
+      { passive: true }
+    );
+    stage.addEventListener('touchend', (event) => {
+      if (touchX === null || items.length < 2) return;
+      const delta = event.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(delta) > 50) show(current + (delta < 0 ? 1 : -1));
     });
   };
 
@@ -897,6 +1023,7 @@
     initCards();
     initCart();
     $$('[data-product]').forEach(initProduct);
+    $$('[data-product]').forEach(initProductZoom);
     initStoryVideo();
     initElasUsam();
     initRecommendations();
@@ -917,6 +1044,7 @@
     playHeroVideos(event.target);
     initCards(event.target);
     $$('[data-product]', event.target).forEach(initProduct);
+    $$('[data-product]', event.target).forEach(initProductZoom);
     initStoryVideo(event.target);
     initElasUsam(event.target);
     initRecommendations();

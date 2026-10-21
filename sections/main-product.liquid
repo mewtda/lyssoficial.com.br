@@ -9,9 +9,25 @@
       assign show_badge = true
     endif
   endfor
+
+  assign desktop_layout = section.settings.desktop_layout | default: 'slider'
+  assign gallery_width = section.settings.gallery_width | default: 60
+  assign image_vw = gallery_width
+  if desktop_layout == 'slider2' or desktop_layout == 'grid' or desktop_layout == 'feature'
+    assign image_vw = gallery_width | divided_by: 2
+  endif
+  assign image_sizes = '(min-width: 768px) ' | append: image_vw | append: 'vw, 100vw'
+  assign zoom_lightbox = section.settings.zoom_lightbox
+  assign zoom_hover = section.settings.zoom_hover
 -%}
 
-<div class="product" data-product data-section="{{ section.id }}" data-url="{{ product.url }}">
+<div
+  class="product product--gallery-{{ desktop_layout }}{% if section.settings.fit_screen %} product--fit-screen{% endif %}{% if zoom_hover %} product--hover-zoom{% endif %}"
+  style="--gallery-width: {{ gallery_width }}%;"
+  data-product
+  data-section="{{ section.id }}"
+  data-url="{{ product.url }}"
+>
   {%- capture top_info -%}
     <div class="product__top-info">
       {% render 'breadcrumbs' %}
@@ -24,14 +40,27 @@
 
   {{ top_info | replace: '<h1 class="product__title">', '<p class="product__title">' | replace: '</h1>', '</p>' }}
 
-  <div class="product__gallery slider" data-slider data-product-gallery>
+  <div
+    class="product__gallery slider"
+    {% if desktop_layout == 'slider2' %}style="--per-view-tablet: 2; --per-view-desktop: 2; --slider-gap-desktop: 8px;"{% endif %}
+    data-slider
+    data-product-gallery
+    {% if zoom_lightbox %}data-zoom-lightbox{% endif %}
+  >
     {%- if show_badge -%}
       <span class="product__badge">{{ settings.card_badge_label }}</span>
     {%- endif -%}
     <div class="slider__track" data-slider-track>
       {%- for media in product.media -%}
         <div class="slider__slide" data-slide data-media-id="{{ media.id }}">
-          <div class="product__media" style="--ratio: {{ media.aspect_ratio | default: 0.757 }};">
+          <div
+            class="product__media"
+            style="--ratio: {{ media.aspect_ratio | default: 0.757 }};"
+            {% if media.media_type == 'image' %}
+              {% if zoom_lightbox or zoom_hover %}data-zoom-src="{{ media | image_url: width: 2400 }}"{% endif %}
+              {% if zoom_lightbox %}role="button" tabindex="0" aria-label="Ampliar imagem {{ forloop.index }}"{% endif %}
+            {% endif %}
+          >
             {%- case media.media_type -%}
               {%- when 'image' -%}
                 {%- liquid
@@ -40,7 +69,7 @@
                     assign loading = 'eager'
                   endif
                 -%}
-                {{ media | image_url: width: 2000 | image_tag: widths: '535, 750, 1000, 1500, 2000', sizes: '(min-width: 768px) 60vw, 100vw', loading: loading, alt: media.alt }}
+                {{ media | image_url: width: 2000 | image_tag: widths: '535, 750, 1000, 1500, 2000', sizes: image_sizes, loading: loading, alt: media.alt }}
               {%- when 'video' -%}
                 {{ media | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, image_size: '1500x' }}
               {%- when 'external_video' -%}
@@ -80,6 +109,28 @@
       </div>
     {%- endif -%}
   </div>
+
+  {%- if zoom_lightbox and media_count > 0 -%}
+    <div class="zoom" role="dialog" aria-modal="true" aria-label="{{ product.title | escape }}" data-zoom-dialog hidden>
+      <div class="zoom__stage" data-zoom-stage>
+        {%- # theme-check-disable ImgWidthAndHeight -%}
+        <img alt="" data-zoom-img>
+        {%- # theme-check-enable ImgWidthAndHeight -%}
+      </div>
+      <button type="button" class="zoom__close" aria-label="{{ 'general.close' | t }}" data-zoom-close>
+        {% render 'icon', icon: 'close' %}
+      </button>
+      {%- if media_count > 1 -%}
+        <button type="button" class="zoom__arrow zoom__arrow--prev" aria-label="{{ 'general.previous' | t }}" data-zoom-prev>
+          {% render 'icon', icon: 'arrow' %}
+        </button>
+        <button type="button" class="zoom__arrow zoom__arrow--next" aria-label="{{ 'general.next' | t }}" data-zoom-next>
+          {% render 'icon', icon: 'arrow' %}
+        </button>
+        <span class="zoom__counter" data-zoom-counter></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 
   <div class="product__info">
     {{ top_info }}
@@ -263,6 +314,61 @@
       "id": "show_dynamic_checkout",
       "label": "Mostrar botões de checkout rápido",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Galeria no desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Layout das imagens",
+      "options": [
+        { "value": "slider", "label": "Carrossel – 1 imagem" },
+        { "value": "slider2", "label": "Carrossel – 2 imagens lado a lado" },
+        { "value": "grid", "label": "Grade – 2 colunas" },
+        { "value": "feature", "label": "Grade – 1 grande + 2 colunas" },
+        { "value": "stack", "label": "Coluna – imagens empilhadas" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "range",
+      "id": "gallery_width",
+      "label": "Largura da galeria",
+      "min": 35,
+      "max": 65,
+      "step": 5,
+      "unit": "%",
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "fit_screen",
+      "label": "Limitar altura da imagem à tela",
+      "info": "Nos layouts de carrossel, a imagem nunca fica mais alta que a janela.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Zoom"
+    },
+    {
+      "type": "checkbox",
+      "id": "zoom_lightbox",
+      "label": "Abrir imagem em tela cheia ao clicar",
+      "info": "Na tela cheia, clique (ou toque) na imagem para dar zoom.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "zoom_hover",
+      "label": "Zoom ao passar o mouse (desktop)",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Vídeo"
     },
     {
       "type": "text",
