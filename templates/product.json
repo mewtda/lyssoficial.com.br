@@ -47,7 +47,7 @@
         "gallery_width": 60,
         "fit_screen": true,
         "zoom_lightbox": true,
-        "zoom_hover": false,
+        "zoom_hover": true,
         "video_metafield": "custom.product"
       }
     },
