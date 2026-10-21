@@ -65,9 +65,17 @@
       <button type="button" class="slider__arrow slider__arrow--next" aria-label="{{ 'general.next' | t }}" data-slider-next>
         {% render 'icon', icon: 'arrow' %}
       </button>
-      <div class="slider__dots product__gallery-dots" data-slider-dots style="--dot-rgb: 255, 255, 255;">
+      <div class="product__thumbs" data-slider-dots>
         {%- for media in product.media -%}
-          <button type="button" class="slider__dot" aria-label="{{ 'general.slide' | t: number: forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %} data-slider-dot="{{ forloop.index0 }}"></button>
+          <button
+            type="button"
+            class="product__thumb"
+            aria-label="{{ 'general.slide' | t: number: forloop.index }}"
+            {% if forloop.first %}aria-current="true"{% endif %}
+            data-slider-dot="{{ forloop.index0 }}"
+          >
+            {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', widths: '80, 120, 160', sizes: '56px' }}
+          </button>
         {%- endfor -%}
       </div>
     {%- endif -%}
