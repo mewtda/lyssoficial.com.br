@@ -4561,7 +4561,12 @@ a.store-notice__head:hover .store-notice__label {
   }
 }
 
-/* Ocultar bolinhas dos hotspots na seção Elas Usam */
-.look__image .hotspot {
+
+/* Esconder bolinhas dos hotspots - Elas Usam */
+.look .hotspot,
+.look .hotspot__dot,
+.look .hotspot__pulse,
+.look .hotspot__index {
   display: none !important;
 }
+
