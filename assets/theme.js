@@ -113,6 +113,29 @@
     updateHeaderOffset();
     window.addEventListener('resize', updateHeaderOffset, { passive: true });
     window.addEventListener('scroll', updateHeaderOffset, { passive: true });
+
+    const header = $('[data-header-transparent]');
+    if (header) {
+      let hovered = false;
+      const updateSolid = () => {
+        const solid = window.scrollY > 10 || hovered || header.contains(document.activeElement) || document.body.classList.contains('is-locked');
+        header.classList.toggle('is-solid', solid);
+      };
+      header.addEventListener('pointerenter', (event) => {
+        if (event.pointerType !== 'mouse') return;
+        hovered = true;
+        updateSolid();
+      });
+      header.addEventListener('pointerleave', () => {
+        hovered = false;
+        updateSolid();
+      });
+      header.addEventListener('focusin', updateSolid);
+      header.addEventListener('focusout', () => setTimeout(updateSolid));
+      new MutationObserver(updateSolid).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      window.addEventListener('scroll', updateSolid, { passive: true });
+      updateSolid();
+    }
   };
 
   const initSearch = () => {
@@ -311,6 +334,18 @@
   };
 
   const initSliders = (root = document) => $$('[data-slider]', root).forEach(initSlider);
+
+  // Hero videos ship without autoplay/preload so only the one visible for the current screen size downloads
+  const playHeroVideos = (root = document) => {
+    $$('.hero__video', root).forEach((video) => {
+      if (video.offsetParent) {
+        video.muted = true;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  };
 
   const initCards = (root = document) => {
     $$('[data-card-scroller]', root).forEach((scroller) => {
@@ -814,6 +849,8 @@
     initNavScroll();
     initSearch();
     initSliders();
+    playHeroVideos();
+    desktop.addEventListener('change', () => playHeroVideos());
     initCards();
     initCart();
     $$('[data-product]').forEach(initProduct);
@@ -833,6 +870,7 @@
 
   document.addEventListener('shopify:section:load', (event) => {
     initSliders(event.target);
+    playHeroVideos(event.target);
     initCards(event.target);
     $$('[data-product]', event.target).forEach(initProduct);
     initStoryVideo(event.target);

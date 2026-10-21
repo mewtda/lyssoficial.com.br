@@ -4417,3 +4417,43 @@ a.store-notice__head:hover .store-notice__label {
     top: calc(50% - 20px);
   }
 }
+
+/* Cabeçalho transparente (página inicial): fica sobre o primeiro banner até rolar */
+.header--transparent {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.header--transparent:not(.is-solid) {
+  background-color: transparent;
+  color: var(--header-transparent-text);
+  border-bottom-color: transparent;
+}
+
+.header--transparent:not(.is-solid) .cart-count {
+  background: var(--header-transparent-text);
+  color: var(--color-text);
+}
+
+.header--transparent:not(.is-solid) .header__nav::before,
+.header--transparent:not(.is-solid) .header__nav::after {
+  opacity: 0;
+}
+
+.header__logo-img--transparent,
+.header--has-transparent-logo:not(.is-solid) .header__logo-img {
+  display: none;
+}
+
+.header--has-transparent-logo:not(.is-solid) .header__logo-img--transparent {
+  display: block;
+}
+
+.header-section:has(.header--transparent) {
+  margin-bottom: calc(-1 * var(--header-height));
+}
+
+@media (min-width: 768px) {
+  body:has(.header--transparent) .main-content > .shopify-section:first-child .hero__slide {
+    height: calc(100vh - var(--announcement-height));
+  }
+}

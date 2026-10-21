@@ -2,12 +2,18 @@
   assign menu = section.settings.menu
   assign logo_alt = section.settings.logo.alt | default: shop.name
   assign logo = section.settings.logo | default: settings.logo
+  assign transparent = false
+  if section.settings.transparent_home and request.page_type == 'index'
+    assign transparent = true
+  endif
+  assign logo_transparent = section.settings.logo_transparent
 -%}
 
 <header
-  class="header"
+  class="header{% if transparent %} header--transparent{% if logo_transparent != blank %} header--has-transparent-logo{% endif %}{% endif %}"
   data-header
-  style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width | times: 0.75 | round }}px;"
+  {% if transparent %}data-header-transparent{% endif %}
+  style="--logo-width: {{ settings.logo_width }}px; --logo-width-mobile: {{ settings.logo_width | times: 0.75 | round }}px; --header-transparent-text: {{ section.settings.transparent_text_color }};"
 >
   <div class="header__logo-wrap">
     <a href="{{ routes.root_url }}" class="header__logo">
@@ -15,7 +21,10 @@
         <h1 class="visually-hidden">{{ shop.name }}</h1>
       {%- endif -%}
       {%- if logo != blank -%}
-        {{ logo | image_url: width: 600 | image_tag: alt: logo_alt, loading: 'eager', widths: '200, 300, 400, 600', sizes: '(min-width: 768px) 200px, 120px' }}
+        {{ logo | image_url: width: 600 | image_tag: class: 'header__logo-img', alt: logo_alt, loading: 'eager', widths: '200, 300, 400, 600', sizes: '(min-width: 768px) 200px, 120px' }}
+        {%- if transparent and logo_transparent != blank -%}
+          {{ logo_transparent | image_url: width: 600 | image_tag: class: 'header__logo-img header__logo-img--transparent', alt: logo_alt, loading: 'eager', widths: '200, 300, 400, 600', sizes: '(min-width: 768px) 200px, 120px' }}
+        {%- endif -%}
       {%- else -%}
         <span class="header__logo-text">{{ shop.name }}</span>
       {%- endif -%}
@@ -179,6 +188,29 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Cabeçalho transparente"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_home",
+      "label": "Transparente na página inicial",
+      "info": "Fica por cima do primeiro banner e volta ao fundo normal ao rolar a página.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_transparent",
+      "label": "Logo (cabeçalho transparente)",
+      "info": "Versão do logo para usar sobre o banner, ex.: branca."
+    },
+    {
+      "type": "color",
+      "id": "transparent_text_color",
+      "label": "Cor dos textos e ícones (cabeçalho transparente)",
+      "default": "#ffffff"
     }
   ],
   "blocks": [

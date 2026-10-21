@@ -23,13 +23,40 @@
           class="hero__slide"
           style="--hero-text: {{ block.settings.text_color }}; --hero-overlay: {{ block.settings.overlay | divided_by: 100.0 }};"
         >
-          {%- if block.settings.video != blank -%}
-            {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false, class: 'media-cover', image_size: '1500x' }}
-          {%- elsif block.settings.image != blank -%}
+          {%- liquid
+            assign video_desktop = block.settings.video | default: block.settings.video_mobile
+            assign video_mobile = block.settings.video_mobile | default: block.settings.video
+            assign image_desktop = block.settings.image | default: block.settings.image_mobile
+            if block.settings.image != blank or block.settings.image_mobile != blank
+              assign has_image = true
+            else
+              assign has_image = false
+            endif
+            # Vídeo tem prioridade; sem vídeo daquele tamanho de tela, usa a foto (só usa o outro vídeo se não houver foto)
+            assign show_video_mobile = false
+            if block.settings.video_mobile != blank or has_image == false and video_mobile != blank
+              assign show_video_mobile = true
+            endif
+            assign show_video_desktop = false
+            if block.settings.video != blank or has_image == false and video_desktop != blank
+              assign show_video_desktop = true
+            endif
+          -%}
+
+          {%- if show_video_mobile -%}
+            {{ video_mobile | video_tag: muted: true, loop: true, playsinline: true, controls: false, preload: 'none', class: 'media-cover mobile-only hero__video', image_size: '1000x' }}
+          {%- elsif has_image -%}
             {{ mobile_image | image_url: width: 1200 | image_tag: class: 'media-cover mobile-only', sizes: '100vw', widths: '375, 535, 750, 1000, 1200', loading: loading, fetchpriority: priority, alt: block.settings.heading }}
-            {{ block.settings.image | image_url: width: 3000 | image_tag: class: 'media-cover desktop-only', sizes: '100vw', widths: '750, 1000, 1500, 2000, 2500, 3000', loading: loading, fetchpriority: priority, alt: block.settings.heading }}
           {%- else -%}
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg media-cover' }}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg media-cover mobile-only' }}
+          {%- endif -%}
+
+          {%- if show_video_desktop -%}
+            {{ video_desktop | video_tag: muted: true, loop: true, playsinline: true, controls: false, preload: 'none', class: 'media-cover desktop-only hero__video', image_size: '2000x' }}
+          {%- elsif has_image -%}
+            {{ image_desktop | image_url: width: 3000 | image_tag: class: 'media-cover desktop-only', sizes: '100vw', widths: '750, 1000, 1500, 2000, 2500, 3000', loading: loading, fetchpriority: priority, alt: block.settings.heading }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg media-cover desktop-only' }}
           {%- endif -%}
 
           <div class="hero__content {% if block.settings.alignment == 'center' %}hero__content--center{% endif %}">
@@ -115,8 +142,14 @@
         {
           "type": "video",
           "id": "video",
-          "label": "Vídeo",
-          "info": "Substitui as imagens."
+          "label": "Vídeo (desktop)",
+          "info": "Tem prioridade sobre a imagem do desktop."
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "Vídeo (celular)",
+          "info": "Tem prioridade sobre a imagem do celular."
         },
         {
           "type": "text",
