@@ -2402,8 +2402,9 @@ details > summary::-webkit-details-marker {
   height: 32px !important;
   padding: 0 !important;
   border-radius: 50%;
-  background: var(--swatch);
-  background-size: cover;
+  background: var(--swatch) !important;
+  background-size: cover !important;
+  opacity: 1 !important;
 }
 
 .variant-picker__values input:checked + .swatch-label {
