@@ -6,7 +6,7 @@
   if section.settings.transparent_home and request.page_type == 'index'
     assign transparent = true
   endif
-  assign logo_transparent = section.settings.logo_transparent
+  assign logo_transparent = section.settings.logo_transparent | default: settings.logo_transparent
 -%}
 
 <header
@@ -203,8 +203,8 @@
     {
       "type": "image_picker",
       "id": "logo_transparent",
-      "label": "Logo (cabeçalho transparente)",
-      "info": "Versão do logo para usar sobre o banner, ex.: branca."
+      "label": "Logo claro (cabeçalho transparente)",
+      "info": "Se vazio, usa o logo claro das configurações do tema."
     },
     {
       "type": "color",

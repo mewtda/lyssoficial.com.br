@@ -13,7 +13,13 @@
       {
         "type": "image_picker",
         "id": "logo",
-        "label": "Logo"
+        "label": "Logo escuro (fundo branco)"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_transparent",
+        "label": "Logo claro (cabeçalho transparente)",
+        "info": "Usado na página inicial enquanto o cabeçalho está transparente sobre o banner."
       },
       {
         "type": "range",
