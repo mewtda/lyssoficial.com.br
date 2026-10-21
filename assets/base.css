@@ -4560,3 +4560,8 @@ a.store-notice__head:hover .store-notice__label {
     left: 88px;
   }
 }
+
+/* Ocultar bolinhas dos hotspots na seção Elas Usam */
+.look__image .hotspot {
+  display: none !important;
+}
