@@ -16,6 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/Retrato_editorial_entre_tulipas_e_margaridas.png",
+            "video_mobile": "shopify://files/videos/IMG_7109.MOV",
             "subheading": "NEW IN",
             "heading": "Nova coleção",
             "link_label": "Descobrir",
@@ -66,9 +67,9 @@
     "best_sellers": {
       "type": "featured-collection",
       "custom_css": [
-        ".card__row{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important}",
-        ".card__row .price{margin:0!important}",
-        "@media(max-width:749px){.card__row{flex-direction:column!important;align-items:flex-start!important;gap:4px!important}.card__row .price{margin:0!important}}"
+        ".card__row {display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;}",
+        ".card__row .price {margin: 0 !important;}",
+        "@media (max-width: 749px) {.card__row {flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; } .card__row .price {margin: 0 !important; }}"
       ],
       "settings": {
         "heading": "em alta",
