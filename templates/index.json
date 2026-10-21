@@ -60,7 +60,7 @@
       ],
       "settings": {
         "height_mobile": 500,
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 6
       }
     },
