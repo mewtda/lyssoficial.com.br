@@ -4535,7 +4535,7 @@ a.store-notice__head:hover .store-notice__label {
 }
 
 .product__thumb[aria-current='true'] {
-  border-color: #fff;
+  border-color: var(--color-text);
 }
 
 @media (min-width: 768px) {
