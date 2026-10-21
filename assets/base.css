@@ -2407,7 +2407,9 @@ details > summary::-webkit-details-marker {
 }
 
 .variant-picker__values input:checked + .swatch-label {
-  background: var(--swatch);
+  background: var(--swatch) !important;
+  background-size: cover;
+  opacity: 1 !important;
   box-shadow: 0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-text);
 }
 
