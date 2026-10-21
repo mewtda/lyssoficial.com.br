@@ -4540,7 +4540,7 @@ a.store-notice__head:hover .store-notice__label {
 
 @media (min-width: 768px) {
   .product__thumbs {
-    top: 50%;
+    top: 24px;
     bottom: auto;
     left: 24px;
     flex-direction: column;
@@ -4549,7 +4549,6 @@ a.store-notice__head:hover .store-notice__label {
     max-height: calc(100% - 48px);
     overflow-x: hidden;
     overflow-y: auto;
-    transform: translateY(-50%);
   }
 
   .product__thumb {
