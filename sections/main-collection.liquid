@@ -86,19 +86,30 @@
 
   {%- paginate collection.products by section.settings.products_per_page -%}
     <div class="product-grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
-      {%- for product in collection.products -%}
-        {%- liquid
-          assign eager = false
-          if forloop.index <= 3
-            assign eager = true
-          endif
-        -%}
-        {% render 'product-card', product: product, eager: eager %}
-      {%- else -%}
-        <div class="product-grid__empty">
-          <p class="h5">{{ 'collections.empty' | t }}</p>
-        </div>
-      {%- endfor -%}
+
+{%- assign available_products = collection.products | where: 'available', true -%}
+{%- assign sold_out_products = collection.products | where: 'available', false -%}
+
+{%- for product in available_products -%}
+  {%- liquid
+    assign eager = false
+    if forloop.index <= 3
+      assign eager = true
+    endif
+  -%}
+  {% render 'product-card', product: product, eager: eager %}
+{%- endfor -%}
+
+{%- for product in sold_out_products -%}
+  {% render 'product-card', product: product, eager: false %}
+{%- endfor -%}
+
+{%- if collection.products.size == 0 -%}
+  <div class="product-grid__empty">
+    <p class="h5">{{ 'collections.empty' | t }}</p>
+  </div>
+{%- endif -%}
+
     </div>
 
     {%- if paginate.pages > 1 -%}
