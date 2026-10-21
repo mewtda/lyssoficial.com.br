@@ -355,11 +355,37 @@
     $$('.hero__video', root).forEach((video) => {
       if (video.offsetParent) {
         video.muted = true;
-        video.play().catch(() => {});
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.preload = 'auto';
+        if (video.paused) video.play().catch(() => {});
+        if (!video.dataset.heroReady) {
+          video.dataset.heroReady = 'true';
+          // Mobile browsers sometimes reject the first play(); try again once the video can play
+          ['loadedmetadata', 'canplay'].forEach((type) =>
+            video.addEventListener(type, () => {
+              if (video.paused && video.offsetParent) video.play().catch(() => {});
+            })
+          );
+        }
       } else {
         video.pause();
       }
     });
+  };
+
+  // Retry when the page comes back into view or on the first touch/scroll, which unlocks playback on iOS
+  const initHeroVideoRetries = () => {
+    const retry = () => playHeroVideos();
+    window.addEventListener('pageshow', retry);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) retry();
+    });
+    ['touchstart', 'scroll', 'click'].forEach((type) =>
+      window.addEventListener(type, retry, { once: true, passive: true })
+    );
   };
 
   const initCards = (root = document) => {
@@ -866,6 +892,7 @@
     initSliders();
     initTabs();
     playHeroVideos();
+    initHeroVideoRetries();
     desktop.addEventListener('change', () => playHeroVideos());
     initCards();
     initCart();
