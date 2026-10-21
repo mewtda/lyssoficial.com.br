@@ -43,7 +43,7 @@
       ],
       "settings": {
         "show_dynamic_checkout": true,
-        "desktop_layout": "grid",
+        "desktop_layout": "slider",
         "gallery_width": 60,
         "fit_screen": true,
         "zoom_lightbox": true,
