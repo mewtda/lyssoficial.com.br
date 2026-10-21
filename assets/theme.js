@@ -335,6 +335,21 @@
 
   const initSliders = (root = document) => $$('[data-slider]', root).forEach(initSlider);
 
+  const initTabs = (root = document) => {
+    $$('[data-tabs]', root).forEach((container) => {
+      const tabs = $$('[data-tab]', container);
+      const panels = $$('[data-tab-panel]', container);
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach((item, i) => item.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+          panels.forEach((panel, i) => (panel.hidden = i !== index));
+          // Sliders measure themselves, so refresh them once the panel is visible
+          window.dispatchEvent(new Event('resize'));
+        });
+      });
+    });
+  };
+
   // Hero videos ship without autoplay/preload so only the one visible for the current screen size downloads
   const playHeroVideos = (root = document) => {
     $$('.hero__video', root).forEach((video) => {
@@ -849,6 +864,7 @@
     initNavScroll();
     initSearch();
     initSliders();
+    initTabs();
     playHeroVideos();
     desktop.addEventListener('change', () => playHeroVideos());
     initCards();
@@ -870,6 +886,7 @@
 
   document.addEventListener('shopify:section:load', (event) => {
     initSliders(event.target);
+    initTabs(event.target);
     playHeroVideos(event.target);
     initCards(event.target);
     $$('[data-product]', event.target).forEach(initProduct);

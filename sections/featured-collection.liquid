@@ -1,67 +1,115 @@
 {%- liquid
-  assign collection = section.settings.collection
   assign limit = section.settings.products_to_show
+  assign has_tabs = false
+  if section.settings.heading_2 != blank
+    assign has_tabs = true
+  endif
+  assign tab_count = 1
+  if has_tabs
+    assign tab_count = 2
+  endif
 -%}
 
 <div
   class="featured-products section-padding"
   style="--pt-mobile: {{ section.settings.padding_top_mobile }}px; --pb-mobile: {{ section.settings.padding_bottom_mobile }}px; --pt-desktop: {{ section.settings.padding_top }}px; --pb-desktop: {{ section.settings.padding_bottom }}px;"
+  {% if has_tabs %}data-tabs{% endif %}
 >
-  {%- if section.settings.heading != blank -%}
+  {%- if has_tabs -%}
+    <div class="featured-products__tabs featured-products__heading page-width" role="tablist">
+      {%- for i in (1..2) -%}
+        {%- liquid
+          if i == 1
+            assign label = section.settings.heading
+          else
+            assign label = section.settings.heading_2
+          endif
+        -%}
+        <button
+          type="button"
+          class="{{ section.settings.heading_style }} featured-products__tab"
+          role="tab"
+          id="Tab-{{ section.id }}-{{ i }}"
+          aria-controls="TabPanel-{{ section.id }}-{{ i }}"
+          aria-selected="{% if i == 1 %}true{% else %}false{% endif %}"
+          data-tab
+        >
+          {{- label -}}
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- elsif section.settings.heading != blank -%}
     <h2 class="{{ section.settings.heading_style }} featured-products__heading page-width">{{ section.settings.heading }}</h2>
   {%- endif -%}
 
-  <div class="page-width">
-    {%- if section.settings.layout == 'slider' -%}
-      <div
-        class="slider"
-        data-slider
-        data-loop
-        style="--per-view-mobile: 2; --per-view-tablet: 3; --per-view-desktop: {{ section.settings.columns_desktop }}; --slider-gap-mobile: 4px; --slider-gap-desktop: 4px;"
-      >
-        <div class="slider__track" data-slider-track>
-          {%- if collection != blank and collection.products_count > 0 -%}
-            {%- for product in collection.products limit: limit -%}
-              <div class="slider__slide" data-slide>
-                {% render 'product-card', product: product %}
-              </div>
-            {%- endfor -%}
-          {%- else -%}
-            {%- for i in (1..4) -%}
-              <div class="slider__slide" data-slide>
-                {% render 'product-card' %}
-              </div>
-            {%- endfor -%}
-          {%- endif -%}
-        </div>
-        <button type="button" class="slider__arrow slider__arrow--prev" aria-label="{{ 'general.previous' | t }}" data-slider-prev>
-          {% render 'icon', icon: 'arrow' %}
-        </button>
-        <button type="button" class="slider__arrow slider__arrow--next" aria-label="{{ 'general.next' | t }}" data-slider-next>
-          {% render 'icon', icon: 'arrow' %}
-        </button>
-        <div class="slider__stripes" data-slider-stripes hidden></div>
-      </div>
-    {%- else -%}
-      <div class="featured-products__grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
-        {%- if collection != blank and collection.products_count > 0 -%}
-          {%- for product in collection.products limit: limit -%}
-            {% render 'product-card', product: product %}
-          {%- endfor -%}
+  {%- for i in (1..tab_count) -%}
+    {%- liquid
+      if i == 1
+        assign collection = section.settings.collection
+      else
+        assign collection = section.settings.collection_2
+      endif
+    -%}
+    <div
+      class="featured-products__panel"
+      {% if has_tabs %}
+        role="tabpanel" id="TabPanel-{{ section.id }}-{{ i }}" aria-labelledby="Tab-{{ section.id }}-{{ i }}" data-tab-panel
+        {% unless i == 1 %}hidden{% endunless %}
+      {% endif %}
+    >
+      <div class="page-width">
+        {%- if section.settings.layout == 'slider' -%}
+          <div
+            class="slider"
+            data-slider
+            data-loop
+            style="--per-view-mobile: 2; --per-view-tablet: 3; --per-view-desktop: {{ section.settings.columns_desktop }}; --slider-gap-mobile: 4px; --slider-gap-desktop: 4px;"
+          >
+            <div class="slider__track" data-slider-track>
+              {%- if collection != blank and collection.products_count > 0 -%}
+                {%- for product in collection.products limit: limit -%}
+                  <div class="slider__slide" data-slide>
+                    {% render 'product-card', product: product %}
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for n in (1..4) -%}
+                  <div class="slider__slide" data-slide>
+                    {% render 'product-card' %}
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+            <button type="button" class="slider__arrow slider__arrow--prev" aria-label="{{ 'general.previous' | t }}" data-slider-prev>
+              {% render 'icon', icon: 'arrow' %}
+            </button>
+            <button type="button" class="slider__arrow slider__arrow--next" aria-label="{{ 'general.next' | t }}" data-slider-next>
+              {% render 'icon', icon: 'arrow' %}
+            </button>
+            <div class="slider__stripes" data-slider-stripes hidden></div>
+          </div>
         {%- else -%}
-          {%- for i in (1..4) -%}
-            {% render 'product-card' %}
-          {%- endfor -%}
+          <div class="featured-products__grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
+            {%- if collection != blank and collection.products_count > 0 -%}
+              {%- for product in collection.products limit: limit -%}
+                {% render 'product-card', product: product %}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for n in (1..4) -%}
+                {% render 'product-card' %}
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
         {%- endif -%}
       </div>
-    {%- endif -%}
-  </div>
 
-  {%- if section.settings.show_view_all and collection != blank -%}
-    <div class="featured-products__footer page-width">
-      <a href="{{ collection.url }}" class="button button--secondary">{{ 'sections.featured_collection.view_all' | t }}</a>
+      {%- if section.settings.show_view_all and collection != blank -%}
+        <div class="featured-products__footer page-width">
+          <a href="{{ collection.url }}" class="button button--secondary">{{ 'sections.featured_collection.view_all' | t }}</a>
+        </div>
+      {%- endif -%}
     </div>
-  {%- endif -%}
+  {%- endfor -%}
 </div>
 
 {% schema %}
@@ -72,7 +120,7 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Título",
+      "label": "Título (aba 1)",
       "default": "em alta"
     },
     {
@@ -88,7 +136,26 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Coleção"
+      "label": "Coleção (aba 1)"
+    },
+    {
+      "type": "header",
+      "content": "Aba 2",
+      "info": "Preencha o título para mostrar as duas abas."
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Título (aba 2)"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Coleção (aba 2)"
+    },
+    {
+      "type": "header",
+      "content": "Exibição"
     },
     {
       "type": "range",

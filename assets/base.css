@@ -4470,3 +4470,26 @@ a.store-notice__head:hover .store-notice__label {
     height: calc(100svh - var(--announcement-height));
   }
 }
+
+/* Abas da seção de produtos em destaque */
+.featured-products__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.featured-products__tab {
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.featured-products__tab:hover,
+.featured-products__tab[aria-selected='true'] {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .featured-products__tabs {
+    gap: 8px 40px;
+  }
+}
