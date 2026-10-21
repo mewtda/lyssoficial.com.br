@@ -1226,8 +1226,9 @@ details > summary::-webkit-details-marker {
 
 .card__row {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
 }
 
 .card__title {
@@ -1241,7 +1242,7 @@ details > summary::-webkit-details-marker {
 .card .price {
   flex-shrink: 0;
   font-size: 13px;
-  margin-top: 0;
+  margin: 0;
 }
 
 .card__mobile-dots {
@@ -4539,13 +4540,24 @@ a.store-notice__head:hover .store-notice__label {
 
 @media (min-width: 768px) {
   .product__thumbs {
+    top: 50%;
+    bottom: auto;
     left: 24px;
-    bottom: 24px;
+    flex-direction: column;
     gap: 8px;
-    max-width: calc(100% - 48px);
+    max-width: none;
+    max-height: calc(100% - 48px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translateY(-50%);
   }
 
   .product__thumb {
     width: 56px;
+  }
+
+  /* Seta "anterior" ao lado da coluna de miniaturas */
+  .product__gallery:has(.product__thumbs) .slider__arrow--prev {
+    left: 88px;
   }
 }
