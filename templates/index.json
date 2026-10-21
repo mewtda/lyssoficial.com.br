@@ -244,25 +244,17 @@
     "editorial": {
       "type": "editorial-video",
       "blocks": {
-        "p2": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/aaaaa.jpg"
-          }
-        },
-        "p3": {
-          "type": "photo",
-          "settings": {}
-        },
-        "p4": {
+        "p7": {
           "type": "photo",
           "settings": {
             "image": "shopify://shop_images/123_1ffdfc35-5bc1-404e-90a3-e7c3f2917137.jpg"
           }
         },
-        "p5": {
+        "p2": {
           "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/aaaaa.jpg"
+          }
         },
         "p6": {
           "type": "photo",
@@ -270,35 +262,18 @@
             "image": "shopify://shop_images/aa.jpg"
           }
         },
-        "p7": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/123_1ffdfc35-5bc1-404e-90a3-e7c3f2917137.jpg"
-          }
-        },
         "p8": {
           "type": "photo",
-          "settings": {}
-        },
-        "p9": {
-          "type": "photo",
-          "settings": {}
-        },
-        "p10": {
-          "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/6218e3f2-4116-49dd-9b92-988db8b52184.jpg"
+          }
         }
       },
       "block_order": [
-        "p2",
-        "p3",
-        "p4",
-        "p5",
-        "p6",
         "p7",
-        "p8",
-        "p9",
-        "p10"
+        "p2",
+        "p6",
+        "p8"
       ],
       "settings": {
         "layout": "mosaic",
