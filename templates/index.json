@@ -244,12 +244,6 @@
     "editorial": {
       "type": "editorial-video",
       "blocks": {
-        "p1": {
-          "type": "photo",
-          "settings": {
-            "image": "shopify://shop_images/6218e3f2-4116-49dd-9b92-988db8b52184.jpg"
-          }
-        },
         "p2": {
           "type": "photo",
           "settings": {
@@ -278,7 +272,9 @@
         },
         "p7": {
           "type": "photo",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/123_1ffdfc35-5bc1-404e-90a3-e7c3f2917137.jpg"
+          }
         },
         "p8": {
           "type": "photo",
@@ -294,7 +290,6 @@
         }
       },
       "block_order": [
-        "p1",
         "p2",
         "p3",
         "p4",
