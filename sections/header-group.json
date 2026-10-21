@@ -90,7 +90,9 @@
         "mega_menu_VEC4qQ"
       ],
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "transparent_home": true,
+        "transparent_text_color": "#ffffff"
       }
     }
   },
