@@ -4457,3 +4457,16 @@ a.store-notice__head:hover .store-notice__label {
     height: calc(100vh - var(--announcement-height));
   }
 }
+
+/* Slideshow em tela cheia no celular */
+@media (max-width: 767px) {
+  .hero--full-mobile .hero__slide {
+    height: calc(100vh - var(--full-header-height));
+    height: calc(100svh - var(--full-header-height));
+  }
+
+  body:has(.header--transparent) .main-content > .shopify-section:first-child .hero--full-mobile .hero__slide {
+    height: calc(100vh - var(--announcement-height));
+    height: calc(100svh - var(--announcement-height));
+  }
+}

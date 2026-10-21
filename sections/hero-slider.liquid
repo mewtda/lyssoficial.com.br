@@ -1,7 +1,7 @@
 {%- assign slide_count = section.blocks.size -%}
 
 <div
-  class="hero slider"
+  class="hero slider{% if section.settings.full_height_mobile %} hero--full-mobile{% endif %}"
   data-slider
   data-loop
   {% if section.settings.autoplay and slide_count > 1 %}data-autoplay="{{ section.settings.autoplay_speed | times: 1000 }}"{% endif %}
@@ -98,8 +98,15 @@
   "tag": "section",
   "settings": [
     {
+      "type": "checkbox",
+      "id": "full_height_mobile",
+      "label": "Tela cheia no celular",
+      "default": true
+    },
+    {
       "type": "range",
       "id": "height_mobile",
+      "info": "Usada quando a tela cheia no celular está desligada.",
       "label": "Altura no celular",
       "min": 350,
       "max": 800,
