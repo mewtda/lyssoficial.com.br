@@ -15,6 +15,12 @@
   {%- endif -%}
 {%- endfor -%}
 
+{%- capture view_all -%}
+  {%- if link.url != blank and link.url != '#' -%}
+    <a href="{{ link.url }}" class="mega-menu__view-all desktop-only">{{ 'sections.header.view_all' | t }}</a>
+  {%- endif -%}
+{%- endcapture -%}
+
 {%- if has_grandchildren -%}
   {%- for child in link.links -%}
     <div class="mega-menu__links">
@@ -24,6 +30,7 @@
           <li><a href="{{ grandchild.url }}" class="link-animation">{{ grandchild.title }}</a></li>
         {%- endfor -%}
       </ul>
+      {%- if forloop.first -%}{{ view_all }}{%- endif -%}
     </div>
   {%- endfor -%}
 {%- else -%}
@@ -34,6 +41,7 @@
         <li><a href="{{ child.url }}" class="link-animation"{% if child.active %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
       {%- endfor -%}
     </ul>
+    {{ view_all }}
   </div>
 {%- endif -%}
 

@@ -760,6 +760,14 @@ details > summary::-webkit-details-marker {
   font-size: 14px;
 }
 
+.mega-menu__view-all {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .mega-menu__card {
   display: flex;
   flex-direction: column;
