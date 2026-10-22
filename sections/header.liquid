@@ -126,6 +126,12 @@
               {% render 'icon', icon: 'chevron' %}
             </summary>
             <div class="mobile-menu__panel">
+              {%- if link.url != blank and link.url != '#' -%}
+                <a href="{{ link.url }}" class="mobile-menu__view-all">
+                  <span>{{ 'sections.header.view_all' | t }}</span>
+                  {% render 'icon', icon: 'chevron' %}
+                </a>
+              {%- endif -%}
               {% render 'mega-menu-content', link: link, promo: promo %}
             </div>
           </details>
