@@ -24,7 +24,7 @@
     "color_button": "#453536",
     "color_button_text": "#ffffff",
     "color_sale": "#896c4c",
-    "free_shipping_threshold": 300,
+    "free_shipping_threshold": 600,
     "card_show_second_image": true,
     "card_badge_tag": "new",
     "card_badge_label": "NEW",
