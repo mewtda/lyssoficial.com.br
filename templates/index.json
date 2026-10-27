@@ -91,6 +91,63 @@
     "elas_usam": {
       "type": "elas-usam",
       "blocks": {
+        "look_yQazwr": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2517_JPG.jpg",
+            "name": "",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
+        },
+        "look_pmfyXb": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2512_JPG.jpg",
+            "name": "",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
+        },
+        "look_LimnCA": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_2510_JPG.jpg",
+            "name": "",
+            "product_1": "",
+            "x_1": 40,
+            "y_1": 30,
+            "product_2": "",
+            "x_2": 62,
+            "y_2": 58,
+            "product_3": "",
+            "x_3": 30,
+            "y_3": 70,
+            "product_4": "",
+            "x_4": 70,
+            "y_4": 20
+          }
+        },
         "l1": {
           "type": "look",
           "settings": {
@@ -169,6 +226,9 @@
         }
       },
       "block_order": [
+        "look_yQazwr",
+        "look_pmfyXb",
+        "look_LimnCA",
         "l1",
         "l2",
         "l3",
