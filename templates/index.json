@@ -62,8 +62,8 @@
       "settings": {
         "full_height_mobile": true,
         "height_mobile": 500,
-        "autoplay": false,
-        "autoplay_speed": 6
+        "autoplay": true,
+        "autoplay_speed": 10
       }
     },
     "best_sellers": {
