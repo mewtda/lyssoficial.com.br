@@ -362,9 +362,9 @@
           "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
           "settings": {
             "title": "SIGA A LYSS NO INSTAGRAM",
-            "title_color": "#EAE7E3",
+            "title_color": "#000000",
             "title_size_v2": 0,
-            "alignment": "center",
+            "alignment": "left",
             "instafeed_margin_top": 0,
             "instafeed_margin_bottom": 0,
             "instafeed_margin_sides": 0,
