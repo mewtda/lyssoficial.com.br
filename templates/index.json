@@ -354,6 +354,33 @@
     "1792456469a5ad72c7": {
       "type": "_blocks",
       "settings": {}
+    },
+    "17932157361e5e98ac": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_pjiWpN": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "title_size_v2": 0,
+            "alignment": "center",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_pjiWpN"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -362,6 +389,7 @@
     "elas_usam",
     "banners",
     "editorial",
-    "1792456469a5ad72c7"
+    "1792456469a5ad72c7",
+    "17932157361e5e98ac"
   ]
 }
