@@ -311,14 +311,14 @@
             "title": "SIGA A LYSS NO INSTAGRAM",
             "title_color": "#000000",
             "title_size_v2": 0,
-            "alignment": "left",
+            "alignment": "center",
             "instafeed_margin_top": 0,
             "instafeed_margin_bottom": 0,
             "instafeed_margin_sides": 0,
             "show_instagram_link": true,
             "link_alignment": "center",
             "link_color": "#000000",
-            "background_color": "#FFFFFF",
+            "background_color": "#ffffff",
             "feed_id": "",
             "html_area": ""
           }
