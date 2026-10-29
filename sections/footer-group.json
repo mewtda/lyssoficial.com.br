@@ -68,7 +68,7 @@
           "type": "text",
           "settings": {
             "heading": "Atendimento",
-            "text": "<p>Segunda a sexta, das 9h às 18h.</p>"
+            "text": "<p>Seg a sexta das 10 ás 19<br/>Sábado das 10 ás 14</p>"
           }
         },
         "m3": {
