@@ -102,7 +102,7 @@
       "settings": {
         "fallback": "ifl-look-1.jpg",
         "reverse": false,
-        "number": "01",
+        "number": "",
         "title": "Um olhar para o",
         "title_italic": "Art Déco",
         "text": "<p>Formas geométricas, pedras naturais e brilho dão vida a uma seleção inspirada na elegância do Art Déco. Todas em dourado, as peças combinam linhas marcantes e detalhes sofisticados para trazer personalidade às suas produções.</p>",
@@ -142,7 +142,7 @@
       "settings": {
         "fallback": "ifl-look-2.jpg",
         "reverse": true,
-        "number": "02",
+        "number": "",
         "title": "Elegância",
         "title_italic": "em contraste",
         "text": "<p>O dourado ganha protagonismo em contraste com o preto, criando uma combinação marcante e sofisticada. Colares em camadas, pulseiras imponentes e detalhes refinados traduzem a elegância do Art Déco. Peças que valorizam cada produção com personalidade e um toque de glamour.</p>",
@@ -182,7 +182,7 @@
       "settings": {
         "fallback": "ifl-look-3.jpg",
         "reverse": false,
-        "number": "03",
+        "number": "",
         "title": "A beleza",
         "title_italic": "dos detalhes",
         "text": "<p>Formas delicadas, brilho sutil e detalhes sofisticados dão vida a uma seleção que combina elegância e versatilidade. Insadas na beleza dos pequenos detalhes, as joias trazem leveza e personalidade para suas produções, acompanhando você dos momentos cotidianos às ocasiões mais especiais</p>",
