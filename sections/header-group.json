@@ -49,10 +49,14 @@
             "content_type": "products",
             "featured_heading": "Destaques",
             "featured_size": "medium",
-            "products": [],
-            "collections": [
-              "brincos"
+            "products": [
+              "brinco-noir",
+              "brinco-mini-elos",
+              "brinco-lauren",
+              "brinco-lamour-1",
+              "brinco-lamour"
             ],
+            "collections": [],
             "label_1": "",
             "link_1": "",
             "label_2": "",
