@@ -1,0 +1,45 @@
+{% render 'ifl-assets' %}
+{%- capture ifl_marq_item -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.style == 'small' -%}<em>{{ block.settings.text }}</em>{%- else -%}{{ block.settings.text }} {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="ifl ifl-marq" style="--ifl-marq-speed: {{ section.settings.speed }}s;" aria-hidden="true">
+  <div class="ifl-marq__inner">
+    {%- for i in (1..8) -%}{{ ifl_marq_item }}{%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "IF · Faixa animada",
+  "tag": "div",
+  "class": "ifl-section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Duração do ciclo", "min": 10, "max": 80, "step": 2, "unit": "s", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Texto",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Isabella Fiorentino × Lyss" },
+        { "type": "select", "id": "style", "label": "Estilo", "default": "serif", "options": [
+          { "value": "serif", "label": "Serifado itálico" },
+          { "value": "small", "label": "Caixa alta pequena" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "IF · Faixa animada",
+    "blocks": [
+      { "type": "item", "settings": { "text": "Isabella Fiorentino × Lyss", "style": "serif" } },
+      { "type": "item", "settings": { "text": "Edição limitada", "style": "small" } },
+      { "type": "item", "settings": { "text": "O lookbook", "style": "serif" } },
+      { "type": "item", "settings": { "text": "Collab especial", "style": "small" } }
+    ]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+{% render 'ifl-assets' %}
+<section class="ifl ifl-hz" data-ifl-hz>
+  <div class="ifl-hz__stick">
+    <div class="ifl-hz__track" data-ifl-track>
+      <div class="ifl-hz__intro">
+        {%- if section.settings.eyebrow != blank -%}<p class="ifl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2>{{ section.settings.heading }}{% if section.settings.heading_italic != blank %} <em>{{ section.settings.heading_italic }}</em>{% endif %}</h2>
+      </div>
+      {%- for block in section.blocks -%}
+        {%- assign p = block.settings.product -%}
+        {%- assign caption = block.settings.caption -%}
+        {%- if caption == blank and p != blank -%}{%- assign caption = p.title -%}{%- endif -%}
+        {%- if p != blank -%}
+          <a class="ifl-hz__card" href="{{ p.url }}" {{ block.shopify_attributes }}>
+            {% render 'ifl-image', image: block.settings.image, fallback: block.settings.fallback, sizes: '(min-width: 821px) 30vw, 72vw', alt: caption %}
+            <span class="ifl-hz__cap ifl-eyebrow">{{ caption | escape }}</span>
+          </a>
+        {%- else -%}
+          <figure class="ifl-hz__card" {{ block.shopify_attributes }}>
+            {% render 'ifl-image', image: block.settings.image, fallback: block.settings.fallback, sizes: '(min-width: 821px) 30vw, 72vw', alt: caption %}
+            {%- if caption != blank -%}<figcaption class="ifl-eyebrow">{{ caption | escape }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IF · Nos detalhes",
+  "tag": "div",
+  "class": "ifl-section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo", "default": "Nos detalhes" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Feito para ser" },
+    { "type": "text", "id": "heading_italic", "label": "Título — parte em itálico dourado", "default": "visto de perto" }
+  ],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Foto de detalhe",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto" },
+        { "type": "text", "id": "fallback", "label": "Foto do tema (arquivo)" },
+        { "type": "product", "id": "product", "label": "Produto (opcional)", "info": "A foto vira link para o produto." },
+        { "type": "text", "id": "caption", "label": "Legenda", "info": "Vazia = nome do produto." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "IF · Nos detalhes", "blocks": [{ "type": "detail" }, { "type": "detail" }, { "type": "detail" }] }]
+}
+{% endschema %}

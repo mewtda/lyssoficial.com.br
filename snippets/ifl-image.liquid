@@ -1,0 +1,28 @@
+{% doc %}
+  Imagem do lookbook: usa a imagem escolhida no editor ou, se vazia, um arquivo da pasta assets.
+
+  @param {image} [image] - Imagem escolhida no editor
+  @param {string} [fallback] - Nome de um arquivo em assets/ (ex.: ifl-hero.jpg)
+  @param {string} [sizes] - Atributo sizes
+  @param {string} [alt] - Texto alternativo
+  @param {boolean} [eager] - Carregar sem lazy
+  @param {boolean} [parallax] - Adiciona o efeito de parallax
+{% enddoc %}
+{%- liquid
+  assign loading = 'lazy'
+  if eager
+    assign loading = 'eager'
+  endif
+  assign img_sizes = sizes | default: '100vw'
+-%}
+{%- if image != blank -%}
+  {%- if parallax -%}
+    {{ image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1500, 1800', sizes: img_sizes, loading: loading, alt: alt, class: 'ifl-par' }}
+  {%- else -%}
+    {{ image | image_url: width: 1800 | image_tag: widths: '600, 900, 1200, 1500, 1800', sizes: img_sizes, loading: loading, alt: alt }}
+  {%- endif -%}
+{%- elsif fallback != blank -%}
+  <img src="{{ fallback | asset_url }}" width="1200" height="1800" alt="{{ alt | escape }}" loading="{{ loading }}"{% if parallax %} data-ifl-par{% endif %}>
+{%- else -%}
+  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}

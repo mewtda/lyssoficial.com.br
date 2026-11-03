@@ -1,0 +1,6 @@
+{% doc %}
+  Carrega CSS/JS do lookbook Isabella Fiorentino. Pode ser renderizado por várias seções;
+  o navegador reaproveita o mesmo arquivo e o JS se protege contra execução dupla.
+{% enddoc %}
+{{ 'ifl-lookbook.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ifl-lookbook.js' | asset_url }}" defer></script>

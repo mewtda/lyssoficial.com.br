@@ -1,0 +1,34 @@
+{% render 'ifl-assets' %}
+<section class="ifl ifl-end">
+  {%- if section.settings.image != blank or section.settings.fallback != blank -%}
+    <div class="ifl-end__bg" aria-hidden="true">
+      {% render 'ifl-image', image: section.settings.image, fallback: section.settings.fallback, sizes: '100vw', parallax: true, alt: '' %}
+    </div>
+  {%- endif -%}
+  <div class="ifl-end__glow" aria-hidden="true"></div>
+  <div class="ifl-end__in ifl-reveal">
+    {%- if section.settings.eyebrow != blank -%}<p class="ifl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2>{{ section.settings.heading | newline_to_br }}</h2>
+    {%- if section.settings.cta_label != blank -%}
+      <a class="ifl-cta ifl-eyebrow" href="{{ section.settings.cta_link | default: '#MainContent' }}"><span aria-hidden="true"></span>{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IF · Fechamento",
+  "tag": "div",
+  "class": "ifl-section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto de fundo (opcional)" },
+    { "type": "text", "id": "fallback", "label": "Foto do tema (arquivo)" },
+    { "type": "text", "id": "eyebrow", "label": "Sobretítulo", "default": "Edição limitada" },
+    { "type": "textarea", "id": "heading", "label": "Título", "default": "Isabella Fiorentino\n× Lyss" },
+    { "type": "text", "id": "cta_label", "label": "Texto do botão (opcional)" },
+    { "type": "text", "id": "cta_link", "label": "Link do botão" }
+  ],
+  "presets": [{ "name": "IF · Fechamento" }]
+}
+{% endschema %}

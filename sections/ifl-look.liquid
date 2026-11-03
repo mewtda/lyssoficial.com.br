@@ -1,0 +1,96 @@
+{% render 'ifl-assets' %}
+{%- liquid
+  assign spot_count = 0
+  for block in section.blocks
+    if block.settings.product != blank
+      assign spot_count = spot_count | plus: 1
+    endif
+  endfor
+  assign pieces_class = 'ifl-pieces'
+  if spot_count == 3 or spot_count > 4
+    assign pieces_class = 'ifl-pieces ifl-pieces--3'
+  endif
+-%}
+<section class="ifl ifl-look{% if section.settings.reverse %} ifl-look--rev{% endif %}"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor | handleize }}"{% endif %}>
+  <div class="ifl-look__media" data-ifl-cursor="{{ section.settings.cursor_label | escape }}">
+    {% render 'ifl-image', image: section.settings.image, fallback: section.settings.fallback, sizes: '(min-width: 821px) 50vw, 100vw', parallax: true, alt: section.settings.title %}
+
+    {%- for block in section.blocks -%}
+      {%- assign p = block.settings.product -%}
+      {%- if p != blank or request.design_mode -%}
+        <div class="ifl-spot{% if block.settings.x > 60 %} ifl-spot--left{% endif %}" style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%;" data-ifl-spot="{{ block.id }}" {{ block.shopify_attributes }}>
+          {%- if p != blank -%}
+            <a class="ifl-spot__dot" href="{{ p.url }}" aria-label="{{ p.title | escape }}">+</a>
+            <span class="ifl-spot__tip" aria-hidden="true">{{ p.title | escape }} {% render 'price', product: p %}</span>
+          {%- else -%}
+            <span class="ifl-spot__dot">+</span>
+            <span class="ifl-spot__tip">Escolha um produto</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="ifl-look__info ifl-reveal">
+    {%- if section.settings.number != blank -%}<div class="ifl-num" aria-hidden="true">{{ section.settings.number }}</div>{%- endif -%}
+    <h2 class="ifl-look__title">{{ section.settings.title }}{% if section.settings.title_italic != blank %} <em>{{ section.settings.title_italic }}</em>{% endif %}</h2>
+    {%- if section.settings.text != blank -%}<div class="ifl-look__text">{{ section.settings.text }}</div>{%- endif -%}
+
+    {%- if spot_count > 0 -%}
+      <div class="{{ pieces_class }}">
+        {%- for block in section.blocks -%}
+          {%- assign p = block.settings.product -%}
+          {%- if p != blank -%}
+            <a class="ifl-piece" href="{{ p.url }}" data-ifl-piece="{{ block.id }}">
+              <div class="ifl-piece__ph">
+                {%- if p.featured_media -%}
+                  {{ p.featured_media.preview_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', sizes: '(min-width: 821px) 18vw, 45vw', loading: 'lazy', alt: p.title }}
+                {%- endif -%}
+                {%- if p.media.size > 1 -%}
+                  {{ p.media[1].preview_image | image_url: width: 700 | image_tag: widths: '300, 500, 700', sizes: '(min-width: 821px) 18vw, 45vw', loading: 'lazy', alt: '' }}
+                {%- endif -%}
+                <span class="ifl-piece__cta">{{ section.settings.piece_cta }}</span>
+              </div>
+              <span class="ifl-piece__name">{{ p.title | escape }}</span>
+              {% render 'price', product: p %}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IF · Look",
+  "tag": "div",
+  "class": "ifl-section",
+  "enabled_on": { "templates": ["collection"] },
+  "max_blocks": 50,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto do look" },
+    { "type": "text", "id": "fallback", "label": "Foto do tema (arquivo)", "info": "Usada enquanto nenhuma foto for escolhida acima." },
+    { "type": "checkbox", "id": "reverse", "label": "Foto à direita", "default": false },
+    { "type": "text", "id": "number", "label": "Número", "default": "01" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Ouro" },
+    { "type": "text", "id": "title_italic", "label": "Título — parte em itálico dourado", "default": "sobre a pele" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Elos grossos, camadas e o brilho quente do dourado.</p>" },
+    { "type": "text", "id": "piece_cta", "label": "Texto ao passar o mouse na joia", "default": "Ver joia" },
+    { "type": "text", "id": "cursor_label", "label": "Texto do cursor sobre a foto", "default": "Ver look" },
+    { "type": "text", "id": "anchor", "label": "Âncora (opcional)", "info": "Ex.: ifl-looks — usado pelo botão da capa." }
+  ],
+  "blocks": [
+    {
+      "type": "spot",
+      "name": "Ponto de produto",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Produto" },
+        { "type": "range", "id": "x", "label": "Posição horizontal", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "y", "label": "Posição vertical", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "IF · Look", "blocks": [{ "type": "spot" }] }]
+}
+{% endschema %}

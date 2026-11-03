@@ -1,0 +1,45 @@
+{% render 'ifl-assets' %}
+<section class="ifl ifl-hero">
+  <div class="ifl-hero__media">
+    {% render 'ifl-image', image: section.settings.image, fallback: section.settings.fallback, sizes: '(min-width: 821px) 55vw, 100vw', eager: true, alt: section.settings.title_1 %}
+  </div>
+  <div class="ifl-hero__txt">
+    {%- if section.settings.badge != blank -%}
+      <p class="ifl-badge ifl-eyebrow"><i aria-hidden="true"></i>{{ section.settings.badge }}</p>
+    {%- endif -%}
+    <h1 class="ifl-hero__title">
+      <span class="ln"><span>{{ section.settings.title_1 }}</span></span>
+      {%- if section.settings.title_2 != blank -%}<span class="ln"><span>{{ section.settings.title_2 }}</span></span>{%- endif -%}
+    </h1>
+    {%- if section.settings.signature != blank -%}
+      <div class="ifl-hero__x">{{ section.settings.signature }}</div>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="ifl-hero__lead">{{ section.settings.text }}</div>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <a class="ifl-cta ifl-eyebrow" href="{{ section.settings.cta_link | default: '#ifl-looks' }}"><span aria-hidden="true"></span>{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IF · Capa do lookbook",
+  "tag": "div",
+  "class": "ifl-section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Foto" },
+    { "type": "text", "id": "fallback", "label": "Foto do tema (arquivo)", "info": "Usada enquanto nenhuma foto for escolhida acima.", "default": "ifl-hero.jpg" },
+    { "type": "text", "id": "badge", "label": "Selo", "default": "Collab especial · Edição limitada" },
+    { "type": "text", "id": "title_1", "label": "Título — linha 1", "default": "Isabella" },
+    { "type": "text", "id": "title_2", "label": "Título — linha 2 (itálico)", "default": "Fiorentino" },
+    { "type": "text", "id": "signature", "label": "Assinatura", "default": "× Lyss" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Uma coleção pensada a quatro mãos. O olhar de Isabella Fiorentino Hawilla, fashion advisor, encontra o design da Lyss em joias feitas para durar além da estação.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Texto do botão", "default": "Ver o lookbook" },
+    { "type": "text", "id": "cta_link", "label": "Link do botão", "info": "Padrão: rola até os looks (#ifl-looks).", "default": "#ifl-looks" }
+  ],
+  "presets": [{ "name": "IF · Capa do lookbook" }]
+}
+{% endschema %}
