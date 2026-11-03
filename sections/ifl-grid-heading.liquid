@@ -1,5 +1,5 @@
 {% render 'ifl-assets' %}
-<div class="ifl ifl-gridhead">
+<div class="ifl ifl-gridhead" id="ifl-produtos">
   <div class="ifl-gridhead__in page-width ifl-reveal">
     <h2>{{ section.settings.heading }}</h2>
     {%- if section.settings.show_count and collection -%}
@@ -7,6 +7,13 @@
     {%- endif -%}
   </div>
 </div>
+
+{%- if section.settings.show_tab and section.settings.tab_label != blank -%}
+  <a class="ifl-tab" href="#ifl-produtos" data-ifl-tab>
+    <span class="ifl-tab__label">{{ section.settings.tab_label }}</span>
+    <span class="ifl-tab__arrow" aria-hidden="true">&darr;</span>
+  </a>
+{%- endif -%}
 
 {% schema %}
 {
@@ -17,7 +24,10 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Título", "default": "Toda a coleção" },
     { "type": "checkbox", "id": "show_count", "label": "Mostrar quantidade", "default": true },
-    { "type": "text", "id": "count_label", "label": "Texto da quantidade", "default": "joias" }
+    { "type": "text", "id": "count_label", "label": "Texto da quantidade", "default": "joias" },
+    { "type": "header", "content": "Aba fixa no canto esquerdo" },
+    { "type": "checkbox", "id": "show_tab", "label": "Mostrar aba que leva aos produtos", "default": true },
+    { "type": "text", "id": "tab_label", "label": "Texto da aba", "default": "Ver produtos" }
   ],
   "presets": [{ "name": "IF · Título da grade" }]
 }

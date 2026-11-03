@@ -14,9 +14,11 @@
       "settings": {
         "fallback": "ifl-hero.jpg",
         "badge": "Collab especial · Edição limitada",
+        "title_pre": "Lyss",
+        "connector": "by",
         "title_1": "Isabella",
         "title_2": "Fiorentino",
-        "signature": "× Lyss",
+        "signature": "",
         "text": "<p>Uma coleção pensada a quatro mãos. O olhar de Isabella Fiorentino Hawilla, fashion advisor, encontra o design da Lyss em joias feitas para durar além da estação.</p>",
         "cta_label": "Ver o lookbook",
         "cta_link": "#ifl-looks"
@@ -28,7 +30,7 @@
         "m1": {
           "type": "item",
           "settings": {
-            "text": "Isabella Fiorentino × Lyss",
+            "text": "Lyss by Isabella Fiorentino",
             "style": "serif"
           }
         },
@@ -208,7 +210,7 @@
       "settings": {
         "fallback": "ifl-closing.jpg",
         "eyebrow": "Edição limitada",
-        "heading": "Isabella Fiorentino\n× Lyss"
+        "heading": "Lyss\nby Isabella Fiorentino"
       }
     }
   },

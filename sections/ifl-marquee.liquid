@@ -1,7 +1,7 @@
 {% render 'ifl-assets' %}
 {%- capture ifl_marq_item -%}
   {%- for block in section.blocks -%}
-    {%- if block.settings.style == 'small' -%}<em>{{ block.settings.text }}</em>{%- else -%}{{ block.settings.text }} {%- endif -%}
+    {%- if block.settings.style == 'small' -%}<em>{{ block.settings.text }}</em>{%- else -%}{% render 'ifl-text', text: block.settings.text, tone: 'dark' %} {%- endif -%}
   {%- endfor -%}
 {%- endcapture -%}
 <div class="ifl ifl-marq" style="--ifl-marq-speed: {{ section.settings.speed }}s;" aria-hidden="true">
@@ -24,7 +24,7 @@
       "type": "item",
       "name": "Texto",
       "settings": [
-        { "type": "text", "id": "text", "label": "Texto", "default": "Isabella Fiorentino × Lyss" },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Lyss by Isabella Fiorentino" },
         { "type": "select", "id": "style", "label": "Estilo", "default": "serif", "options": [
           { "value": "serif", "label": "Serifado itálico" },
           { "value": "small", "label": "Caixa alta pequena" }
@@ -35,7 +35,7 @@
   "presets": [{
     "name": "IF · Faixa animada",
     "blocks": [
-      { "type": "item", "settings": { "text": "Isabella Fiorentino × Lyss", "style": "serif" } },
+      { "type": "item", "settings": { "text": "Lyss by Isabella Fiorentino", "style": "serif" } },
       { "type": "item", "settings": { "text": "Edição limitada", "style": "small" } },
       { "type": "item", "settings": { "text": "O lookbook", "style": "serif" } },
       { "type": "item", "settings": { "text": "Collab especial", "style": "small" } }

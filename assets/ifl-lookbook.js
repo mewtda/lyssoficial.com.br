@@ -178,6 +178,10 @@
     var vh = window.innerHeight;
     var max = document.documentElement.scrollHeight - vh;
     if (progress) progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    // esconde a aba "Ver produtos" quando a grade já está na tela
+    var tab = document.querySelector('[data-ifl-tab]');
+    var grid = document.getElementById('ifl-produtos');
+    if (tab && grid) tab.classList.toggle('is-hidden', grid.getBoundingClientRect().top < vh * 0.6);
     if (reduce) return;
 
     document.querySelectorAll('[data-ifl-par], .ifl-par').forEach(function (img) {

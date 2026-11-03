@@ -1,0 +1,21 @@
+{% doc %}
+  Escreve um texto de título trocando a palavra "Lyss" pelo logo da loja.
+
+  @param {string} text - Texto do título
+  @param {string} [tone] - 'light' (logo claro, para fundo escuro) ou 'dark' (logo preto)
+{% enddoc %}
+{%- liquid
+  assign logo = settings.logo
+  if tone == 'light' and settings.logo_transparent != blank
+    assign logo = settings.logo_transparent
+  endif
+  assign out = text | escape
+  if logo != blank
+    capture logo_html
+      echo logo | image_url: width: 800 | image_tag: class: 'ifl-logo', alt: 'Lyss', loading: 'lazy', widths: '300, 500, 800', sizes: '400px'
+    endcapture
+    assign out = out | replace: 'LYSS', '__IFL_LOGO__' | replace: 'Lyss', '__IFL_LOGO__' | replace: 'lyss', '__IFL_LOGO__'
+    assign out = out | replace: '__IFL_LOGO__', logo_html
+  endif
+  echo out
+-%}
