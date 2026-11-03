@@ -77,5 +77,113 @@
 
     {% section 'cart-drawer' %}
     {% render 'search-dialog' %}
+    
+{% if request.page_type == 'index' %}
+<div id="lyss-intro" style="display:none" aria-label="Vídeo de abertura LYSS">
+  <video
+    id="lyss-intro-video"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+  >
+    <source src="https://cdn.shopify.com/videos/c/o/v/20195acba9b74a45af4930a8e77c145f.mov" type="video/mp4">
+  </video>
+
+  <button id="lyss-intro-skip" type="button">
+    Pular vídeo ✕
+  </button>
+</div>
+
+<style>
+  #lyss-intro {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background: #000;
+    z-index: 2147483647;
+    overflow: hidden;
+  }
+
+  #lyss-intro-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #lyss-intro-skip {
+    position: absolute;
+    right: 25px;
+    bottom: 35px;
+    padding: 12px 22px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 30px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  @media (max-width: 749px) {
+    #lyss-intro-skip {
+      right: 18px;
+      bottom: 30px;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const intro = document.getElementById('lyss-intro');
+  const video = document.getElementById('lyss-intro-video');
+  const skip = document.getElementById('lyss-intro-skip');
+
+  if (!intro || !video || !skip) return;
+
+  const key = 'lyss_intro_seen';
+
+  try {
+    if (sessionStorage.getItem(key)) return;
+  } catch (e) {}
+
+  let finished = false;
+  let fallback;
+
+  function closeIntro() {
+    if (finished) return;
+    finished = true;
+
+    clearTimeout(fallback);
+    video.pause();
+    intro.style.display = 'none';
+
+    try {
+      sessionStorage.setItem(key, '1');
+    } catch (e) {}
+  }
+
+  skip.addEventListener('click', closeIntro);
+  video.addEventListener('ended', closeIntro);
+  video.addEventListener('error', closeIntro);
+
+  intro.style.display = 'block';
+
+  const playPromise = video.play();
+
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(closeIntro);
+  }
+
+  fallback = setTimeout(closeIntro, 15000);
+})();
+</script>
+{% endif %}
+
   </body>
 </html>
