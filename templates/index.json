@@ -29,6 +29,7 @@
         },
         "s2": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/aa.jpg",
             "subheading": "EXPERIÊNCIA EXCLUSIVA",
@@ -67,7 +68,7 @@
       "settings": {
         "full_height_mobile": true,
         "height_mobile": 630,
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 10
       }
     },
