@@ -42,7 +42,6 @@
         },
         "s3": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Retrato_de_moda_com_joias_douradas.png",
             "image_mobile": "shopify://shop_images/IMG_5335_JPG.jpg",
