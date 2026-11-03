@@ -14,7 +14,6 @@
       "blocks": {
         "s1": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Retrato_editorial_entre_tulipas_e_margaridas.png",
             "video": "shopify://files/videos/a32.mp4",
@@ -30,7 +29,6 @@
         },
         "s2": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/aa.jpg",
             "subheading": "EXPERIÊNCIA EXCLUSIVA",
@@ -44,6 +42,7 @@
         },
         "s3": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Retrato_de_moda_com_joias_douradas.png",
             "image_mobile": "shopify://shop_images/IMG_5335_JPG.jpg",
