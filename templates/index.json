@@ -61,8 +61,8 @@
         "s3"
       ],
       "settings": {
-        "full_height_mobile": true,
-        "height_mobile": 500,
+        "full_height_mobile": false,
+        "height_mobile": 730,
         "autoplay": true,
         "autoplay_speed": 10
       }
