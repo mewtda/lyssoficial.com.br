@@ -39,9 +39,11 @@
 .ifl-hero__title .ln:nth-child(2) > span { animation-delay: 1.12s; }
 .ifl-hero__title .ln:nth-child(3) > span { animation-delay: 1.24s; }
 .ifl-hero__title .ln--italic > span { font-style: italic; }
-.ifl-hero__title .ln--brand { margin-bottom: .12em; }
-.ifl-hero__title .ln--brand .ifl-logo { height: .62em; }
-.ifl-by { font-style: italic; color: var(--ifl-gold); font-size: .55em; vertical-align: .35em; margin-right: .1em; }
+.ifl-hero__title .ln--brand { margin-bottom: .14em; }
+.ifl-hero__title .ln--brand .ifl-logo { height: .9em; }
+/* "by Isabella Fiorentino": metade do tamanho do logo */
+.ifl-hero__title .ln:not(.ln--brand) { font-size: .45em; line-height: 1.1; }
+.ifl-by { font-style: italic; color: var(--ifl-gold); margin-right: .15em; }
 .ifl-logo { display: inline-block; height: .78em; width: auto !important; max-width: none; vertical-align: baseline; object-fit: contain !important; }
 .ifl .ifl-logo { display: inline-block; height: .78em; width: auto; max-width: none; vertical-align: baseline; }
 @keyframes ifl-rise { to { transform: none; } }
@@ -158,8 +160,12 @@ html { scroll-behavior: smooth; }
 
 /* FECHAMENTO */
 .ifl-end { background: var(--ifl-ink); color: var(--ifl-cream); text-align: center; padding: 20vh 8vw; position: relative; }
-.ifl-end__bg { position: absolute; inset: 0; opacity: .28; overflow: hidden; }
-.ifl-end__bg img { transform: scale(1.15); }
+.ifl-end:has(.ifl-end__bg) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; padding: 0; text-align: center; }
+.ifl-end__bg { position: relative; aspect-ratio: 4/5; max-height: 92vh; width: 100%; overflow: hidden; }
+.ifl-end__bg img { transform: scale(1.15); object-position: center 40%; }
+.ifl-end:has(.ifl-end__bg) .ifl-end__in { padding: 12vh 6vw; }
+.ifl-end__main, .ifl-end__sub { display: block; }
+.ifl-end__sub { font-size: .42em; line-height: 1.2; margin-top: .5em; letter-spacing: .01em; }
 .ifl-end__glow { position: absolute; inset: -20%; background: radial-gradient(closest-side, rgba(184,149,90,.35), transparent 70%); animation: ifl-glow 9s ease-in-out infinite alternate; pointer-events: none; }
 @keyframes ifl-glow { from { transform: translate(-12%, -6%); } to { transform: translate(12%, 8%); } }
 .ifl-end__in { position: relative; }
@@ -191,6 +197,8 @@ html { scroll-behavior: smooth; }
   .ifl-gridhead { padding: 10vh 0 0; }
   .ifl-gridhead__in { flex-direction: column; align-items: flex-start; }
   .ifl-end { padding: 16vh 16px; }
+  .ifl-end:has(.ifl-end__bg) { grid-template-columns: 1fr; }
+  .ifl-end:has(.ifl-end__bg) .ifl-end__in { padding: 56px 16px 72px; }
   .ifl-tab { padding: 16px 8px; font-size: 10px; }
   .ifl-cursor { display: none; }
 }

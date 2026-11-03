@@ -13,15 +13,15 @@
       "type": "ifl-hero",
       "settings": {
         "fallback": "ifl-hero.jpg",
-        "badge": "Collab especial · Edição limitada",
+        "badge": "Coleção exclusiva · Edição limitada",
         "title_pre": "Lyss",
         "connector": "by",
         "title_1": "Isabella",
         "title_2": "Fiorentino",
         "signature": "",
         "text": "<p>Uma coleção pensada a quatro mãos. O olhar de Isabella Fiorentino Hawilla, fashion advisor, encontra o design da Lyss em joias feitas para durar além da estação.</p>",
-        "cta_label": "Ver o lookbook",
-        "cta_link": "#ifl-looks"
+        "cta_label": "Ver coleção",
+        "cta_link": "#ifl-produtos"
       }
     },
     "ifl_marquee": {
@@ -44,14 +44,14 @@
         "m3": {
           "type": "item",
           "settings": {
-            "text": "O lookbook",
+            "text": "Nova coleção",
             "style": "serif"
           }
         },
         "m4": {
           "type": "item",
           "settings": {
-            "text": "Collab especial",
+            "text": "Coleção exclusiva",
             "style": "small"
           }
         }
@@ -107,7 +107,7 @@
         "title_italic": "sobre a pele",
         "text": "<p>Elos grossos, camadas e o brilho quente do dourado. As joias que abrem a coleção e definem o seu tom.</p>",
         "piece_cta": "Ver joia",
-        "cursor_label": "Ver look",
+        "cursor_label": "Ver joias",
         "anchor": "ifl-looks"
       }
     },
@@ -143,7 +143,7 @@
         "title_italic": "sobre o preto",
         "text": "<p>O dourado ganha força contra o preto. Colares em camadas e pulseiras largas para as noites que pedem presença.</p>",
         "piece_cta": "Ver joia",
-        "cursor_label": "Ver look"
+        "cursor_label": "Ver joias"
       }
     },
     "ifl_look_3": {
@@ -178,7 +178,7 @@
         "title_italic": "natural",
         "text": "<p>O mesmo ouro, à luz do dia. Joias que acompanham a agenda inteira, da manhã ao jantar.</p>",
         "piece_cta": "Ver joia",
-        "cursor_label": "Ver look"
+        "cursor_label": "Ver joias"
       }
     },
     "ifl_grid_heading": {
@@ -208,7 +208,7 @@
     "ifl_closing": {
       "type": "ifl-closing",
       "settings": {
-        "fallback": "ifl-closing.jpg",
+        "fallback": "ifl-detail-2.jpg",
         "eyebrow": "Edição limitada",
         "heading": "Lyss\nby Isabella Fiorentino"
       }

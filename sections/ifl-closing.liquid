@@ -8,7 +8,7 @@
   <div class="ifl-end__glow" aria-hidden="true"></div>
   <div class="ifl-end__in ifl-reveal">
     {%- if section.settings.eyebrow != blank -%}<p class="ifl-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
-    <h2>{%- assign ifl_lines = section.settings.heading | newline_to_br | split: '<br />' -%}{%- for l in ifl_lines -%}{% render 'ifl-text', text: l, tone: 'light' %}{% unless forloop.last %}<br>{% endunless %}{%- endfor -%}</h2>
+    <h2>{%- assign ifl_lines = section.settings.heading | newline_to_br | split: '<br />' -%}{%- for l in ifl_lines -%}{%- if forloop.first -%}<span class="ifl-end__main">{% render 'ifl-text', text: l, tone: 'light' %}</span>{%- else -%}<span class="ifl-end__sub">{% render 'ifl-text', text: l, tone: 'light' %}</span>{%- endif -%}{%- endfor -%}</h2>
     {%- if section.settings.cta_label != blank -%}
       <a class="ifl-cta ifl-eyebrow" href="{{ section.settings.cta_link | default: '#MainContent' }}"><span aria-hidden="true"></span>{{ section.settings.cta_label }}</a>
     {%- endif -%}
@@ -25,7 +25,7 @@
     { "type": "image_picker", "id": "image", "label": "Foto de fundo (opcional)" },
     { "type": "text", "id": "fallback", "label": "Foto do tema (arquivo)" },
     { "type": "text", "id": "eyebrow", "label": "Sobretítulo", "default": "Edição limitada" },
-    { "type": "textarea", "id": "heading", "label": "Título", "default": "Lyss\nby Isabella Fiorentino" },
+    { "type": "textarea", "id": "heading", "label": "Título", "info": "A primeira linha fica grande; as demais, menores.", "default": "Lyss\nby Isabella Fiorentino" },
     { "type": "text", "id": "cta_label", "label": "Texto do botão (opcional)" },
     { "type": "text", "id": "cta_link", "label": "Link do botão" }
   ],
