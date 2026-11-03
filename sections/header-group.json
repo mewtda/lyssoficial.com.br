@@ -49,14 +49,10 @@
             "content_type": "products",
             "featured_heading": "Destaques",
             "featured_size": "medium",
-            "products": [
-              "brinco-argola-crystal",
-              "brinco-argola-estrela-de-luz",
-              "brinco-argola-lumiere",
-              "brinco-argola-star",
-              "brinco-caixos"
+            "products": [],
+            "collections": [
+              "brincos"
             ],
-            "collections": [],
             "label_1": "",
             "link_1": "",
             "label_2": "",
