@@ -42,12 +42,11 @@
         },
         "s3": {
           "type": "slide",
-          "disabled": true,
           "settings": {
             "subheading": "Curated",
             "heading": "Icons",
             "link_label": "SHOP",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/izabela-fiorentino",
             "alignment": "center",
             "text_color": "#ffffff",
             "overlay": 0
@@ -76,7 +75,7 @@
       "settings": {
         "heading": "em alta",
         "heading_style": "h3",
-        "collection": "all",
+        "collection": "os-mais-vendidos",
         "heading_2": "Acessórios para cabelo",
         "collection_2": "acessorioscabelo",
         "products_to_show": 12,
