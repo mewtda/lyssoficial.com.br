@@ -1,11 +1,23 @@
 {% render 'ifl-assets' %}
 {%- liquid
   assign spot_count = 0
+  assign look_total = 0
+  assign look_ids = ''
+  assign look_seen = ','
   for block in section.blocks
     if block.settings.product != blank
       assign spot_count = spot_count | plus: 1
+      assign v = block.settings.product.selected_or_first_available_variant
+      assign v_key = ',' | append: v.id | append: ','
+      if v.available and look_seen contains v_key
+      elsif v.available
+        assign look_total = look_total | plus: v.price
+        assign look_ids = look_ids | append: v.id | append: ','
+        assign look_seen = look_seen | append: v.id | append: ','
+      endif
     endif
   endfor
+  assign look_ids = look_ids | split: ','
   assign pieces_class = 'ifl-pieces'
   if spot_count == 3 or spot_count > 4
     assign pieces_class = 'ifl-pieces ifl-pieces--3'
@@ -22,6 +34,19 @@
           {%- if p != blank -%}
             <a class="ifl-spot__dot" href="{{ p.url }}" aria-label="{{ p.title | escape }}">+</a>
             <span class="ifl-spot__tip" aria-hidden="true">{{ p.title | escape }} {% render 'price', product: p %}</span>
+            <template data-ifl-sheet>
+              <div class="ifl-sheet__media">
+                {%- if p.featured_media -%}
+                  {{ p.featured_media.preview_image | image_url: width: 500 | image_tag: widths: '250, 375, 500', sizes: '40vw', loading: 'lazy', alt: p.title }}
+                {%- endif -%}
+              </div>
+              <div class="ifl-sheet__body">
+                <p class="ifl-sheet__title">{{ p.title | escape }}</p>
+                {% render 'price', product: p %}
+                {%- if p.available == false -%}<p class="ifl-sheet__soldout">{{ 'products.product.sold_out' | t }}</p>{%- endif -%}
+                <a class="ifl-sheet__cta" href="{{ p.url }}">{{ section.settings.sheet_cta }}</a>
+              </div>
+            </template>
           {%- else -%}
             <span class="ifl-spot__dot">+</span>
             <span class="ifl-spot__tip">Escolha um produto</span>
@@ -57,6 +82,15 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+      {%- if section.settings.show_buy_look and look_ids.size > 0 -%}
+        <button type="button" class="ifl-buylook" data-ifl-buy-look data-variants="{{ look_ids | join: ',' }}">
+          <span class="ifl-buylook__label">{{ section.settings.buy_look_label }}</span>
+          <span class="ifl-buylook__sep" aria-hidden="true"></span>
+          <span class="ifl-buylook__price">{{ look_total | money }}</span>
+          <span class="ifl-buylook__done" aria-hidden="true">{{ section.settings.buy_look_done }}</span>
+        </button>
+        <p class="ifl-buylook__error" role="alert" hidden></p>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </section>
@@ -77,7 +111,11 @@
     { "type": "text", "id": "title_italic", "label": "Título — parte em itálico dourado", "default": "sobre a pele" },
     { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Elos grossos, camadas e o brilho quente do dourado.</p>" },
     { "type": "text", "id": "piece_cta", "label": "Texto ao passar o mouse na joia", "default": "Ver joia" },
+    { "type": "checkbox", "id": "show_buy_look", "label": "Mostrar botão Comprar o look", "info": "Adiciona à sacola todas as joias disponíveis deste look (primeira variante disponível de cada uma).", "default": true },
+    { "type": "text", "id": "buy_look_label", "label": "Texto do botão", "default": "Comprar o look" },
+    { "type": "text", "id": "buy_look_done", "label": "Texto após adicionar", "default": "Adicionado à sacola" },
     { "type": "text", "id": "cursor_label", "label": "Texto do cursor sobre a foto", "default": "Ver look" },
+    { "type": "text", "id": "sheet_cta", "label": "Celular: botão da gaveta do produto", "default": "Ver produto" },
     { "type": "text", "id": "anchor", "label": "Âncora (opcional)", "info": "Ex.: ifl-looks — usado pelo botão da capa." }
   ],
   "blocks": [

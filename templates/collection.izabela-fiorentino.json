@@ -25,22 +25,78 @@
     "ifl_marquee": {
       "type": "ifl-marquee",
       "blocks": {
-        "m1": { "type": "item", "settings": { "text": "Isabella Fiorentino × Lyss", "style": "serif" } },
-        "m2": { "type": "item", "settings": { "text": "Edição limitada", "style": "small" } },
-        "m3": { "type": "item", "settings": { "text": "O lookbook", "style": "serif" } },
-        "m4": { "type": "item", "settings": { "text": "Collab especial", "style": "small" } }
+        "m1": {
+          "type": "item",
+          "settings": {
+            "text": "Isabella Fiorentino × Lyss",
+            "style": "serif"
+          }
+        },
+        "m2": {
+          "type": "item",
+          "settings": {
+            "text": "Edição limitada",
+            "style": "small"
+          }
+        },
+        "m3": {
+          "type": "item",
+          "settings": {
+            "text": "O lookbook",
+            "style": "serif"
+          }
+        },
+        "m4": {
+          "type": "item",
+          "settings": {
+            "text": "Collab especial",
+            "style": "small"
+          }
+        }
       },
-      "block_order": ["m1", "m2", "m3", "m4"],
-      "settings": { "speed": 40 }
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {
+        "speed": 40
+      }
     },
     "ifl_look_1": {
       "type": "ifl-look",
       "blocks": {
-        "s1": { "type": "spot", "settings": { "product": "bracelete-retro-mix", "x": 12, "y": 24 } },
-        "s2": { "type": "spot", "settings": { "product": "brinco-mini-elos", "x": 36, "y": 23 } },
-        "s3": { "type": "spot", "settings": { "product": "colar-retro-mix", "x": 56, "y": 58 } }
+        "s1": {
+          "type": "spot",
+          "settings": {
+            "product": "bracelete-retro-mix",
+            "x": 12,
+            "y": 24
+          }
+        },
+        "s2": {
+          "type": "spot",
+          "settings": {
+            "product": "brinco-mini-elos",
+            "x": 36,
+            "y": 23
+          }
+        },
+        "s3": {
+          "type": "spot",
+          "settings": {
+            "product": "colar-retro-mix",
+            "x": 56,
+            "y": 58
+          }
+        }
       },
-      "block_order": ["s1", "s2", "s3"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
       "settings": {
         "fallback": "ifl-look-1.jpg",
         "reverse": false,
@@ -56,10 +112,27 @@
     "ifl_look_2": {
       "type": "ifl-look",
       "blocks": {
-        "s1": { "type": "spot", "settings": { "product": "colar-retro", "x": 42, "y": 35 } },
-        "s2": { "type": "spot", "settings": { "product": "bracelete-retro", "x": 76, "y": 78 } }
+        "s1": {
+          "type": "spot",
+          "settings": {
+            "product": "colar-retro",
+            "x": 42,
+            "y": 35
+          }
+        },
+        "s2": {
+          "type": "spot",
+          "settings": {
+            "product": "bracelete-retro",
+            "x": 76,
+            "y": 78
+          }
+        }
       },
-      "block_order": ["s1", "s2"],
+      "block_order": [
+        "s1",
+        "s2"
+      ],
       "settings": {
         "fallback": "ifl-look-2.jpg",
         "reverse": true,
@@ -74,10 +147,27 @@
     "ifl_look_3": {
       "type": "ifl-look",
       "blocks": {
-        "s1": { "type": "spot", "settings": { "product": "colar-bee", "x": 51, "y": 79 } },
-        "s2": { "type": "spot", "settings": { "product": "brinco-noir", "x": 27, "y": 44 } }
+        "s1": {
+          "type": "spot",
+          "settings": {
+            "product": "colar-bee",
+            "x": 51,
+            "y": 79
+          }
+        },
+        "s2": {
+          "type": "spot",
+          "settings": {
+            "product": "brinco-noir",
+            "x": 27,
+            "y": 44
+          }
+        }
       },
-      "block_order": ["s1", "s2"],
+      "block_order": [
+        "s1",
+        "s2"
+      ],
       "settings": {
         "fallback": "ifl-look-3.jpg",
         "reverse": false,
@@ -89,23 +179,13 @@
         "cursor_label": "Ver look"
       }
     },
-    "ifl_details": {
-      "type": "ifl-details",
-      "blocks": {
-        "d1": { "type": "detail", "settings": { "fallback": "ifl-detail-1.jpg", "caption": "Brincos" } },
-        "d2": { "type": "detail", "settings": { "fallback": "ifl-detail-2.jpg", "caption": "Braceletes" } },
-        "d3": { "type": "detail", "settings": { "fallback": "ifl-detail-3.jpg", "caption": "Pulseiras" } }
-      },
-      "block_order": ["d1", "d2", "d3"],
-      "settings": {
-        "eyebrow": "Nos detalhes",
-        "heading": "Feito para ser",
-        "heading_italic": "visto de perto"
-      }
-    },
     "ifl_grid_heading": {
       "type": "ifl-grid-heading",
-      "settings": { "heading": "Toda a coleção", "show_count": true, "count_label": "joias" }
+      "settings": {
+        "heading": "Toda a coleção",
+        "show_count": true,
+        "count_label": "joias"
+      }
     },
     "main": {
       "type": "main-collection",
@@ -138,7 +218,6 @@
     "ifl_look_1",
     "ifl_look_2",
     "ifl_look_3",
-    "ifl_details",
     "ifl_grid_heading",
     "main",
     "ifl_closing"
