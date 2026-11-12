@@ -45,6 +45,26 @@
   </div>
 {%- endif -%}
 
+{%- if promo and promo.settings.banner_image != blank -%}
+  {%- liquid
+    assign banner_tag = 'div'
+    if promo.settings.banner_link != blank
+      assign banner_tag = 'a'
+    endif
+    assign banner_alt = promo.settings.banner_image.alt | default: promo.settings.banner_heading | escape
+  -%}
+  <{{ banner_tag }}{% if banner_tag == 'a' %} href="{{ promo.settings.banner_link }}"{% endif %} class="mega-menu__banner desktop-only" style="--banner-overlay: {{ promo.settings.banner_overlay | divided_by: 100.0 }};">
+    {{ promo.settings.banner_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: banner_alt, sizes: '(min-width: 1024px) 40vw, 50vw', widths: '500, 700, 1000, 1400', class: 'mega-menu__banner-image' }}
+    {%- if promo.settings.banner_eyebrow != blank or promo.settings.banner_heading != blank or promo.settings.banner_cta != blank and banner_tag == 'a' -%}
+      <span class="mega-menu__banner-content">
+        {%- if promo.settings.banner_eyebrow != blank -%}<span class="mega-menu__banner-eyebrow">{{ promo.settings.banner_eyebrow }}</span>{%- endif -%}
+        {%- if promo.settings.banner_heading != blank -%}<span class="mega-menu__banner-heading">{{ promo.settings.banner_heading }}</span>{%- endif -%}
+        {%- if promo.settings.banner_cta != blank and banner_tag == 'a' -%}<span class="mega-menu__banner-cta">{{ promo.settings.banner_cta }}</span>{%- endif -%}
+      </span>
+    {%- endif -%}
+  </{{ banner_tag }}>
+{%- endif -%}
+
 {%- if promo -%}
   {%- assign promo_type = promo.settings.content_type | default: 'images' -%}
   {%- case promo_type -%}

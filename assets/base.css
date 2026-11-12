@@ -4750,3 +4750,49 @@ a.store-notice__head:hover .store-notice__label {
   font-size: 13px;
   letter-spacing: 0.05em;
 }
+
+/* Mega menu: banner entre os links e os destaques */
+.mega-menu__banner {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+  min-height: 220px;
+  margin: 0 32px;
+  overflow: hidden;
+  background: var(--color-placeholder);
+  color: #fff;
+  text-decoration: none;
+}
+.mega-menu__banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, var(--banner-overlay, .2)), rgba(0, 0, 0, calc(var(--banner-overlay, .2) / 3)));
+  pointer-events: none;
+}
+.mega-menu__banner-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s;
+}
+a.mega-menu__banner:hover .mega-menu__banner-image { transform: scale(1.04); }
+.mega-menu__banner-content {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 22px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mega-menu__banner-eyebrow { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.mega-menu__banner-heading { font-family: var(--font-heading); font-size: 28px; line-height: 1.1; }
+.mega-menu__banner-cta { margin-top: 4px; font-size: 12px; font-weight: 500; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.mega-menu__banner + .mega-menu__featured { margin-left: 0; flex: 0 1 auto; }
+.mega-menu:has(.mega-menu__banner) > .mega-menu__links { flex: 0 0 auto; min-width: 140px; }
+.mobile-menu__panel .mega-menu__banner { display: none; }
