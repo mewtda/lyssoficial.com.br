@@ -88,10 +88,11 @@
             "link_1": "",
             "label_2": "",
             "link_2": "",
+            "banner_image": "shopify://shop_images/0C6A8590.jpg",
             "banner_eyebrow": "",
-            "banner_heading": "",
+            "banner_heading": "Anel Baguete",
             "banner_cta": "Ver mais",
-            "banner_link": "",
+            "banner_link": "shopify://products/anel-baguete",
             "banner_overlay": 20
           }
         }
