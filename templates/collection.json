@@ -12,16 +12,16 @@
     "main": {
       "type": "main-collection",
       "custom_css": [
-        ".card__row{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important}",
-        ".card__title{width:100%!important;margin:0!important}",
-        ".card__row .price{margin:0!important;width:100%!important;justify-content:flex-start!important}",
-        "@media(min-width:990px){.product-grid{max-width:1200px!important;margin:0 auto!important;gap:32px 24px!important}.product-grid img{transform:scale(0.82)}}"
+        ".card__row {display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;}",
+        ".card__title {width: 100% !important; margin: 0 !important;}",
+        ".card__row .price {margin: 0 !important; width: 100% !important; justify-content: flex-start !important;}",
+        "@media (min-width: 990px) {.product-grid {max-width: 1200px !important; margin: 0 auto !important; gap: 32px 24px !important; } .product-grid img {transform: scale(0.82); }}"
       ],
       "settings": {
         "show_title": false,
         "show_description": false,
         "products_per_page": 24,
-        "columns_desktop": 5,
+        "columns_desktop": 4,
         "enable_filtering": true,
         "enable_sorting": true
       }
