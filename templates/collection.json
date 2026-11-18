@@ -19,7 +19,7 @@
       "settings": {
         "show_title": false,
         "show_description": false,
-        "products_per_page": 24,
+        "products_per_page": 16,
         "columns_desktop": 5,
         "enable_filtering": true,
         "enable_sorting": true
