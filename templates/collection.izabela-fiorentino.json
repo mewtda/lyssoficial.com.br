@@ -206,20 +206,13 @@
       }
     },
     "main": {
-      "type": "main-collection",
+      "type": "ifl-grid-heading",
       "custom_css": [
         ".card__row {display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;}",
         ".card__title {width: 100% !important; margin: 0 !important;}",
         ".card__row .price {margin: 0 !important; width: 100% !important; justify-content: flex-start !important;}"
       ],
-      "settings": {
-        "show_title": false,
-        "show_description": false,
-        "products_per_page": 24,
-        "columns_desktop": 4,
-        "enable_filtering": true,
-        "enable_sorting": true
-      }
+      "settings": {}
     },
     "ifl_closing": {
       "type": "ifl-closing",

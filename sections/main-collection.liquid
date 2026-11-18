@@ -84,7 +84,7 @@
     </div>
   {%- endif -%}
 
-  {%- paginate collection.products by section.settings.products_per_page -%}
+  {%- paginate collection.products by 200 -%}
     <div class="product-grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
 
 {%- assign available_products = collection.products | where: 'available', true -%}
