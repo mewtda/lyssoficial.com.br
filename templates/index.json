@@ -76,7 +76,8 @@
       "custom_css": [
         ".card__row {display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 4px !important;}",
         ".card__row .price {margin: 0 !important;}",
-        "@media (max-width: 749px) {.card__row {flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; } .card__row .price {margin: 0 !important; }}"
+        "img {mix-blend-mode: multiply !important; transform: scale(0.88);}",
+        "@media (min-width: 990px) {.page-width, [class*=\"grid\"], [class*=\"slider\"] {max-width: 1380px !important; margin-left: auto !important; margin-right: auto !important; }}"
       ],
       "settings": {
         "heading": "em alta",
