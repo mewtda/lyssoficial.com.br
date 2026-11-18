@@ -15,6 +15,7 @@
         ".card__row{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important}",
         ".card__title{width:100%!important;margin:0!important}",
         ".card__row .price{margin:0!important;width:100%!important;justify-content:flex-start!important}",
+        ".product-grid img{mix-blend-mode:multiply!important;transform:scale(0.88)}",
         "@media(min-width:990px){.product-grid{max-width:1440px!important;margin:0 auto!important;gap:44px 24px!important;padding:0 32px!important}}"
       ],
       "settings": {
