@@ -42,6 +42,7 @@
         },
         "s3": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Boutique_de_joias_com_elegancia_dourada.png",
             "image_mobile": "shopify://shop_images/WhatsApp_Image_2026-11-22_at_13.58.57.jpg",
