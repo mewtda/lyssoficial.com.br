@@ -48,7 +48,7 @@
             "subheading": "Coleção",
             "heading": "Favoritos da Tati",
             "link_label": "SHOP",
-            "link": "shopify://collections/isabella-fiorentino",
+            "link": "shopify://collections/favoritosdatati",
             "alignment": "center",
             "text_color": "#ffffff",
             "overlay": 15
@@ -81,7 +81,7 @@
       "settings": {
         "heading": "em alta",
         "heading_style": "h3",
-        "collection": "isabella-fiorentino",
+        "collection": "favoritosdatati",
         "heading_2": "Acessórios para cabelo",
         "collection_2": "acessorioscabelo",
         "products_to_show": 12,
